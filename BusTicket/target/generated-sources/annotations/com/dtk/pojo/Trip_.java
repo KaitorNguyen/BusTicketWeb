@@ -11,7 +11,7 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-01T09:20:36")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-01T10:16:40")
 @StaticMetamodel(Trip.class)
 public class Trip_ { 
 
