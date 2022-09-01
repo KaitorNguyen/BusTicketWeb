@@ -27,7 +27,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
     
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) throws IOException, ServletException {
-        User u = this.userService.getUsers(a.getName()).get(0);
+        User u = this.userService.getUserByUsername(a.getName());
         request.getSession().setAttribute("currentUser", u);
         
         response.sendRedirect("/BusTicket/");

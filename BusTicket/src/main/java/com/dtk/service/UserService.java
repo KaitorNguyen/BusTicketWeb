@@ -12,9 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  *
  * @author GIGABYTE
  */
-public interface UserService extends UserDetailsService{
+public interface UserService extends UserDetailsService {
 
     boolean addUser(User user);
 
-    List<User> getUsers(String username);
+    User getUserByUsername(String username);
+//    List<User> getUsers(String username);
 }

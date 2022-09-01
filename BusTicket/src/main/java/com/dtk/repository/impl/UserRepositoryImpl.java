@@ -25,17 +25,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
     public boolean addUser(User user) {
-                Session session = this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(user);
-            
+
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
@@ -43,21 +43,36 @@ public class UserRepositoryImpl implements UserRepository{
         return false;
     }
 
+//    @Override
+//    public List<User> getUsers(String username) {
+//        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        CriteriaBuilder builder = session.getCriteriaBuilder();
+//        CriteriaQuery<User> query = builder.createQuery(User.class);
+//        Root root = query.from(User.class);
+//        query.select(root);
+//
+//        if (!username.isEmpty()) {
+//            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
+//            query = query.where(p);
+//        }
+//
+//        Query q = session.createQuery(query);
+//        return q.getResultList();
+//    }
+
     @Override
-    public List<User> getUsers(String username) {
-                Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> query = builder.createQuery(User.class);
-        Root root = query.from(User.class);
-        query.select(root);
+    public User getUserByUsername(String username) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<User> q = b.createQuery(User.class);
+        Root root = q.from(User.class);
+        q.select(root);
         
-        if (!username.isEmpty()) {
-            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
-            query = query.where(p);
-        }
+        q.where(b.equal(root.get("username"), username.trim()));
         
-        Query q = session.createQuery(query);
-        return  q.getResultList();
+        Query query = session.createQuery(q);
+        return (User) query.getSingleResult();
+
     }
-    
+
 }
