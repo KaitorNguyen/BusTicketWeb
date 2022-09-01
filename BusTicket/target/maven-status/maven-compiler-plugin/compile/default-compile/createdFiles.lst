@@ -8,12 +8,15 @@ com\dtk\pojo\Trip_.class
 com\dtk\repository\impl\UserRepositoryImpl.class
 com\dtk\service\impl\UserServiceImpl.class
 com\dtk\pojo\User_.class
+com\dtk\repository\TripRepository.class
 com\dtk\pojo\TicketDetail_.class
 com\dtk\configs\SecurityWebAppInitializer.class
+com\dtk\service\impl\TripServiceImpl.class
 com\dtk\configs\SpringSecurityConfig.class
 com\dtk\controllers\IndexController.class
 com\dtk\handlers\LogoutHandler.class
 com\dtk\pojo\Ticket.class
+com\dtk\repository\impl\TripRepositoryImpl.class
 com\dtk\controllers\UserController.class
 com\dtk\pojo\Route_.class
 com\dtk\configs\WebAppContextConfig.class
@@ -27,5 +30,6 @@ com\dtk\configs\DispatcherServletInit.class
 com\dtk\pojo\User.class
 com\dtk\configs\HibernateConfig.class
 com\dtk\pojo\TicketDetail.class
+com\dtk\service\TripService.class
 com\dtk\pojo\Route.class
 com\dtk\pojo\Trip.class

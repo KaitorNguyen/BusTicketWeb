@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Trip.findAll", query = "SELECT t FROM Trip t"),
     @NamedQuery(name = "Trip.findById", query = "SELECT t FROM Trip t WHERE t.id = :id"),
     @NamedQuery(name = "Trip.findByName", query = "SELECT t FROM Trip t WHERE t.name = :name"),
+    @NamedQuery(name = "Trip.findByImage", query = "SELECT t FROM Trip t WHERE t.image = :image"),
     @NamedQuery(name = "Trip.findByTime", query = "SELECT t FROM Trip t WHERE t.time = :time"),
     @NamedQuery(name = "Trip.findByPrice", query = "SELECT t FROM Trip t WHERE t.price = :price")})
 public class Trip implements Serializable {
@@ -51,6 +52,9 @@ public class Trip implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
+    @Size(max = 150)
+    @Column(name = "image")
+    private String image;
     @Column(name = "time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
@@ -98,6 +102,14 @@ public class Trip implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Date getTime() {

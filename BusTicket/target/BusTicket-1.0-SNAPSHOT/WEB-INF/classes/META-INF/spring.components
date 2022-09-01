@@ -22,5 +22,7 @@ com.dtk.pojo.Trip=javax.persistence.Entity,javax.persistence.Table,javax.xml.bin
 com.dtk.pojo.Trip_=javax.annotation.Generated,javax.persistence.metamodel.StaticMetamodel
 com.dtk.pojo.User=javax.persistence.Entity,javax.persistence.Table,javax.xml.bind.annotation.XmlRootElement,javax.persistence.NamedQueries
 com.dtk.pojo.User_=javax.annotation.Generated,javax.persistence.metamodel.StaticMetamodel
+com.dtk.repository.impl.TripRepositoryImpl=org.springframework.stereotype.Component
 com.dtk.repository.impl.UserRepositoryImpl=org.springframework.stereotype.Component
+com.dtk.service.impl.TripServiceImpl=org.springframework.stereotype.Component
 com.dtk.service.impl.UserServiceImpl=org.springframework.stereotype.Component

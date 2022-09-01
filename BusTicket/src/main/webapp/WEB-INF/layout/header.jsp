@@ -1,6 +1,6 @@
 <%-- 
     Document   : header
-    Created on : Aug 31, 2022, 7:30:24 PM
+    Created on : Aug 28, 2022, 7:30:24 PM
     Author     : GIGABYTE
 --%>
 
@@ -54,7 +54,7 @@
                                 <i class="far fa-user"></i>
                             </c:if>
 
-                            ${pageContext.session.getAttribute("currentUser").fullname} (<sec:authentication property="principal.username"/>)
+                            ${pageContext.session.getAttribute("currentUser").fullname} (<sec:authentication property="principal.username"/>) ${currentUser.userRole}
                         </a>
                     </li>
                     <li class="nav-item active">
@@ -62,6 +62,12 @@
                     </li>
                 </sec:authorize>
             </ul>
+
+            <c:url value="/" var="action"/>
+            <form  action="${action}"class="d-flex">
+                <input class="form-control me-2" type="text"  name="kw" placeholder="Nhập từ khóa....">
+                <button type="submit" class="btn btn-primary" type="button">Tìm</button>
+            </form>
         </div>
     </div>
 </nav>

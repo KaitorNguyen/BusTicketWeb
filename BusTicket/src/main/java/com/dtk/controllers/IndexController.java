@@ -4,20 +4,30 @@
  */
 package com.dtk.controllers;
 
+import com.dtk.service.TripService;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
- * @author GIGABYTE
+ * @author XGEAR
  */
 @Controller
 @ControllerAdvice
 public class IndexController {
 
+    @Autowired
+    private TripService tripService;
+    
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model, 
+            @RequestParam Map<String, String> params) {
+        model.addAttribute("trips", this.tripService.geTrips(params, 0));
         return "index";
     }
 }
