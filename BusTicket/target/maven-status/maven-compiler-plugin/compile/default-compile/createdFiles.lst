@@ -8,6 +8,7 @@ com\dtk\pojo\Trip_.class
 com\dtk\repository\impl\UserRepositoryImpl.class
 com\dtk\service\impl\UserServiceImpl.class
 com\dtk\pojo\User_.class
+com\dtk\controllers\ApiProductController.class
 com\dtk\repository\TripRepository.class
 com\dtk\pojo\TicketDetail_.class
 com\dtk\configs\SecurityWebAppInitializer.class

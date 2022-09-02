@@ -28,6 +28,8 @@ public class IndexController {
     public String index(Model model, 
             @RequestParam Map<String, String> params) {
         model.addAttribute("trips", this.tripService.geTrips(params, 0));
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("tripCounter", this.tripService.countTrip());
         return "index";
     }
 }

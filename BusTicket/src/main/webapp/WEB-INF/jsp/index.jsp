@@ -6,7 +6,19 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<c:if test="${trips.size() == 0}">
+    <p><em>
+            Không có chuyến đi nào được tìm thấy !!!
+        </em></p>
+    </c:if>
+<ul class="pagination">
+    <c:forEach begin="1" end="${Math.ceil(tripCounter/8)}" var="i">
+        <c:url value="/" var="c">
+            <c:param  value="${i}" name="page"/>
+        </c:url>
+        <li class="page-item"><a class="page-link" href="${c}">${i}</a></li>
+    </c:forEach>
+</ul>
 <div class="container">
     <div class="row" style="margin-top: 10px">
         <c:forEach items="${trips}" var="t">

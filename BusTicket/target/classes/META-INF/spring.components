@@ -2,6 +2,7 @@ com.dtk.configs.HibernateConfig=org.springframework.stereotype.Component
 com.dtk.configs.SpringSecurityConfig=org.springframework.stereotype.Component
 com.dtk.configs.TilesConfig=org.springframework.stereotype.Component
 com.dtk.configs.WebAppContextConfig=org.springframework.stereotype.Component
+com.dtk.controllers.ApiProductController=org.springframework.stereotype.Component
 com.dtk.controllers.IndexController=org.springframework.stereotype.Component
 com.dtk.controllers.UserController=org.springframework.stereotype.Component
 com.dtk.handlers.LoginSuccessHandler=org.springframework.stereotype.Component

@@ -14,4 +14,5 @@ import java.util.Map;
  */
 public interface TripService {
     List<Trip> geTrips(Map<String, String> params, int page);
+    int countTrip();
 }

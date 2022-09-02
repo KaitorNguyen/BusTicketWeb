@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -63,17 +64,22 @@ public class Trip implements Serializable {
     @Column(name = "price")
     private long price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
+    @JsonIgnore
     private Set<Feedback> feedbackSet;
     @JoinColumn(name = "id_coach", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Coach idCoach;
     @JoinColumn(name = "id_route", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Route idRoute;
     @JoinColumn(name = "id_driver", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User idDriver;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
+    @JsonIgnore
     private Set<Ticket> ticketSet;
 
     public Trip() {

@@ -25,5 +25,10 @@ public class TripServiceImpl implements TripService{
     public List<Trip> geTrips(Map<String, String> params, int page) {
         return this.tripRepository.getTrips(params, page);
     }
+
+    @Override
+    public int countTrip() {
+       return this.tripRepository.countTrip();
+    }
     
 }
