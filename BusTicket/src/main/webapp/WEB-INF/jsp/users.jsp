@@ -40,6 +40,7 @@
                 <option selected value="ROLE_CUSTOMER">Choose...</option>
                 <option value="ROLE_EMPLOYEE">Employee</option>
                 <option value="ROLE_DRIVER">Driver</option>
+                <option value="ROLE_ADMIN">Admin</option>
             </form:select>
         </div>
         <div class="col-md-6 mb-3">
