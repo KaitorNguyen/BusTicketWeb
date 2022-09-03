@@ -1,6 +1,6 @@
 <%-- 
-    Document   : register
-    Created on : Aug 29, 2022, 8:34:56 AM
+    Document   : users
+    Created on : Sep 3, 2022, 4:14:41 AM
     Author     : GIGABYTE
 --%>
 
@@ -8,34 +8,39 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center">DANG KY</h1>
+<h1 class="text-center" style="margin-top: 15px">QUAN LY NHAN VIEN</h1>
+<div class="d-flex align-items-center" >
+    <strong id="mySpinner" >Loading...</strong>
+    <div class="spinner-border ms-5" id="mySpinner2"></div>
+</div>
 
-<c:if test="${errMsg != null}">
-    <div class="alert alert-danger">
-        ${errMsg}
-    </div>
-</c:if>
-
-<c:url value="/register" var="action" />
-
+<c:url value="/admin/users" var="action" />
 <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user">
     <div class="row g-3">
         <div class="col-md-6 mb-3">
             <label for="fullname" class="form-label fs-5">Full Name</label>
             <form:input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full Name"/>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-2 mb-3">
             <label for="gender" class="form-label fs-5">Gender</label>
             <div>
                 <div class="form-check form-check-inline">
-                    <form:radiobutton class="form-check-input" id="gender" path="gender" value="Nam"/>
+                    <form:radiobutton class="form-check-input" id="genderM" path="gender" value="Nam"/>
                     <label class="form-check-label fs-5" for="inlineRadio1">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <form:radiobutton class="form-check-input" id="gender" path="gender" value="Nu"/>
+                    <form:radiobutton class="form-check-input" id="genderF" path="gender" value="Nu"/>
                     <label class="form-check-label fs-5" for="inlineRadio2">Female</label>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
+            <label for="gender" class="form-label fs-5">Role</label>
+            <form:select class="form-select" aria-label=".form-select-lg example" id="userRole" path="userRole">
+                <option selected value="ROLE_CUSTOMER">Choose...</option>
+                <option value="ROLE_EMPLOYEE">Employee</option>
+                <option value="ROLE_DRIVER">Driver</option>
+            </form:select>
         </div>
         <div class="col-md-6 mb-3">
             <label for="birthday" class="form-label fs-5">Birthday</label>
@@ -80,3 +85,29 @@
         </div>   
     </div>
 </form:form> 
+
+<table class="table table-hover caption-top">
+    <caption>Danh sach nhan vien</caption>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Full Name</th>
+            <th>Birthday</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myUser">
+
+    </tbody>
+</table>
+
+<script src="<c:url value="/js/user.js" />"></script>
+<script>
+    <c:url value="/api/users" var="u"/>
+    window.onload = function () {
+        getUsers('${u}');
+    }
+</script>

@@ -6,6 +6,7 @@ package com.dtk.repository;
 
 import com.dtk.pojo.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,7 +15,8 @@ import java.util.List;
 public interface UserRepository {
 
     boolean addUser(User user);
+    boolean deleteUser(int id);
 
     User getUserByUsername(String username);
-//    List<User> getUsers(String username);
+    List<User> getUsers(Map<String, String> params, int page);
 }

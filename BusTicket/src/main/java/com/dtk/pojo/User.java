@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -105,17 +106,23 @@ public class User implements Serializable {
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
+    @JsonIgnore
     private Set<Feedback> feedbackSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDriver")
+    @JsonIgnore
     private Set<Trip> tripSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
+    @JsonIgnore
     private Set<Ticket> ticketSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmployee")
+    @JsonIgnore
     private Set<Ticket> ticketSet1;
 
     @Transient
+    @JsonIgnore
     private String confirmPassword;
     @Transient
+    @JsonIgnore
     private MultipartFile file;
     
     public User() {

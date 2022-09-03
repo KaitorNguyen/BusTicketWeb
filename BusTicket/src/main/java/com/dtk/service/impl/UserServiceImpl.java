@@ -43,7 +43,11 @@ public class UserServiceImpl implements UserService {
         try {
             String pass = user.getPassword();
             user.setPassword(this.passwordEncoder.encode(pass));
-            user.setUserRole(User.CUSTOMER);
+
+            String role = user.getUserRole();
+            if (role == null) {
+                user.setUserRole(User.CUSTOMER);
+            }
 
             Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                     ObjectUtils.asMap("resource_type", "auto"));
@@ -56,10 +60,10 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-//    @Override
-//    public List<User> getUsers(String username) {
-//        return this.userRepository.getUsers(username);
-//    }
+    @Override
+    public boolean deleteUser(int id) {
+        return this.userRepository.deleteUser(id);
+    }
 
     @Override
     public User getUserByUsername(String username) {
@@ -77,6 +81,11 @@ public class UserServiceImpl implements UserService {
         authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
 
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), authorities);
+    }
+
+    @Override
+    public List<User> getUsers(Map<String, String> params, int page) {
+        return this.userRepository.getUsers(params, page);
     }
 
 }

@@ -6,6 +6,7 @@ package com.dtk.service;
 
 import com.dtk.pojo.User;
 import java.util.List;
+import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -15,7 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService {
 
     boolean addUser(User user);
+    boolean deleteUser(int id);
 
     User getUserByUsername(String username);
-//    List<User> getUsers(String username);
+    List<User> getUsers(Map<String, String> params, int page);
 }

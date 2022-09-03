@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class ApiProductController {
+public class ApiTripController {
+    
     @Autowired
-    private  TripService tripService;    
+    private TripService tripService;
     
     @GetMapping("/trips")
-    public ResponseEntity<List<Trip>> getTrips(){
+    public ResponseEntity<List<Trip>> getTrips() {
         return new ResponseEntity<>(this.tripService.geTrips(null, 0), HttpStatus.OK);
-        
     }
 }

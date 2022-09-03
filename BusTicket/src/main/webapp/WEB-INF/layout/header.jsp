@@ -27,7 +27,7 @@
                         <a class="nav-link" href="#">Quan Ly Tuyen Xe</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quan Ly Nhan Vien</a>
+                        <a class="nav-link" href="<c:url value="/admin/users"/>">Quan Ly Nhan Vien</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Thong Ke & Bao Cao</a>
@@ -63,12 +63,13 @@
                 </sec:authorize>
             </ul>
 
-            <c:url value="/" var="action"/>
-            <form  action="${action}"class="d-flex">
-                <input class="form-control me-2" type="text"  name="kw" placeholder="Nhập từ khóa....">
-                <button type="submit" class="btn btn-primary" type="button">Tìm</button>
-            </form>
+            <sec:authorize access="!hasRole('ROLE_ADMIN')">
+                <c:url value="/" var="action"/>
+                <form  action="${action}"class="d-flex">
+                    <input class="form-control me-2" type="text"  name="kw" placeholder="Nhập từ khóa....">
+                    <button type="submit" class="btn btn-primary" type="button">Tìm</button>
+                </form>
+            </sec:authorize>
         </div>
     </div>
 </nav>
-

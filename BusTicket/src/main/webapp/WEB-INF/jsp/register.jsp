@@ -19,55 +19,64 @@
 <c:url value="/register" var="action" />
 
 <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user">
-    <div>
-        <div class="form-floating mb-3">
-            <form:input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full name"/>
-            <label for="fullname">Full name</label>
+    <div class="row g-3">
+        <div class="col-md-6 mb-3">
+            <label for="fullname" class="form-label fs-5">Full Name</label>
+            <form:input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full Name"/>
         </div>
-        <div class="form-floating mb-3">
-            <div class="form-check form-check-inline">
-                <form:radiobutton class="form-check-input" id="gender" path="gender" value="Nam"/>
-                <label class="form-check-label" for="inlineRadio1">Nam</label>
+        <div class="col-md-6 mb-3">
+            <label for="gender" class="form-label fs-5">Gender</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <form:radiobutton class="form-check-input" id="gender" path="gender" value="Nam"/>
+                    <label class="form-check-label fs-5" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <form:radiobutton class="form-check-input" id="gender" path="gender" value="Nu"/>
+                    <label class="form-check-label fs-5" for="inlineRadio2">Female</label>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <form:radiobutton class="form-check-input" id="gender" path="gender" value="Nu"/>
-                <label class="form-check-label" for="inlineRadio2">Nu</label>
-            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="birthday" class="form-label fs-5">Birthday</label>
+            <form:input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label fs-5">Address</label>
+            <form:input type="text" class="form-control" id="address" path="address" placeholder="Address"/>
 
         </div>
-        <div class="form-floating mb-3">
-            <form:input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
-            <label>Birthday</label>
-        </div>
-        <div class="form-floating mb-3">
-            <form:input type="text" class="form-control" id="address" path="address" placeholder="Address"/>
-            <label>Address</label>
-        </div>
-        <div class="form-floating mb-3">
+        <div class="col-md-6 mb-3">
+            <label for="phone" class="form-label fs-5">Phone</label>
             <form:input type="text" class="form-control" id="phone" path="phone" placeholder="Phone"/>
-            <label for="phone">Phone</label>
+
         </div>
-        <div class="form-floating mb-3">
+        <div class="col-md-6 mb-3">
+            <label for="email" class="form-label fs-5">Email</label>
             <form:input type="email" class="form-control" id="email" path="email" placeholder="name@example.com"/>
-            <label for="email">Email</label>
+
         </div>
-        <div class="form-floating mb-3">
-            <form:input type="text" class="form-control" id="username" path="username" placeholder="User name"/>
-            <label for="username">Username</label>
+        <div class="col-md-6 mb-3">
+            <label for="username" class="form-label fs-5">Username</label>
+            <form:input type="text" class="form-control" id="username" path="username" placeholder="Username"/>
+
         </div>    
-        <div class="form-floating mb-3">
+        <div class="col-md-6 mb-3">
+            <label for="password" class="form-label fs-5">Password</label>
             <form:input type="password" class="form-control" id="password" path="password" placeholder="Password"/>
-            <label for="password">Password</label>
+
         </div>
-        <div class="form-floating mb-3">
+        <div class="col-md-6 mb-3">
+            <label for="password" class="form-label fs-5">Confirm Password</label>
             <form:input type="password" class="form-control" id="confirmPassword" path="confirmPassword" placeholder="Confirm Password"/>
-            <label for="password">Confirm Password</label>
+
         </div>
-        <div class="mb-3">
-            <label for="avatar">Avatar</label>
+        <div class="col-md-6 mb-3">
+            <label for="avatar" class="form-label fs-5">Avatar</label>
             <form:input type="file" class="form-control" id="avatar" path="file"/>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>   
     </div>
-
 </form:form> 

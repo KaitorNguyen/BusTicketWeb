@@ -30,4 +30,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/register.jsp" />
     </definition>
+    
+    <definition name="users" extends="baseLayout">
+        <put-attribute name="title" value="QUAN LY NHAN VIEN" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/users.jsp" />
+    </definition>
 </tiles-definitions>
