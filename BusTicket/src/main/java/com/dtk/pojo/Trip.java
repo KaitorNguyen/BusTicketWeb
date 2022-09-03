@@ -49,6 +49,7 @@ public class Trip implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @JsonIgnore
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
@@ -62,6 +63,7 @@ public class Trip implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
+    @JsonIgnore
     private long price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore

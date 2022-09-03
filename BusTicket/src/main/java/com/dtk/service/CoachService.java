@@ -4,15 +4,15 @@
  */
 package com.dtk.service;
 
-import com.dtk.pojo.Trip;
+import com.dtk.pojo.Coach;
 import java.util.List;
-import java.util.Map;
+import org.springframework.stereotype.Service;
 
 /**
  *
- * @author GIGABYTE
+ * @author Admin
  */
-public interface TripService {
-    List<Trip> getTrips(Map<String, String> params, int page);
-    int countTrip();
+
+public interface CoachService {
+     List<Coach> getCoachs();
 }

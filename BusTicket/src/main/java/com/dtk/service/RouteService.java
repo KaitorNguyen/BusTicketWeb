@@ -4,15 +4,13 @@
  */
 package com.dtk.service;
 
-import com.dtk.pojo.Trip;
+import com.dtk.pojo.Route;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
- * @author GIGABYTE
+ * @author Admin
  */
-public interface TripService {
-    List<Trip> getTrips(Map<String, String> params, int page);
-    int countTrip();
+public interface RouteService {
+    List<Route> getRoutes();
 }

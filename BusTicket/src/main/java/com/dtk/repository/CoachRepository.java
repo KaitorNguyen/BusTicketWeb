@@ -2,17 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.dtk.service;
+package com.dtk.repository;
 
-import com.dtk.pojo.Trip;
+import com.dtk.pojo.Coach;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
- * @author GIGABYTE
+ * @author Admin
  */
-public interface TripService {
-    List<Trip> getTrips(Map<String, String> params, int page);
-    int countTrip();
+public interface CoachRepository {
+     List<Coach> getCoachs();
 }

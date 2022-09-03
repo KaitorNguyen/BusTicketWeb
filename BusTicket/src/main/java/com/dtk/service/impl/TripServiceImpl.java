@@ -22,7 +22,7 @@ public class TripServiceImpl implements TripService{
     @Autowired
     private TripRepository tripRepository;
     @Override
-    public List<Trip> geTrips(Map<String, String> params, int page) {
+    public List<Trip> getTrips(Map<String, String> params, int page) {
         return this.tripRepository.getTrips(params, page);
     }
 

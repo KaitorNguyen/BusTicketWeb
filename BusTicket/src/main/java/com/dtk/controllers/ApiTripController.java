@@ -27,6 +27,6 @@ public class ApiTripController {
     
     @GetMapping("/trips")
     public ResponseEntity<List<Trip>> getTrips() {
-        return new ResponseEntity<>(this.tripService.geTrips(null, 0), HttpStatus.OK);
+        return new ResponseEntity<>(this.tripService.getTrips(null, 0), HttpStatus.OK);
     }
 }
