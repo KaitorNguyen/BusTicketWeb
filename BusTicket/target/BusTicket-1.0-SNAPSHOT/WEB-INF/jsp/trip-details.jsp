@@ -19,17 +19,21 @@
         <h1>${trip.name}</h1>
     </div>
 </div>
+ <c:url value="/api/feedbacks" var="url"/>
+<div class="form-group">
+    <textarea class="form-control"  id="commentId" placeholder="Noi dung feedback"></textarea>       
+</div>
+<input type="button" onclick="addFeedback('${url}', ${trip.id})" value="Binh luan" class="btn btn-danger"/>
+<ul id="feedbacks">
 
-    <ul id="feedbacks">
-        
-    </ul>
+</ul>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/trip.js" />"></script>
 <script>
     <c:url value="/api/feedbacks" var="url"/>
-    window.onload = function(){
+    window.onload = function () {
         loadFeedbacks('${url}')
     }
 </script>

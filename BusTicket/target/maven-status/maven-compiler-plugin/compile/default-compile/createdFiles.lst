@@ -5,6 +5,8 @@ com\dtk\service\UserService.class
 com\dtk\pojo\Coach_.class
 com\dtk\pojo\Trip_.class
 com\dtk\repository\impl\UserRepositoryImpl.class
+com\dtk\formatter\CoachFormatter.class
+com\dtk\formatter\RouteFormatter.class
 com\dtk\repository\impl\CoachRepositoryImpl.class
 com\dtk\repository\TripRepository.class
 com\dtk\pojo\TicketDetail_.class
@@ -30,6 +32,7 @@ com\dtk\repository\UserRepository.class
 com\dtk\controllers\AdminController.class
 com\dtk\service\impl\UserServiceImpl.class
 com\dtk\pojo\User_.class
+com\dtk\repository\impl\FeedbackRepositoryImpl.class
 com\dtk\controllers\ApiTripController.class
 com\dtk\configs\SpringSecurityConfig.class
 com\dtk\controllers\IndexController.class
@@ -46,4 +49,6 @@ com\dtk\configs\DispatcherServletInit.class
 com\dtk\pojo\User.class
 com\dtk\pojo\TicketDetail.class
 com\dtk\service\TripService.class
+com\dtk\controllers\ApiFeedbackController.class
 com\dtk\pojo\Trip.class
+com\dtk\repository\FeedbackRepository.class

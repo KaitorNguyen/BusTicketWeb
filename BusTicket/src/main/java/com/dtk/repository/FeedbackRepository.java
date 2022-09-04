@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface FeedbackRepository {
     List<Feedback> getFeedbacks();
+ public Feedback addFeedback(String comment, int tripId);
 }

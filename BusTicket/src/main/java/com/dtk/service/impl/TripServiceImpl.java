@@ -57,4 +57,9 @@ public class TripServiceImpl implements TripService {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public Feedback addFeedback(String comment, int tripId) {
+       return this.feedbackRepository.addFeedback(comment, tripId);
+    }
+
 }

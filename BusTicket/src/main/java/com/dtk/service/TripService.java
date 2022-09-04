@@ -14,11 +14,18 @@ import java.util.Map;
  * @author GIGABYTE
  */
 public interface TripService {
+
     List<Trip> getTrips(Map<String, String> params, int page);
-     List<Feedback> getFeedbacks();
+
+    List<Feedback> getFeedbacks();
+
     int countTrip();
+
     Trip getTripById(int id);
-    
+
     boolean addTrip(Trip trip);
+
     boolean deleteTrip(int id);
+
+    Feedback addFeedback(String comment, int tripId);
 }

@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUserByRole(userRole);
     }
 
+    @Override
+    public User getUserById(int id) {
+        return this.userRepository.getUserById(id);
+    }
+
 }

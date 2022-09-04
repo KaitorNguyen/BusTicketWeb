@@ -13,7 +13,7 @@ function loadAdminTrips(endpoint) {
         for (let i = 0; i < data.length; i++) {
             msg += `
                     <tr>
-                        <td>${i+1}</td>
+                        <td>${i + 1}</td>
                         <td> <img src="${data[i].image}" width='120'/></td>
                         <td>${data[i].name} </td>
                         <td>${data[i].idRoute.start} - ${data[i].idRoute.end}</td>
@@ -28,26 +28,44 @@ function loadAdminTrips(endpoint) {
 
         let d = document.getElementById("adminTrip");
         d.innerHTML = msg;
-        
-        let d2 =document.getElementById("myLoading");
+
+        let d2 = document.getElementById("myLoading");
         d2.style.display = "none";
     })
 }
 
-function loadFeedbacks(endpoint){
-    fetch(endpoint).then(function(res){
-             return res.json();
-    }).then(function(data){
+function loadFeedbacks(endpoint) {
+    fetch(endpoint).then(function (res) {
+        return res.json();
+    }).then(function (data) {
         let h = ``;
-        for(let c of data){
-            h+=`
+        for (let c of data) {
+            h += `
             <li>${c.comment} - binh luan boi ${c.user.username} - ${moment(c.createdDate).locale("vi").fromNow()}</li>
 
 `
         }
-        
+
         let fb = document.getElementById("feedbacks");
         fb.innerHTML = h;
     })
 
+}
+
+function addFeedback(endpoint, id) {
+    fetch(endpoint, {
+        method: 'post',
+        body: JSON.stringify({
+            "comment": document.getElementById("commentId").value,
+            "tripId": id,
+
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.info(data);
+    })
 }
