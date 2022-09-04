@@ -16,7 +16,8 @@ function loadAdminTrips(endpoint) {
                         <td>${i + 1}</td>
                         <td> <img src="${data[i].image}" width='120'/></td>
                         <td>${data[i].name} </td>
-                        <td>${data[i].idRoute.start} - ${data[i].idRoute.end}</td>
+                        <td>${data[i].idRoute.start}</td>
+                        <td>${data[i].idRoute.end}</td>
                         <td>${moment(data[i].time).format("DD-MM-YYYY LT")}</td>
                         <td>${data[i].price}</td>
                         <td>${data[i].idDriver.fullname} - ${data[i].idDriver.userRole}</td>
@@ -41,9 +42,11 @@ function loadFeedbacks(endpoint) {
         let h = ``;
         for (let c of data) {
             h += `
-            <li>${c.comment} - binh luan boi ${c.user.username} - ${moment(c.createdDate).locale("vi").fromNow()}</li>
-
-`
+                <li>
+                    <img style="width: 50px; margin: 5px 0px 5px 0px" src="${c.user.avatar}" class="rounded" /> 
+                    ${c.comment} - binh luan boi ${c.user.username} - ${moment(c.createdDate).locale("vi").fromNow()}
+                </li>
+            `
         }
 
         let fb = document.getElementById("feedbacks");

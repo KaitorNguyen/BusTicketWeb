@@ -11,13 +11,13 @@
             Không có chuyến đi nào được tìm thấy !!!
         </em></p>
     </c:if>
-<ul class="pagination">
+<ul class="pagination" style="margin: 15px">
     <c:forEach begin="1" end="${Math.ceil(tripCounter/8)}" var="i">
         <c:url value="/" var="c">
             <c:param  value="${i}" name="page"/>
         </c:url>
         <li class="page-item"><a class="page-link" href="${c}">${i}</a></li>
-    </c:forEach>
+        </c:forEach>
 </ul>
 <div class="container">
     <div class="row" style="margin-top: 10px">
@@ -25,11 +25,16 @@
             <c:url value="/" var="cURL">
                 <c:param name="tripId" value="${t.id}"/>
             </c:url>
-            <div class="card col-md-3" style="padding: 3px; margin-right: 10px;" >
-                <img class="card-img-top" class="img-fluid" src="<c:url value="${t.image}"/>" alt="Card image">
+            <div class="card col-md-3" style="padding: 3px; margin: 5px 10px;" >
+                <a href="/BusTicket/trips/${t.id}">
+                    <img class="card-img-top" class="img-fluid" src="<c:url value="${t.image}"/>" alt="Card image">
+                </a>
                 <div class="card-body">
                     <h4 class="card-title">${t.name}</h4>
+                    <p class="card-text"> Diem xuat phat: ${t.idRoute.start}</p>
+                    <p class="card-text"> Diem den: ${t.idRoute.end}</p>
                     <p class="card-text"> Khởi hành vào lúc ${t.time}</p>
+                    <a href="/BusTicket/trips/${t.id}" class="btn btn-info">Thông tin vé</a>
                     <a href="${cURL}" class="btn btn-primary">Đặt Vé Ngay</a>
                 </div>
             </div>                                 

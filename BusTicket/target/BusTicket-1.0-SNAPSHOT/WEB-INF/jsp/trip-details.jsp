@@ -11,20 +11,27 @@
 
 <h1 class="text-center text-info"> CHI TIET CHUYEN DI</h1>
 
-<div class="row">
-    <div class="col-md-5 " >
-        <img src="${trip.image}"/>
+<div class="row container">
+    <div class="col-md-4 " >
+        <img src="${trip.image}" class="rounded" style="width: 70%"/>
     </div>
-    <div class="col-md-7">
-        <h1>${trip.name}</h1>
+    <div class="col-md-4">
+        <h5>Ten chuyen xe: ${trip.name}</h5>
+        <h5>Diem di: ${trip.idRoute.start}</h5>
+        <h5>Diem den: ${trip.idRoute.end}</h5>
+        <h5>Thoi gian di: ${trip.time}</h5>
+        <h5>Gia ve: ${trip.price}</h5>
+        <h5>Tai xe: ${trip.idDriver.fullname}</h5>
+        <h5>Bien so xe: ${trip.idCoach.licensePlates}</h5>
     </div>
 </div>
- <c:url value="/api/feedbacks" var="url"/>
-<div class="form-group">
+        
+<c:url value="/api/feedbacks" var="url"/>
+<div class="form-group" style="margin: 15px 0px 15px 0px">
     <textarea class="form-control"  id="commentId" placeholder="Noi dung feedback"></textarea>       
 </div>
-<input type="button" onclick="addFeedback('${url}', ${trip.id})" value="Binh luan" class="btn btn-danger"/>
-<ul id="feedbacks">
+<input type="button" onclick="addFeedback('${url}', ${trip.id})" value="Binh luan" class="btn btn-danger" style="margin-bottom: 15px"/>
+<ul id="feedbacks" style="list-style-type: none">
 
 </ul>
 

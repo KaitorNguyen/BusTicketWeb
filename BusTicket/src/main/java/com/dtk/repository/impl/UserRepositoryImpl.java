@@ -90,7 +90,7 @@ public class UserRepositoryImpl implements UserRepository {
             List<Predicate> predicates = new ArrayList<>();
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
-                Predicate p = b.like(root.get("name").as(String.class),
+                Predicate p = b.like(root.get("fullname").as(String.class),
                         String.format("%%%s%%", kw));
                 predicates.add(p);
             }

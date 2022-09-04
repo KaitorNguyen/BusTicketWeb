@@ -89,6 +89,11 @@
 
 <table class="table table-hover caption-top">
     <caption>Danh sach nhan vien</caption>
+    <c:url value="/" var="action" />
+    <form method="get" action="${action}" class="d-flex">
+        <input class="form-control me-2" type="text" name="kw" placeholder="Nhap tu khoa de tim...">
+        <button type="submit" class="btn btn-primary" type="button">Tim</button>
+    </form>
     <thead>
         <tr>
             <th>STT</th>

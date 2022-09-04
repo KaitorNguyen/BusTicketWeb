@@ -9,7 +9,7 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-05T01:59:17")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-05T05:16:50")
 @StaticMetamodel(Ticket.class)
 public class Ticket_ { 
 

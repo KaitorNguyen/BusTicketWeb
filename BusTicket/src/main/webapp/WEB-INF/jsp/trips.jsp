@@ -61,7 +61,8 @@
             <th>STT</th>
             <th>Image</th>
             <th>Ten</th>
-            <th>Tuyen Xe</th>
+            <th>Diem xuat phat</th>
+            <th>Diem den</th>
             <th>Thoi gian di</th>
             <th>Gia ve</th>
             <th>Tai xe</th>

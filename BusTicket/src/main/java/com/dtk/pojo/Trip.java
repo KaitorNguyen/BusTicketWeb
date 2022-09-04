@@ -63,7 +63,6 @@ public class Trip implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    @JsonIgnore
     private long price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore
