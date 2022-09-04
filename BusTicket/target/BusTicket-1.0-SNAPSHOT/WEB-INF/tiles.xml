@@ -51,4 +51,9 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/trips.jsp" />
     </definition>
+      <definition name="details" extends="baseLayout">
+        <put-attribute name="title" value="CHI TIET CHUYEN DI" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/trip-details.jsp" />
+    </definition>
 </tiles-definitions>

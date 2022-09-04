@@ -14,5 +14,6 @@ import java.util.Map;
  */
 public interface TripRepository {
     List<Trip> getTrips(Map<String, String> params, int page);
+    Trip getTripById(int id);
     int countTrip();
 }

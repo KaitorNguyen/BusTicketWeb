@@ -76,5 +76,10 @@ public class TripRepositoryImpl implements TripRepository {
 
         return Integer.parseInt(q.getSingleResult().toString());
     }
+    @Override
+    public Trip getTripById(int id){
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Trip.class, id);
+    }
 
 }

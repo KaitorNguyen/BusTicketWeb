@@ -4,7 +4,9 @@
  */
 package com.dtk.service.impl;
 
+import com.dtk.pojo.Feedback;
 import com.dtk.pojo.Trip;
+import com.dtk.repository.FeedbackRepository;
 import com.dtk.repository.TripRepository;
 import com.dtk.service.TripService;
 import java.util.List;
@@ -17,10 +19,13 @@ import org.springframework.stereotype.Service;
  * @author XGEAR
  */
 @Service
-public class TripServiceImpl implements TripService{
+public class TripServiceImpl implements TripService {
 
     @Autowired
     private TripRepository tripRepository;
+    @Autowired
+    private FeedbackRepository feedbackRepository;
+
     @Override
     public List<Trip> getTrips(Map<String, String> params, int page) {
         return this.tripRepository.getTrips(params, page);
@@ -28,7 +33,16 @@ public class TripServiceImpl implements TripService{
 
     @Override
     public int countTrip() {
-       return this.tripRepository.countTrip();
+        return this.tripRepository.countTrip();
     }
-    
+
+    @Override
+    public List<Feedback> getFeedbacks() {
+        return this.feedbackRepository.getFeedbacks();
+    }
+    @Override
+    public Trip getTripById(int id){
+        return this.tripRepository.getTripById(id);
+    }
+
 }

@@ -19,6 +19,7 @@ com\dtk\service\impl\CoachServiceImpl.class
 com\dtk\pojo\Feedback.class
 com\dtk\pojo\Seat.class
 com\dtk\repository\CoachRepository.class
+com\dtk\formatter\UserFormatter.class
 com\dtk\pojo\Ticket_.class
 com\dtk\controllers\TripController.class
 com\dtk\configs\HibernateConfig.class

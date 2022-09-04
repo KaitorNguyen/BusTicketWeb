@@ -28,3 +28,21 @@ function loadAdminTrips(endpoint) {
         d2.style.display = "none";
     })
 }
+
+function loadFeedbacks(endpoint){
+    fetch(endpoint).then(function(res){
+             return res.json();
+    }).then(function(data){
+        let h = ``;
+        for(let c of data){
+            h+=`
+            <li>${c.comment} - binh luan boi ${c.user.username} - ${moment(c.createdDate).locale("vi").fromNow()}</li>
+
+`
+        }
+        
+        let fb = document.getElementById("feedbacks");
+        fb.innerHTML = h;
+    })
+
+}

@@ -4,6 +4,7 @@
  */
 package com.dtk.service;
 
+import com.dtk.pojo.Feedback;
 import com.dtk.pojo.Trip;
 import java.util.List;
 import java.util.Map;
@@ -14,5 +15,7 @@ import java.util.Map;
  */
 public interface TripService {
     List<Trip> getTrips(Map<String, String> params, int page);
+     List<Feedback> getFeedbacks();
     int countTrip();
+    Trip getTripById(int id);
 }

@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -56,6 +57,7 @@ public class Feedback implements Serializable {
     private Trip idTrip;
     @JoinColumn(name = "id_customer", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonProperty("user")
     private User idCustomer;
 
     public Feedback() {

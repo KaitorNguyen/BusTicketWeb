@@ -27,8 +27,7 @@
             </c:forEach>
         </form:select>
         <label for="sel1" class="form-label">Select list (select one):</label>
-        </div>
-        
+     </div     
         <input type="submit"  value="Them Chuyen Di" class="btn btn-danger"/>
 </form:form>
 

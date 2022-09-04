@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,21 +30,27 @@ public class IndexController {
     private TripService tripService;
     @Autowired
     private RouteService routeService;
-    @Autowired 
+    @Autowired
     private CoachService coachService;
-    
+
     @ModelAttribute
-    public void commonAttr(Model model){
+    public void commonAttr(Model model) {
         model.addAttribute("routes", this.routeService.getRoutes(null));
         model.addAttribute("coaches", this.coachService.getCoachs(null));
     }
-    
+
     @RequestMapping("/")
-    public String index(Model model, 
+    public String index(Model model,
             @RequestParam Map<String, String> params) {
         model.addAttribute("trips", this.tripService.getTrips(params, 0));
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("tripCounter", this.tripService.countTrip());
         return "index";
+    }
+
+    @GetMapping("/trips/{tripId}")
+    public String tripDetail(Model model, @PathVariable(value = "tripId") int id) {
+        model.addAttribute("trip", this.tripService.getTripById(id));
+        return "details";
     }
 }
