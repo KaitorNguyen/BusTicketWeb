@@ -31,7 +31,7 @@ function getUsers(endpoint) {
                             <td>${data[i].phone}</td>
                             <td>${data[i].email}</td>
                             <td>${data[i].userRole}</td>
-                            <td
+                            <td>
                                 <button class="btn btn-danger" onclick="deleteUser('${endpoint + "/" + data[i].id}', ${data[i].id})">
                                     Delete
                                 </button>

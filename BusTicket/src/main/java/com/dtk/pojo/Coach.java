@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -58,8 +59,10 @@ public class Coach implements Serializable {
     @Column(name = "license_plates")
     private String licensePlates;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCoach")
+    @JsonIgnore
     private Set<Seat> seatSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCoach")
+    @JsonIgnore
     private Set<Trip> tripSet;
 
     public Coach() {

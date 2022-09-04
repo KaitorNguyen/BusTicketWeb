@@ -33,8 +33,8 @@ public class IndexController {
     
     @ModelAttribute
     public void commonAttr(Model model){
-        model.addAttribute("routes", this.routeService.getRoutes());
-        model.addAttribute("coaches", this.coachService.getCoachs());
+        model.addAttribute("routes", this.routeService.getRoutes(null));
+        model.addAttribute("coaches", this.coachService.getCoachs(null));
     }
     
     @RequestMapping("/")

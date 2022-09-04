@@ -3,6 +3,7 @@ com.dtk.configs.SpringSecurityConfig=org.springframework.stereotype.Component
 com.dtk.configs.TilesConfig=org.springframework.stereotype.Component
 com.dtk.configs.WebAppContextConfig=org.springframework.stereotype.Component
 com.dtk.controllers.AdminController=org.springframework.stereotype.Component
+com.dtk.controllers.ApiCoachController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiTripController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiUserController=org.springframework.stereotype.Component
 com.dtk.controllers.IndexController=org.springframework.stereotype.Component

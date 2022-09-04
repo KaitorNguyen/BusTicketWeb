@@ -7,6 +7,7 @@ package com.dtk.repository.impl;
 import com.dtk.pojo.Coach;
 import com.dtk.repository.CoachRepository;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,12 +30,13 @@ public class CoachRepositoryImpl implements CoachRepository {
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<Coach> getCoachs() {
+    public List<Coach> getCoachs(Map<String, String> params) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Coach> q = b.createQuery(Coach.class);
         Root root = q.from(Coach.class);
         q.select(root);
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }

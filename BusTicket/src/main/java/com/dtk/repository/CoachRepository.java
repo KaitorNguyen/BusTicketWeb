@@ -6,11 +6,12 @@ package com.dtk.repository;
 
 import com.dtk.pojo.Coach;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Admin
  */
 public interface CoachRepository {
-     List<Coach> getCoachs();
+     List<Coach> getCoachs(Map<String, String> params);
 }

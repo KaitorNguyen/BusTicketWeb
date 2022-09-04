@@ -31,12 +31,22 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/register.jsp" />
     </definition>
     
+    <definition name="routes" extends="baseLayout">
+        <put-attribute name="title" value="QUAN LY TUYEN XE" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/routes.jsp" />
+    </definition>
+    <definition name="coaches" extends="baseLayout">
+        <put-attribute name="title" value="QUAN LY XE" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/coaches.jsp" />
+    </definition>
     <definition name="users" extends="baseLayout">
         <put-attribute name="title" value="QUAN LY NHAN VIEN" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/users.jsp" />
     </definition>
-     <definition name="trips" extends="baseLayout">
+    <definition name="trips" extends="baseLayout">
         <put-attribute name="title" value="QUAN LY CHUYEN DI" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/trips.jsp" />

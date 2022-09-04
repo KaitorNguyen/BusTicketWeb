@@ -24,6 +24,7 @@ com\dtk\controllers\TripController.class
 com\dtk\configs\HibernateConfig.class
 com\dtk\pojo\Route.class
 com\dtk\pojo\Coach.class
+com\dtk\controllers\ApiCoachController.class
 com\dtk\repository\UserRepository.class
 com\dtk\controllers\AdminController.class
 com\dtk\service\impl\UserServiceImpl.class

@@ -6,11 +6,12 @@ package com.dtk.repository;
 
 import com.dtk.pojo.Route;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Admin
  */
 public interface RouteRepository {
-    List<Route> getRoutes();
+    List<Route> getRoutes(Map<String, String> params);
 }

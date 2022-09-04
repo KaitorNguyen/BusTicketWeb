@@ -8,6 +8,7 @@ import com.dtk.pojo.Coach;
 import com.dtk.repository.CoachRepository;
 import com.dtk.service.CoachService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class CoachServiceImpl implements CoachService {
     private CoachRepository coachRepository;
 
     @Override
-    public List<Coach> getCoachs() {
-       return this.coachRepository.getCoachs();
+    public List<Coach> getCoachs(Map<String, String> params) {
+        return this.coachRepository.getCoachs(params);
     }
 
 }

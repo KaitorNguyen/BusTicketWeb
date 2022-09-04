@@ -4,6 +4,8 @@
  */
 package com.dtk.controllers;
 
+import com.dtk.pojo.Coach;
+import com.dtk.pojo.Route;
 import com.dtk.pojo.User;
 import com.dtk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,17 @@ public class AdminController {
         }
         model.addAttribute("errMsg", errMsg);
         return "users";
+    }
+
+    @GetMapping("/coaches")
+    public String listCoaches(Model model) {
+        model.addAttribute("coaches", new Coach());
+        return "coaches";
+    }
+
+    @GetMapping("/routes")
+    public String listRoutes(Model model) {
+        model.addAttribute("routes", new Route());
+        return "routes";
     }
 }

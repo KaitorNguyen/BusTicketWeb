@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -53,6 +54,7 @@ public class Route implements Serializable {
     @Column(name = "end")
     private String end;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRoute")
+    @JsonIgnore
     private Set<Trip> tripSet;
 
     public Route() {

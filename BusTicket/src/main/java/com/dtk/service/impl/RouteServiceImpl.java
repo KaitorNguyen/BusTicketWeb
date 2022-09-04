@@ -8,6 +8,7 @@ import com.dtk.pojo.Route;
 import com.dtk.repository.RouteRepository;
 import com.dtk.service.RouteService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class RouteServiceImpl implements RouteService {
     private RouteRepository routeRepository;
 
     @Override
-    public List<Route> getRoutes() {
-        return this.routeRepository.getRoutes();
+    public List<Route> getRoutes(Map<String, String> params) {
+        return this.routeRepository.getRoutes(params);
     }
 
 }

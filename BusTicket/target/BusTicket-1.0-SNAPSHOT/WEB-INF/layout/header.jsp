@@ -21,10 +21,13 @@
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quan Ly Chuyen Xe</a>
+                        <a class="nav-link" href="<c:url value="/admin/trips"/>">Quan Ly Chuyen Xe</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Quan Ly Tuyen Xe</a>
+                        <a class="nav-link" href="<c:url value="/admin/routes"/>">Quan Ly Tuyen Xe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/admin/coaches"/>">Quan Ly Xe</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/admin/users"/>">Quan Ly Nhan Vien</a>

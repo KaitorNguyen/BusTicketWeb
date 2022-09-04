@@ -7,6 +7,7 @@ package com.dtk.repository.impl;
 import com.dtk.pojo.Route;
 import com.dtk.repository.RouteRepository;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -29,8 +30,8 @@ public class RouteRepositoryImpl implements RouteRepository {
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<Route> getRoutes() {
-         Session session = this.sessionFactory.getObject().getCurrentSession();
+    public List<Route> getRoutes(Map<String, String> params) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Route> q = b.createQuery(Route.class);
         Root root = q.from(Route.class);

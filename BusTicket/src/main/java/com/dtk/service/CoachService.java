@@ -6,6 +6,7 @@ package com.dtk.service;
 
 import com.dtk.pojo.Coach;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,5 +15,5 @@ import org.springframework.stereotype.Service;
  */
 
 public interface CoachService {
-     List<Coach> getCoachs();
+     List<Coach> getCoachs(Map<String, String> params);
 }

@@ -23,13 +23,13 @@
     <div class="form-floating">
         <form:select path="idRoute" class="form-select" id="sel1" name="sellist">
             <c:forEach items="${routes}" var="r">
-                <option value="${r.id}">${r.start} ${r.end}</option>
+                <option value="${r.id}">${r.start} - ${r.end}</option>
             </c:forEach>
         </form:select>
         <label for="sel1" class="form-label">Select list (select one):</label>
         </div>
         
-        <input type="submit"  value="Them Chuyen Di" class="btn btn-danger"/><
+        <input type="submit"  value="Them Chuyen Di" class="btn btn-danger"/>
 </form:form>
 
 
