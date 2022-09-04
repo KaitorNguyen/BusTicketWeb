@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -38,6 +39,33 @@ public class RouteRepositoryImpl implements RouteRepository {
         q.select(root);
         Query query = session.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public boolean addRoute(Route route) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(route);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteRoute(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Route r = session.get(Route.class, id);
+            session.delete(r);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 
 }

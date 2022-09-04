@@ -7,10 +7,14 @@ package com.dtk.controllers;
 import com.dtk.pojo.Coach;
 import com.dtk.pojo.Route;
 import com.dtk.pojo.User;
+import com.dtk.service.CoachService;
+import com.dtk.service.RouteService;
 import com.dtk.service.UserService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +30,10 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CoachService coachService;
+    @Autowired
+    private RouteService routeService;
 
     @GetMapping("/users")
     public String list(Model model) {
@@ -51,13 +59,39 @@ public class AdminController {
 
     @GetMapping("/coaches")
     public String listCoaches(Model model) {
-        model.addAttribute("coaches", new Coach());
+        model.addAttribute("coach", new Coach());
+        return "coaches";
+    }
+
+    @PostMapping("/coaches")
+    public String addCoach(@ModelAttribute(value = "coach") @Valid Coach coach, 
+            BindingResult rs) {
+        if (rs.hasErrors()) {
+            return "coaches";
+        }
+
+        if (this.coachService.addCoach(coach) == true) {
+            return "redirect:/admin/coaches";
+        }
         return "coaches";
     }
 
     @GetMapping("/routes")
     public String listRoutes(Model model) {
-        model.addAttribute("routes", new Route());
+        model.addAttribute("route", new Route());
+        return "routes";
+    }
+
+    @PostMapping("/routes")
+    public String addRoute(@ModelAttribute(value = "route") @Valid Route route, 
+            BindingResult rs) {
+        if (rs.hasErrors()) {
+            return "routes";
+        }
+
+        if (this.routeService.addRoute(route) == true) {
+            return "redirect:/admin/routes";
+        }
         return "routes";
     }
 }

@@ -13,5 +13,8 @@ import java.util.Map;
  * @author Admin
  */
 public interface CoachRepository {
-     List<Coach> getCoachs(Map<String, String> params);
+
+    List<Coach> getCoachs(Map<String, String> params);
+    boolean addCoach(Coach coach);
+    boolean deleteCoach(int id);
 }

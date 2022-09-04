@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
  *
  * @author Admin
  */
-
 public interface CoachService {
-     List<Coach> getCoachs(Map<String, String> params);
+
+    List<Coach> getCoachs(Map<String, String> params);
+
+    boolean addCoach(Coach coach);
+    boolean deleteCoach(int id);
 }

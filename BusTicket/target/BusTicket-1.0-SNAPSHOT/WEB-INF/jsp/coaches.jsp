@@ -14,8 +14,10 @@
     <div class="spinner-border ms-5" id="mySpinner2"></div>
 </div>
 
+
 <c:url value="/admin/coaches" var="action" />
-<form:form method="post" action="${action}" modelAttribute="coaches">
+<form:form method="post" action="${action}" modelAttribute="coach">
+    <form:errors path="*" element="div" cssClass="alert alert-danger"/>
     <div class="row g-3">
         <div class="form-floating col-md-4 mb-3">
             <form:input type="text" class="form-control" id="name" path="name" placeholder="Ten xe"/>
@@ -30,6 +32,9 @@
             <label for="floatingPassword">Bien so xe</label>
         </div>
     </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>  
 </form:form> 
 
 <table class="table table-hover caption-top">

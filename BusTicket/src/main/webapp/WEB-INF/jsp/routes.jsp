@@ -15,7 +15,8 @@
 </div>
 
 <c:url value="/admin/routes" var="action" />
-<form:form method="post" action="${action}" modelAttribute="routes">
+<form:form method="post" action="${action}" modelAttribute="route">
+    <form:errors path="*" element="div" cssClass="alert alert-danger"/>
     <div class="row g-3">
         <div class="form-floating col-md-6 mb-3">
             <form:input type="text" class="form-control" id="start" path="start" placeholder="Diem xuat phat"/>
@@ -25,6 +26,9 @@
             <form:input type="text" class="form-control" id="end" path="end" placeholder="Diem ket thuc"/>
             <label for="floatingPassword">Diem den</label>
         </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>  
     </div>
 </form:form> 
 

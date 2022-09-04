@@ -3,6 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+function deleteCoach(endpoint, id) {
+    fetch(endpoint, {
+        method: 'delete'
+    }).then(function (res) {
+        if (res.status === 204)
+            location.reload();
+    }).catch(function (err) {
+        console.error(err);
+    })
+}
 
 function getCoaches(endpoint) {
     fetch(endpoint).then(function (res) {
@@ -19,7 +29,8 @@ function getCoaches(endpoint) {
                         <td>${data[i].totalseat}</td>
                         <td>${data[i].licensePlates}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="deleteUser('${endpoint + "/" + data[i].id}', ${data[i].id})">
+                            <button class="btn btn-primary">Update</button>
+                            <button class="btn btn-danger" onclick="deleteCoach('${endpoint + "/" + data[i].id}', ${data[i].id})">
                                 Delete
                             </button>
                         </td>

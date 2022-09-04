@@ -3,6 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+function deleteRoute(endpoint, id) {
+    fetch(endpoint, {
+        method: 'delete'
+    }).then(function (res) {
+        if (res.status === 204)
+            location.reload();
+    }).catch(function (err) {
+        console.error(err);
+    })
+}
 
 function getRoutes(endpoint) {
     fetch(endpoint).then(function (res) {
@@ -18,7 +28,7 @@ function getRoutes(endpoint) {
                         <td>${data[i].start}</td>
                         <td>${data[i].end}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="deleteUser('${endpoint + "/" + data[i].id}', ${data[i].id})">
+                            <button class="btn btn-danger" onclick="deleteRoute('${endpoint + "/" + data[i].id}', ${data[i].id})">
                                 Delete
                             </button>
                         </td>

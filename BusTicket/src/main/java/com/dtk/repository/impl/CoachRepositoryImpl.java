@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -36,9 +37,36 @@ public class CoachRepositoryImpl implements CoachRepository {
         CriteriaQuery<Coach> q = b.createQuery(Coach.class);
         Root root = q.from(Coach.class);
         q.select(root);
-        
+
         Query query = session.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public boolean addCoach(Coach coach) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(coach);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteCoach(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        try {
+            Coach c = session.get(Coach.class, id);
+            session.delete(c);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }
