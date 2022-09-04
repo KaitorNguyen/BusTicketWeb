@@ -25,11 +25,11 @@
         </div>
         <div class="form-floating col-md-4 mb-3">
             <form:input type="number" class="form-control" id="totalseat" path="totalseat" placeholder="Tong so ghe"/>
-            <label for="floatingPassword">Tong so ghe</label>
+            <label for="floatingTotalSeat">Tong so ghe</label>
         </div>
         <div class="form-floating col-md-4 mb-3">
             <form:input type="text" class="form-control" id="licensePlates" path="licensePlates" placeholder="Bien so xe"/>
-            <label for="floatingPassword">Bien so xe</label>
+            <label for="floatingLicensePlates">Bien so xe</label>
         </div>
     </div>
     <div class="col-auto">

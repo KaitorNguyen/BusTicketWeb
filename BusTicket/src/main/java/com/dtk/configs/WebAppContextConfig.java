@@ -4,12 +4,16 @@
  */
 package com.dtk.configs;
 
+import com.dtk.formatter.CoachFormatter;
+import com.dtk.formatter.RouteFormatter;
+import com.dtk.formatter.UserFormatter;
 import javax.faces.application.ResourceHandler;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -82,5 +86,12 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
         return v;
+    }
+    
+        @Override
+    public void addFormatters(FormatterRegistry r) {
+        r.addFormatter(new UserFormatter());
+        r.addFormatter(new RouteFormatter());
+        r.addFormatter(new CoachFormatter());
     }
 }

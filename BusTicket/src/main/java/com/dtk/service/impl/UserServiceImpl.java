@@ -89,4 +89,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUsers(params, page);
     }
 
+    @Override
+    public List<User> getUserByRole(String userRole) {
+        return this.userRepository.getUserByRole(userRole);
+    }
+
 }

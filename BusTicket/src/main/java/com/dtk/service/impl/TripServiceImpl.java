@@ -23,6 +23,7 @@ public class TripServiceImpl implements TripService {
 
     @Autowired
     private TripRepository tripRepository;
+
     @Autowired
     private FeedbackRepository feedbackRepository;
 
@@ -40,9 +41,20 @@ public class TripServiceImpl implements TripService {
     public List<Feedback> getFeedbacks() {
         return this.feedbackRepository.getFeedbacks();
     }
+
     @Override
-    public Trip getTripById(int id){
+    public Trip getTripById(int id) {
         return this.tripRepository.getTripById(id);
+    }
+
+    @Override
+    public boolean addTrip(Trip trip) {
+        return this.tripRepository.addTrip(trip);
+    }
+
+    @Override
+    public boolean deleteTrip(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

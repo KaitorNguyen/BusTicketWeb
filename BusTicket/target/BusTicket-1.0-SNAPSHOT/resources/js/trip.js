@@ -13,9 +13,14 @@ function loadAdminTrips(endpoint) {
         for (let i = 0; i < data.length; i++) {
             msg += `
                     <tr>
-                        <td>${data[i].name} </td>
+                        <td>${i+1}</td>
                         <td> <img src="${data[i].image}" width='120'/></td>
-                        <td>${data[i].time}</td>
+                        <td>${data[i].name} </td>
+                        <td>${data[i].idRoute.start} - ${data[i].idRoute.end}</td>
+                        <td>${moment(data[i].time).format("DD-MM-YYYY LT")}</td>
+                        <td>${data[i].price}</td>
+                        <td>${data[i].idDriver.fullname} - ${data[i].idDriver.userRole}</td>
+                        <td>${data[i].idCoach.licensePlates}</td>
                         <td><button class='btn btn-danger'> Xóa</button></td>
                     </tr> 
                     `

@@ -7,6 +7,7 @@ package com.dtk.controllers;
 import com.dtk.service.CoachService;
 import com.dtk.service.RouteService;
 import com.dtk.service.TripService;
+import com.dtk.service.UserService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,14 @@ public class IndexController {
     private RouteService routeService;
     @Autowired
     private CoachService coachService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
     public void commonAttr(Model model) {
         model.addAttribute("routes", this.routeService.getRoutes(null));
         model.addAttribute("coaches", this.coachService.getCoachs(null));
+        model.addAttribute("userDriver", this.userService.getUserByRole("ROLE_DRIVER"));
     }
 
     @RequestMapping("/")

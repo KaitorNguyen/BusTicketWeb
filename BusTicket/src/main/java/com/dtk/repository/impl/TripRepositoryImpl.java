@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -47,18 +48,18 @@ public class TripRepositoryImpl implements TripRepository {
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             String kw = params.get("kw");
-            
+
             if (kw != null && !kw.isEmpty()) {
                 Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
                 predicates.add(p);
             }
-            
+
             q.where(predicates.toArray(Predicate[]::new));
 
         }
 
         Query query = session.createQuery(q);
-        
+
         if (page > 0) {
             int size = Integer.parseInt(env.getProperty("page.size").toString());
             int start = (page - 1) * size;
@@ -76,10 +77,28 @@ public class TripRepositoryImpl implements TripRepository {
 
         return Integer.parseInt(q.getSingleResult().toString());
     }
+
     @Override
-    public Trip getTripById(int id){
+    public Trip getTripById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         return session.get(Trip.class, id);
+    }
+
+    @Override
+    public boolean addTrip(Trip trip) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(trip);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteTrip(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

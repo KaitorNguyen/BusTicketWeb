@@ -70,15 +70,15 @@ public class Trip implements Serializable {
     private Set<Feedback> feedbackSet;
     @JoinColumn(name = "id_coach", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Coach idCoach;
     @JoinColumn(name = "id_route", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Route idRoute;
     @JoinColumn(name = "id_driver", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private User idDriver;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore

@@ -26,34 +26,61 @@
                 <option value="${r.id}">${r.start} - ${r.end}</option>
             </c:forEach>
         </form:select>
-        <label for="sel1" class="form-label">Select list (select one):</label>
-     </div     
-        <input type="submit"  value="Them Chuyen Di" class="btn btn-danger"/>
+        <label for="sel1" class="form-label">Tuyen xe:</label>
+    </div>
+    <div class="form-floating mt-3 mb-3">
+        <form:select path="idDriver" class="form-select" id="driver" name="driverlist">
+            <c:forEach items="${userDriver}" var="d">
+                <option value="${d.id}">${d.fullname}</option>
+            </c:forEach>
+        </form:select>
+        <label for="driver" class="form-label">Tai xe:</label>
+    </div>
+    <div class="form-floating mt-3 mb-3">
+        <form:select path="idCoach" class="form-select" id="coach" name="coachlist">
+            <c:forEach items="${coaches}" var="c">
+                <option value="${c.id}">${c.name} - ${c.totalseat} cho - ${c.licensePlates}</option>
+            </c:forEach>
+        </form:select>
+        <label for="coach" class="form-label">Xe:</label>
+    </div>
+
+    <input type="submit"  value="Them Chuyen Di" class="btn btn-danger"/>
 </form:form>
 
 
 
-        <div class="spinner-border text-info" id="myLoading" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+<div class="spinner-border text-info" id="myLoading" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
 
-        <table class="table">
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tbody id="adminTrip">
+<table class="table table-hover caption-top">
+    <caption>Danh sach chuyen xe</caption>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Image</th>
+            <th>Ten</th>
+            <th>Tuyen Xe</th>
+            <th>Thoi gian di</th>
+            <th>Gia ve</th>
+            <th>Tai xe</th>
+            <th>Bien so xe</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="adminTrip">
 
-            </tbody>
+    </tbody>
+</table>
 
-        </table>
-        <script src="<c:url value="/js/trip.js" />"></script>
-        <script>
-            <c:url value="/api/trips" var="endpoint"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+<script src="<c:url value="/js/trip.js" />"></script>
+<script>
+    <c:url value="/api/trips" var="endpoint"/>
 
     window.onload = function () {
         loadAdminTrips('${endpoint}');
     }
-        </script>
+</script>

@@ -4,7 +4,7 @@
  */
 package com.dtk.formatter;
 
-import com.dtk.pojo.User;
+import com.dtk.pojo.Route;
 import java.text.ParseException;
 import java.util.Locale;
 import org.springframework.format.Formatter;
@@ -13,19 +13,19 @@ import org.springframework.format.Formatter;
  *
  * @author GIGABYTE
  */
-public class UserFormatter implements Formatter<User>{
+public class RouteFormatter implements Formatter<Route>{
 
     @Override
-    public String print(User t, Locale locale) {
+    public String print(Route t, Locale locale) {
         return String.valueOf(t.getId());
     }
 
     @Override
-    public User parse(String id, Locale locale) throws ParseException {
-        User u = new User();
-        u.setId(Integer.parseInt(id));
+    public Route parse(String id, Locale locale) throws ParseException {
+        Route r = new Route();
+        r.setId(Integer.parseInt(id));
         
-        return u;
+        return r;
     }
     
 }

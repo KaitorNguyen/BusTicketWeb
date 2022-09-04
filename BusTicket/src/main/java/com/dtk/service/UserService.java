@@ -20,4 +20,5 @@ public interface UserService extends UserDetailsService {
 
     User getUserByUsername(String username);
     List<User> getUsers(Map<String, String> params, int page);
+    List<User> getUserByRole(String userRole);
 }
