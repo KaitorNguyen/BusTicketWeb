@@ -49,12 +49,13 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public boolean addTrip(Trip trip) {
+        trip.setImage("https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg");
         return this.tripRepository.addTrip(trip);
     }
 
     @Override
     public boolean deleteTrip(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.tripRepository.deleteTrip(id);
     }
 
     @Override

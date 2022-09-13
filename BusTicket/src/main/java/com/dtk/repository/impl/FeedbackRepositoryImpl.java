@@ -46,7 +46,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
         Feedback f = new Feedback();
         f.setComment(comment);
         f.setIdTrip(this.tripRepository.getTripById(tripId));
-        f.setIdCustomer(session.get(User.class, 6));
+        f.setIdCustomer(session.get(User.class, 5));
         session.save(f); 
         return f;
     }

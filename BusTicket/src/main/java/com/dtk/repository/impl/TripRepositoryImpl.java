@@ -98,7 +98,16 @@ public class TripRepositoryImpl implements TripRepository {
 
     @Override
     public boolean deleteTrip(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            Trip t = session.get(Trip.class, id);
+            session.remove(t);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 
 }

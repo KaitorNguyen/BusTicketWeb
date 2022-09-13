@@ -49,7 +49,7 @@ public class Trip implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    @JsonIgnore
+//    @JsonIgnore
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")

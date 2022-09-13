@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,6 +39,14 @@ public class TripController {
             return "redirect:/admin/trips";
         }
         return "trips";
+    }
+    
+    @RequestMapping("/trips/remove/{tripId}")
+    public String removeTrip (Model model, @PathVariable("tripId") Integer tripId) {
+        if(tripService.getTripById(tripId)!=null) {
+            tripService.deleteTrip(tripId);
+        }
+        return "redirect:/admin/trips";
     }
 }
 

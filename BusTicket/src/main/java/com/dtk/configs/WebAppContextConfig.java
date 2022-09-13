@@ -43,14 +43,12 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
         conf.enable();
     }
-    
-    
+
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     }
-    
-    
+
 //    @Bean
 //    public InternalResourceViewResolver viewResolver() {
 //        InternalResourceViewResolver r = new InternalResourceViewResolver();
@@ -61,14 +59,13 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 //
 //        return r;
 //    }
-
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("UTF-8");
         return resolver;
     }
-    
+
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource m = new ResourceBundleMessageSource();
@@ -80,15 +77,15 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     public Validator getValidator() {
         return WebMvcConfigurer.super.getValidator(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-   
+
     @Bean
     public Validator validator() {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
         return v;
     }
-    
-        @Override
+
+    @Override
     public void addFormatters(FormatterRegistry r) {
         r.addFormatter(new UserFormatter());
         r.addFormatter(new RouteFormatter());

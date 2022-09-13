@@ -22,7 +22,13 @@ function loadAdminTrips(endpoint) {
                         <td>${data[i].price}</td>
                         <td>${data[i].idDriver.fullname} - ${data[i].idDriver.userRole}</td>
                         <td>${data[i].idCoach.licensePlates}</td>
-                        <td><button class='btn btn-danger'> Xóa</button></td>
+                        <td>
+                            <a href="/BusTicket/admin/trips/remove/${data[i].id}">
+                                <button class="btn btn-danger"> 
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
                     </tr> 
                     `
         }
@@ -69,6 +75,16 @@ function addFeedback(endpoint, id) {
     }).then(function (res) {
         return res.json();
     }).then(function (data) {
+        let fb = document.querySelector("#feedbacks li:first-child");
+        let h = ``;
+        h = `
+                <li>
+                    <img style="width: 50px; margin: 5px 0px 5px 0px" src="${data.user.avatar}" class="rounded" /> 
+                    ${data.comment} - binh luan boi ${data.user.username} - ${moment(data.createdDate).locale("vi").fromNow()}
+                </li>
+            `
+
+        fb.insertAdjacentHTML("beforebegin", h);
         console.info(data);
     })
 }
