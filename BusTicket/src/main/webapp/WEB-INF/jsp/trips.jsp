@@ -21,7 +21,7 @@
         <label for="price">Giá</label>
     </div>
     <div class="form-floating mt-3 mb-3">
-        <form:select path="idRoute" class="form-select" id="sel1" name="sellist">
+        <form:select path="idRoute" class="form-select" id="route" name="routelist">
             <c:forEach items="${routes}" var="r">
                 <option value="${r.id}">${r.start} - ${r.end}</option>
             </c:forEach>

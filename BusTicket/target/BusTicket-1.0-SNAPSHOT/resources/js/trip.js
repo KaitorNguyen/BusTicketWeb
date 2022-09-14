@@ -18,7 +18,7 @@ function loadAdminTrips(endpoint) {
                         <td>${data[i].name} </td>
                         <td>${data[i].idRoute.start}</td>
                         <td>${data[i].idRoute.end}</td>
-                        <td>${moment(data[i].time).format("DD-MM-YYYY LT")}</td>
+                        <td>${moment(data[i].startTime).format("DD-MM-YYYY LT")}</td>
                         <td>${data[i].price}</td>
                         <td>${data[i].idDriver.fullname} - ${data[i].idDriver.userRole}</td>
                         <td>${data[i].idCoach.licensePlates}</td>

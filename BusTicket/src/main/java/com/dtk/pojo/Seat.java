@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Seat.findAll", query = "SELECT s FROM Seat s"),
     @NamedQuery(name = "Seat.findById", query = "SELECT s FROM Seat s WHERE s.id = :id"),
     @NamedQuery(name = "Seat.findByName", query = "SELECT s FROM Seat s WHERE s.name = :name"),
-    @NamedQuery(name = "Seat.findByStatus", query = "SELECT s FROM Seat s WHERE s.status = :status")})
+    @NamedQuery(name = "Seat.findByStatusSeat", query = "SELECT s FROM Seat s WHERE s.statusSeat = :statusSeat")})
 public class Seat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,9 +47,8 @@ public class Seat implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "name")
     private String name;
-    @Size(max = 45)
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status_seat")
+    private Boolean statusSeat;
     @JoinColumn(name = "id_coach", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Coach idCoach;
@@ -84,12 +83,12 @@ public class Seat implements Serializable {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getStatusSeat() {
+        return statusSeat;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusSeat(Boolean statusSeat) {
+        this.statusSeat = statusSeat;
     }
 
     public Coach getIdCoach() {

@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TicketDetail.findAll", query = "SELECT t FROM TicketDetail t"),
-    @NamedQuery(name = "TicketDetail.findById", query = "SELECT t FROM TicketDetail t WHERE t.id = :id")})
+    @NamedQuery(name = "TicketDetail.findById", query = "SELECT t FROM TicketDetail t WHERE t.id = :id"),
+    @NamedQuery(name = "TicketDetail.findByPriceSeat", query = "SELECT t FROM TicketDetail t WHERE t.priceSeat = :priceSeat")})
 public class TicketDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +38,8 @@ public class TicketDetail implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "price_seat")
+    private Long priceSeat;
     @JoinColumn(name = "id_seat", referencedColumnName = "id")
     @OneToOne(optional = false)
     private Seat idSeat;
@@ -57,6 +60,14 @@ public class TicketDetail implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Long getPriceSeat() {
+        return priceSeat;
+    }
+
+    public void setPriceSeat(Long priceSeat) {
+        this.priceSeat = priceSeat;
     }
 
     public Seat getIdSeat() {

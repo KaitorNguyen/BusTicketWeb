@@ -11,19 +11,21 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-13T14:44:17")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-15T00:09:46")
 @StaticMetamodel(Trip.class)
 public class Trip_ { 
 
     public static volatile SingularAttribute<Trip, String> image;
     public static volatile SingularAttribute<Trip, Route> idRoute;
     public static volatile SetAttribute<Trip, Ticket> ticketSet;
-    public static volatile SingularAttribute<Trip, Long> price;
     public static volatile SetAttribute<Trip, Feedback> feedbackSet;
-    public static volatile SingularAttribute<Trip, String> name;
+    public static volatile SingularAttribute<Trip, Long> price;
     public static volatile SingularAttribute<Trip, Coach> idCoach;
+    public static volatile SingularAttribute<Trip, String> name;
+    public static volatile SingularAttribute<Trip, Date> startTime;
     public static volatile SingularAttribute<Trip, Integer> id;
-    public static volatile SingularAttribute<Trip, Date> time;
+    public static volatile SingularAttribute<Trip, Date> endTime;
     public static volatile SingularAttribute<Trip, User> idDriver;
+    public static volatile SingularAttribute<Trip, String> statusTrip;
 
 }

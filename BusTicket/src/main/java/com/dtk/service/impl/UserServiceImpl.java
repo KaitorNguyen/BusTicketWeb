@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
             String pass = user.getPassword();
             user.setPassword(this.passwordEncoder.encode(pass));
 
-//            user.setActive(Boolean.TRUE);
+            user.setActive(Boolean.TRUE);
             String role = user.getUserRole();
             if (role == null) {
                 user.setUserRole(User.CUSTOMER);

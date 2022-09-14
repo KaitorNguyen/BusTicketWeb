@@ -124,7 +124,7 @@ public class User implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
-    
+
     public User() {
     }
 

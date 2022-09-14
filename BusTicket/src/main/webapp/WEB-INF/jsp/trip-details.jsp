@@ -19,7 +19,7 @@
         <h5>Ten chuyen xe: ${trip.name}</h5>
         <h5>Diem di: ${trip.idRoute.start}</h5>
         <h5>Diem den: ${trip.idRoute.end}</h5>
-        <h5>Thoi gian di: ${trip.time}</h5>
+        <h5>Thoi gian di: ${trip.startTime}</h5>
         <h5>Gia ve: ${trip.price}</h5>
         <h5>Tai xe: ${trip.idDriver.fullname}</h5>
         <h5>Bien so xe: ${trip.idCoach.licensePlates}</h5>

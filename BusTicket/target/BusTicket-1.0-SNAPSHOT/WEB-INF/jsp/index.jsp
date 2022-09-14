@@ -7,17 +7,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:if test="${trips.size() == 0}">
-    <p><em>
+    <p>
+        <em>
             Không có chuyến đi nào được tìm thấy !!!
-        </em></p>
-    </c:if>
+        </em>
+    </p>
+</c:if>
 <ul class="pagination" style="margin: 15px">
     <c:forEach begin="1" end="${Math.ceil(tripCounter/8)}" var="i">
         <c:url value="/" var="c">
             <c:param  value="${i}" name="page"/>
         </c:url>
         <li class="page-item"><a class="page-link" href="${c}">${i}</a></li>
-        </c:forEach>
+    </c:forEach>
 </ul>
 <div class="container">
     <div class="row" style="margin-top: 10px">
@@ -33,7 +35,7 @@
                     <h4 class="card-title">${t.name}</h4>
                     <p class="card-text"> Diem xuat phat: ${t.idRoute.start}</p>
                     <p class="card-text"> Diem den: ${t.idRoute.end}</p>
-                    <p class="card-text"> Khởi hành vào lúc ${t.time}</p>
+                    <p class="card-text"> Khởi hành vào lúc ${t.startTime}</p>
                     <a href="/BusTicket/trips/${t.id}" class="btn btn-info">Thông tin vé</a>
                     <a href="${cURL}" class="btn btn-primary">Đặt Vé Ngay</a>
                 </div>

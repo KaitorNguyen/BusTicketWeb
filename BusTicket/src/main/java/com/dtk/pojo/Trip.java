@@ -40,8 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Trip.findById", query = "SELECT t FROM Trip t WHERE t.id = :id"),
     @NamedQuery(name = "Trip.findByName", query = "SELECT t FROM Trip t WHERE t.name = :name"),
     @NamedQuery(name = "Trip.findByImage", query = "SELECT t FROM Trip t WHERE t.image = :image"),
-    @NamedQuery(name = "Trip.findByTime", query = "SELECT t FROM Trip t WHERE t.time = :time"),
-    @NamedQuery(name = "Trip.findByPrice", query = "SELECT t FROM Trip t WHERE t.price = :price")})
+    @NamedQuery(name = "Trip.findByStartTime", query = "SELECT t FROM Trip t WHERE t.startTime = :startTime"),
+    @NamedQuery(name = "Trip.findByEndTime", query = "SELECT t FROM Trip t WHERE t.endTime = :endTime"),
+    @NamedQuery(name = "Trip.findByPrice", query = "SELECT t FROM Trip t WHERE t.price = :price"),
+    @NamedQuery(name = "Trip.findByStatusTrip", query = "SELECT t FROM Trip t WHERE t.statusTrip = :statusTrip")})
 public class Trip implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +51,6 @@ public class Trip implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-//    @JsonIgnore
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
@@ -57,13 +58,19 @@ public class Trip implements Serializable {
     @Size(max = 150)
     @Column(name = "image")
     private String image;
-    @Column(name = "time")
+    @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date time;
+    private Date startTime;
+    @Column(name = "end_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
     private long price;
+    @Size(max = 45)
+    @Column(name = "status_trip")
+    private String statusTrip;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore
     private Set<Feedback> feedbackSet;
@@ -119,12 +126,20 @@ public class Trip implements Serializable {
         this.image = image;
     }
 
-    public Date getTime() {
-        return time;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public long getPrice() {
@@ -133,6 +148,14 @@ public class Trip implements Serializable {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public String getStatusTrip() {
+        return statusTrip;
+    }
+
+    public void setStatusTrip(String statusTrip) {
+        this.statusTrip = statusTrip;
     }
 
     @XmlTransient

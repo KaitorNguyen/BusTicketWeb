@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ticket.findByPaymentMethod", query = "SELECT t FROM Ticket t WHERE t.paymentMethod = :paymentMethod"),
     @NamedQuery(name = "Ticket.findByPaymentDate", query = "SELECT t FROM Ticket t WHERE t.paymentDate = :paymentDate"),
     @NamedQuery(name = "Ticket.findByPaymentContent", query = "SELECT t FROM Ticket t WHERE t.paymentContent = :paymentContent"),
-    @NamedQuery(name = "Ticket.findByStatus", query = "SELECT t FROM Ticket t WHERE t.status = :status")})
+    @NamedQuery(name = "Ticket.findByStatusTicket", query = "SELECT t FROM Ticket t WHERE t.statusTicket = :statusTicket")})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,8 +69,8 @@ public class Ticket implements Serializable {
     @Column(name = "payment_content")
     private String paymentContent;
     @Size(max = 45)
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status_ticket")
+    private String statusTicket;
     @JoinColumn(name = "id_trip", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Trip idTrip;
@@ -146,12 +146,12 @@ public class Ticket implements Serializable {
         this.paymentContent = paymentContent;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusTicket() {
+        return statusTicket;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusTicket(String statusTicket) {
+        this.statusTicket = statusTicket;
     }
 
     public Trip getIdTrip() {
