@@ -4,6 +4,7 @@ META-INF\spring.components
 com\dtk\service\UserService.class
 com\dtk\pojo\Coach_.class
 com\dtk\pojo\Trip_.class
+com\dtk\controllers\ApiRouteController.class
 com\dtk\repository\impl\UserRepositoryImpl.class
 com\dtk\formatter\CoachFormatter.class
 com\dtk\formatter\RouteFormatter.class

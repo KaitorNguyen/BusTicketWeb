@@ -8,14 +8,17 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<h1 class='text-center text-info'>Quan Ly Chuyen Di</h1>
+<h1 class="text-center text-info" style="margin-top: 15px">Quan Ly Chuyen Xe</h1>
 
 <form:form method="post" action="" modelAttribute="trip">
     <div class="form-floating mb-3 mt-3">
         <form:input class="form-control" path="name" id="name"/>
-        <label for="name">Tên chuyến đi</label>
+        <label for="name">Tên chuyến đi:</label>
     </div>
-
+    <div class="form-floating mb-3 mt-3">
+        <form:input type="datetime-local" class="form-control" path="startTime" id="startTime"/>
+        <label for="startTime">Thoi gian xuat phat:</label>
+    </div>
     <div class="form-floating mt-3 mb-3">
         <form:input class="form-control" path="price" id="price"/>
         <label for="price">Giá</label>

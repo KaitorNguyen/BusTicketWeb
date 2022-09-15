@@ -4,8 +4,8 @@
  */
 package com.dtk.controllers;
 
-import com.dtk.pojo.Coach;
-import com.dtk.service.CoachService;
+import com.dtk.pojo.Route;
+import com.dtk.service.RouteService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,19 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class ApiCoachController {
+public class ApiRouteController {
 
     @Autowired
-    private CoachService coachService;
+    private RouteService routeService;
 
-    @GetMapping("/coaches")
-    public ResponseEntity<List<Coach>> getCoaches() {
-        return new ResponseEntity<>(this.coachService.getCoachs(null), HttpStatus.OK);
+    @GetMapping("/routes")
+    public ResponseEntity<List<Route>> getRoutes() {
+        return new ResponseEntity<>(this.routeService.getRoutes(null), HttpStatus.OK);
     }
 
-    @DeleteMapping("/coaches/{coachId}")
+    @DeleteMapping("/routes/{routeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCoach(@PathVariable(value = "coachId") int id) {
-        this.coachService.deleteCoach(id);
+    public void deleteRoute(@PathVariable(value = "routeId") int id) {
+        this.routeService.deleteRoute(id);
     }
 }

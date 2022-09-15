@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<h1 class="text-center text-info"> CHI TIET CHUYEN DI</h1>
+<h1 class="text-center text-info" style="margin-top: 15px"> CHI TIET CHUYEN DI</h1>
 
 <div class="row container">
     <div class="col-md-4 " >

@@ -8,7 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center" style="margin-top: 15px">QUAN LY TUYEN XE</h1>
+<h1 class="text-center text-info" style="margin-top: 15px">QUAN LY TUYEN XE</h1>
 <div class="d-flex align-items-center" >
     <strong id="mySpinner" >Loading...</strong>
     <div class="spinner-border ms-5" id="mySpinner2"></div>

@@ -8,7 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center" style="margin-top: 15px">QUAN LY NHAN VIEN</h1>
+<h1 class="text-center text-info" style="margin-top: 15px">QUAN LY NHAN VIEN</h1>
 <div class="d-flex align-items-center" >
     <strong id="mySpinner" >Loading...</strong>
     <div class="spinner-border ms-5" id="mySpinner2"></div>
@@ -92,6 +92,8 @@
     <thead>
         <tr>
             <th>STT</th>
+            <th>Avatar</th>
+            <th>Username</th>
             <th>Full Name</th>
             <th>Birthday</th>
             <th>Phone</th>
@@ -105,6 +107,8 @@
     </tbody>
 </table>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/user.js" />"></script>
 <script>
     <c:url value="/api/users" var="u"/>

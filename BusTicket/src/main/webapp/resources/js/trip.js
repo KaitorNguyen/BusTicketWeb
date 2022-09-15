@@ -14,7 +14,9 @@ function loadAdminTrips(endpoint) {
             msg += `
                     <tr>
                         <td>${i + 1}</td>
-                        <td> <img src="${data[i].image}" width='120'/></td>
+                        <td> 
+                            <img src="${data[i].image}" alt="${data[i].name}" width='120'/>
+                        </td>
                         <td>${data[i].name} </td>
                         <td>${data[i].idRoute.start}</td>
                         <td>${data[i].idRoute.end}</td>

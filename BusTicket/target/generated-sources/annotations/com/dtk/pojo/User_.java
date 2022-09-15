@@ -3,16 +3,17 @@ package com.dtk.pojo;
 import com.dtk.pojo.Feedback;
 import com.dtk.pojo.Ticket;
 import com.dtk.pojo.Trip;
+import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-15T00:09:46")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-09-15T11:49:49")
 @StaticMetamodel(User.class)
 public class User_ { 
 
-    public static volatile SingularAttribute<User, String> birthday;
+    public static volatile SingularAttribute<User, Date> birthday;
     public static volatile SingularAttribute<User, String> address;
     public static volatile SingularAttribute<User, String> gender;
     public static volatile SetAttribute<User, Feedback> feedbackSet;

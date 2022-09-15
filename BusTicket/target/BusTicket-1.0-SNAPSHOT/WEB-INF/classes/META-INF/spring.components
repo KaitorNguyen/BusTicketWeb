@@ -5,6 +5,7 @@ com.dtk.configs.WebAppContextConfig=org.springframework.stereotype.Component
 com.dtk.controllers.AdminController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiCoachController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiFeedbackController=org.springframework.stereotype.Component
+com.dtk.controllers.ApiRouteController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiTripController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiUserController=org.springframework.stereotype.Component
 com.dtk.controllers.IndexController=org.springframework.stereotype.Component

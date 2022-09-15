@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
@@ -27,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -59,9 +61,13 @@ public class Trip implements Serializable {
     @Column(name = "image")
     private String image;
     @Column(name = "start_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
     @Column(name = "end_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
     @Basic(optional = false)
@@ -224,5 +230,5 @@ public class Trip implements Serializable {
     public String toString() {
         return "com.dtk.pojo.Trip[ id=" + id + " ]";
     }
-    
+
 }

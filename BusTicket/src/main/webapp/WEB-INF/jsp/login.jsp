@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center">DANG NHAP</h1>
+<h1 class="text-center text-info">DANG NHAP</h1>
 
 <c:if test="${param.error != null}">
     <div class="alert alert-danger">

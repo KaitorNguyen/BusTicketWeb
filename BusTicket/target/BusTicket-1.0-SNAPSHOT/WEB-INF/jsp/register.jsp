@@ -8,7 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center">DANG KY</h1>
+<h1 class="text-center text-info">DANG KY</h1>
 
 <c:if test="${errMsg != null}">
     <div class="alert alert-danger">

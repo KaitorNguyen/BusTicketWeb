@@ -26,8 +26,12 @@ function getUsers(endpoint) {
                     h += `
                             <tr>
                                 <td>${i + 1}</td>
+                                <td> 
+                                    <img src="${data[i].avatar}" alt="${data[i].username}" class="rounded-circle" width='40'/> 
+                                </td>
+                                <td>${data[i].username}</td>
                                 <td>${data[i].fullname}</td>
-                                <td>${data[i].birthday}</td>
+                                <td>${moment(data[i].birthday).format("DD-MM-YYYY")}</td>
                                 <td>${data[i].phone}</td>
                                 <td>${data[i].email}</td>
                                 <td>${data[i].userRole}</td>
