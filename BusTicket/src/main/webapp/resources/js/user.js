@@ -3,6 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
+function loadMyModalEditUser(endpoint, id) {
+    fetch(endpoint, {
+    method: 'get'
+    }).then(function (res) {
+    return res.json();
+    }).then(function (data) {
+        let fullname = document.getElementById('fullname');
+        let gender = document.getElementById('gender');
+        let userRole = document.getElementById('userRole');
+        let birthday = document.getElementById('birthday');
+        let address = document.getElementById('address');
+        let phone = document.getElementById('phone');
+        let email = document.getElementById('email');
+        let username = document.getElementById('username');
+        let avatar = document.getElementById('avatar');
+        let editU = document.getElementById('editU');
+        
+        fullname.value = data[0]["fullname"];
+        gender.value = data[0]["gender"];
+        userRole.value = data[0]["userRole"];
+        birthday.value = moment(data[0]["birthday"]).format("YYYY-MM-DD");
+        address.value = data[0]["address"];
+        phone.value = data[0]["phone"];
+        email.value = data[0]["email"];
+        username.value = data[0]["username"];
+        avatar.value = data[0]["avatar"];
+//        editU.setAttribute('onclick', `editUser(${id})`);
+    });
+}
+
 function deleteUser(endpoint, id) {
     fetch(endpoint, {
         method: 'delete'
@@ -36,7 +66,10 @@ function getUsers(endpoint) {
                                 <td>${data[i].email}</td>
                                 <td>${data[i].userRole}</td>
                                 <td>
-                                    <button class="btn btn-danger" onclick="deleteUser('${endpoint + "/" + data[i].id}', ${data[i].id})">
+                                    <button class="btn btn-primary" onclick="loadMyModalEditUser('${endpoint + "/getUser/" + data[i].id}', ${data[i].id})" data-bs-toggle="modal" data-bs-target="#myModalEditUser">
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-danger" onclick="deleteUser('${endpoint + "/deleteUser/" + data[i].id}', ${data[i].id})">
                                         Delete
                                     </button>
                                 </td>

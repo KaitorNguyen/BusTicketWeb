@@ -37,12 +37,16 @@ public class AdminController {
 
     @GetMapping("/users")
     public String list(Model model) {
-        model.addAttribute("user", new User());
         return "users";
     }
 
-    @PostMapping("/users")
-    public String add(Model model, @ModelAttribute(value = "user") User user) {
+    @GetMapping("/users/add_user")
+    public String addUserView(Model model) {
+        model.addAttribute("user", new User());
+        return "add-user";
+    }
+    @PostMapping("/users/add_user")
+    public String addUser(Model model, @ModelAttribute(value = "user") User user) {
         String errMsg = "";
         if (user.getPassword().equals(user.getConfirmPassword())) {
             if (this.userService.addUser(user) == true) {
@@ -54,7 +58,7 @@ public class AdminController {
             errMsg = "Mat khau khong khop!";
         }
         model.addAttribute("errMsg", errMsg);
-        return "users";
+        return "add-user";
     }
 
     @GetMapping("/coaches")

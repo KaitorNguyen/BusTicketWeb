@@ -38,4 +38,14 @@ public class CoachServiceImpl implements CoachService {
         return this.coachRepository.deleteCoach(id);
     }
 
+    @Override
+    public Coach getCoachByID(int id) {
+        return this.coachRepository.getCoachByID(id);
+    }
+
+    @Override
+    public boolean editCoach(Coach coach) {
+        return this.coachRepository.editCoach(coach);
+    }
+
 }

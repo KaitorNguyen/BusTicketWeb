@@ -31,16 +31,10 @@ public class IndexController {
     private TripService tripService;
     @Autowired
     private RouteService routeService;
-    @Autowired
-    private CoachService coachService;
-    @Autowired
-    private UserService userService;
 
     @ModelAttribute
     public void commonAttr(Model model) {
         model.addAttribute("routes", this.routeService.getRoutes(null));
-        model.addAttribute("coaches", this.coachService.getCoachs(null));
-        model.addAttribute("userDriver", this.userService.getUserByRole("ROLE_DRIVER"));
     }
 
     @RequestMapping("/")

@@ -15,7 +15,9 @@ import java.util.Map;
 public interface RouteService {
 
     List<Route> getRoutes(Map<String, String> params);
+    Route getRouteByID(int id);
 
     boolean addRoute(Route route);
     boolean deleteRoute(int id);
+    boolean editRoute(Route route);
 }

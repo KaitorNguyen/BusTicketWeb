@@ -69,4 +69,22 @@ public class CoachRepositoryImpl implements CoachRepository {
         return false;
     }
 
+    @Override
+    public Coach getCoachByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Coach.class, id);
+    }
+
+    @Override
+    public boolean editCoach(Coach coach) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(coach);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
 }

@@ -8,48 +8,54 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/BusTicket/">Bus Ticket Online</a>
+        <a class="navbar-brand fw-bold text-lg-center text-gradient" href="/BusTicket/">
+            <img style="width: 25%" src="<c:url value="/images/icons_bus.png"/>" /> Bus Ticket Online
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/BusTicket/">Trang Chu</a>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav" style="margin: 10px">
+                <li class="nav-item nav-masthead">
+                    <a class="nav-link fw-bold text-lg-center " style="margin-right: 15px" href="/BusTicket/">Trang Chủ</a>
                 </li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin/trips"/>">Quan Ly Chuyen Xe</a>
+                    <li class="nav-item nav-masthead">
+                        <a class="nav-link fw-bold text-lg-center " href="<c:url value="/admin/trips"/>">Quản Lý Chuyến Xe</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin/routes"/>">Quan Ly Tuyen Xe</a>
+                    <li class="nav-item nav-masthead">
+                        <a class="nav-link fw-bold text-lg-center " href="<c:url value="/admin/routes"/>">Quản Lý Tuyến Xe</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin/coaches"/>">Quan Ly Xe</a>
+                    <li class="nav-item nav-masthead">
+                        <a class="nav-link fw-bold text-lg-center " href="<c:url value="/admin/coaches"/>">Quản Lý Xe</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin/users"/>">Quan Ly Nhan Vien</a>
+                    <li class="nav-item nav-masthead">
+                        <a class="nav-link fw-bold text-lg-center " href="<c:url value="/admin/users"/>">Quản Lý Nhân Viên</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Thong Ke & Bao Cao</a>
+                    <li class="nav-item nav-masthead">
+                        <a class="nav-link fw-bold text-lg-center " style="margin-right: 40px" href="#">Thống Kê & Báo Cáo</a>
                     </li>
                 </sec:authorize>
 
                 <sec:authorize access="!isAuthenticated()">
-                    <li class="nav-item active">
-                        <a class="nav-link text-info" href="<c:url value="/login"/>">
-                            <i class="far fa-user"></i> Login
-                        </a>
+                    <li class="nav-item active" style="padding-right: 10px">
+                        <button class="button-30">
+                            <a class="nav-link text-info fw-bold text-lg-center " href="<c:url value="/login"/>">
+                                <i class="far fa-user"></i> Đăng nhập
+                            </a>
+                        </button>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link text-info" href="<c:url value="/register"/>">Register</a>
+                        <button class="button-30">
+                            <a class="nav-link text-info fw-bold text-lg-center " href="<c:url value="/register"/>">Đăng ký</a>
+                        </button>
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <li class="nav-item active">
-                        <a class="nav-link text-danger" href="<c:url value="/"/>">
+                    <li class="nav-item active" style="margin-right: 15px">
+                        <a class="nav-link text-danger fw-bold text-lg-center " href="<c:url value="/"/>" data-bs-toggle="modal" data-bs-target="#myModal">
                             <c:if test="${currentUser.avatar != null}">
                                 <img style="width: 25px" src="${pageContext.session.getAttribute("currentUser").avatar}" class="rounded" />
                             </c:if>
@@ -57,22 +63,43 @@
                                 <i class="far fa-user"></i>
                             </c:if>
 
-                            ${pageContext.session.getAttribute("currentUser").fullname} (<sec:authentication property="principal.username"/>) ${currentUser.userRole}
+                            <sec:authentication property="principal.username"/>
                         </a>
                     </li>
+
                     <li class="nav-item active">
-                        <a class="nav-link text-danger" href="<c:url value="/logout"/>">Logout</a>
+                        <button class="button-30">
+                            <a class="nav-link text-danger fw-bold text-lg-center " href="<c:url value="/logout"/>">Đăng xuất</a>
+                        </button>
                     </li>
                 </sec:authorize>
             </ul>
-
-            <sec:authorize access="!hasRole('ROLE_ADMIN')">
-                <c:url value="/" var="action"/>
-                <form  action="${action}"class="d-flex">
-                    <input class="form-control me-2" type="text"  name="kw" placeholder="Nhập từ khóa....">
-                    <button type="submit" class="btn btn-primary" type="button">Tìm</button>
-                </form>
-            </sec:authorize>
         </div>
     </div>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xin chào ${pageContext.session.getAttribute("currentUser").fullname} </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Bạn đang đăng nhập với vai trò ${currentUser.userRole} 
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </nav>

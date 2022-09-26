@@ -8,111 +8,136 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-info" style="margin-top: 15px">QUAN LY NHAN VIEN</h1>
-<div class="d-flex align-items-center" >
-    <strong id="mySpinner" >Loading...</strong>
-    <div class="spinner-border ms-5" id="mySpinner2"></div>
-</div>
+<div class="container">
+    <h1 class="text-center text-info" style="margin-top: 15px">QUẢN LÝ NHÂN VIÊN</h1>
 
-<c:url value="/admin/users" var="action" />
-<form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user">
-    <div class="row g-3">
-        <div class="col-md-6 mb-3">
-            <label for="fullname" class="form-label fs-5">Full Name</label>
-            <form:input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full Name"/>
-        </div>
-        <div class="col-md-2 mb-3">
-            <label for="gender" class="form-label fs-5">Gender</label>
-            <div>
-                <div class="form-check form-check-inline">
-                    <form:radiobutton class="form-check-input" id="genderM" path="gender" value="Nam"/>
-                    <label class="form-check-label fs-5" for="inlineRadio1">Male</label>
+    <button class="cssbuttons-io-button" type="button" onclick="location.href = '<c:url value="/admin/users/add_user"/>'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg>
+        <span> Add </span>
+    </button>
+
+    <div class="d-flex align-items-center" >
+        <strong id="mySpinner" >Loading...</strong>
+        <div class="spinner-border ms-5" id="mySpinner2"></div>
+    </div>
+
+    <table class="table table-hover caption-top">
+        <caption>Danh sach nhan vien</caption>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Avatar</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Birthday</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="myUser">
+
+        </tbody>
+    </table>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModalEditUser">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit User</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="form-check form-check-inline">
-                    <form:radiobutton class="form-check-input" id="genderF" path="gender" value="Nu"/>
-                    <label class="form-check-label fs-5" for="inlineRadio2">Female</label>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="form-floating col-md-4 mb-3">
+                            <input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full name"/>
+                            <label for="fullname">Full name</label>
+                        </div>
+<!--                        <div class="form-floating col-md-4 mb-3">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="gender" name="gender" path="gender" value="Nam">Nam
+                                    <label class="form-check-label" for="inlineRadio1"></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="genderNu" name="gender" path="gender" value="Nu">Nu
+                                    <label class="form-check-label" for="inlineRadio2"></label>
+                            </div>
+                        </div>-->
+                        <div class="form-floating col-md-4 mb-3">
+                            <select class="form-select" aria-label=".form-select-lg example" id="gender" name="gender" path="gender">
+                                <option selected value="Nam">Nam</option>
+                                <option value="Nu">Nu</option>
+                            </select>
+                            <label for="roll" class="form-label">Role:</label>
+                        </div>
+                        <div class="form-floating col-md-4 mb-3">
+                            <select class="form-select" aria-label=".form-select-lg example" id="userRole" name="userRole" path="userRole">
+                                <option selected value="ROLE_EMPLOYEE">Employee</option>
+                                <option value="ROLE_DRIVER">Driver</option>
+                                <option value="ROLE_CUSTOMER">Customer</option>
+                                <option value="ROLE_ADMIN">Admin</option>
+                            </select>
+                            <label for="roll" class="form-label">Role:</label>
+                        </div>
+                        <div class="form-floating col-md-4 mb-3">
+                            <input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
+                            <label for="birthday">Birthday</label>
+                        </div>
+                        <div class="form-floating col-md-4 mb-3">
+                            <input type="text" class="form-control" id="address" path="address" placeholder="Address"/>
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="form-floating col-md-4 mb-3">
+                            <input type="text" class="form-control" id="phone" path="phone" placeholder="Phone"/>
+                            <label for="phone">Phone</label>
+                        </div>
+                        <div class="form-floating col-md-6 mb-3">
+                            <input type="email" class="form-control" id="email" path="email" placeholder="name@example.com"/>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating col-md-6 mb-3">
+                            <input type="text" class="form-control" id="username" path="username" placeholder="User name"/>
+                            <label for="username">User name</label>
+                        </div>    
+                        <div class="form-floating col-md-6 mb-3">
+                            <input type="password" class="form-control" id="password" path="password" placeholder="Password" disabled/>
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="form-floating col-md-6 mb-3">
+                            <input type="password" class="form-control" id="confirmPassword" path="confirmPassword" placeholder="Confirm Password" disabled/>
+                            <label for="password">Confirm Password</label>
+                        </div>
+                        <div class="form-floating col-md-12 mb-3">
+                            <input type="file" class="form-control" id="avatar" path="file"/>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="editU" class="btn btn-primary">
+                        Edit
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
             </div>
         </div>
-        <div class="col-md-4">
-            <label for="gender" class="form-label fs-5">Role</label>
-            <form:select class="form-select" aria-label=".form-select-lg example" id="userRole" path="userRole">
-                <option selected value="ROLE_CUSTOMER">Choose...</option>
-                <option value="ROLE_EMPLOYEE">Employee</option>
-                <option value="ROLE_DRIVER">Driver</option>
-                <option value="ROLE_ADMIN">Admin</option>
-            </form:select>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="birthday" class="form-label fs-5">Birthday</label>
-            <form:input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label class="form-label fs-5">Address</label>
-            <form:input type="text" class="form-control" id="address" path="address" placeholder="Address"/>
-
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="phone" class="form-label fs-5">Phone</label>
-            <form:input type="text" class="form-control" id="phone" path="phone" placeholder="Phone"/>
-
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="email" class="form-label fs-5">Email</label>
-            <form:input type="email" class="form-control" id="email" path="email" placeholder="name@example.com"/>
-
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="username" class="form-label fs-5">Username</label>
-            <form:input type="text" class="form-control" id="username" path="username" placeholder="Username"/>
-
-        </div>    
-        <div class="col-md-6 mb-3">
-            <label for="password" class="form-label fs-5">Password</label>
-            <form:input type="password" class="form-control" id="password" path="password" placeholder="Password"/>
-
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="password" class="form-label fs-5">Confirm Password</label>
-            <form:input type="password" class="form-control" id="confirmPassword" path="confirmPassword" placeholder="Confirm Password"/>
-
-        </div>
-        <div class="col-md-6 mb-3">
-            <label for="avatar" class="form-label fs-5">Avatar</label>
-            <form:input type="file" class="form-control" id="avatar" path="file"/>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>   
     </div>
-</form:form> 
-
-<table class="table table-hover caption-top">
-    <caption>Danh sach nhan vien</caption>
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Avatar</th>
-            <th>Username</th>
-            <th>Full Name</th>
-            <th>Birthday</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody id="myUser">
-
-    </tbody>
-</table>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/user.js" />"></script>
 <script>
     <c:url value="/api/users" var="u"/>
-    window.onload = function () {
-        getUsers('${u}');
-    }
+        window.onload = function () {
+            getUsers('${u}');
+        }
 </script>

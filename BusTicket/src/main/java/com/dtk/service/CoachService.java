@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 public interface CoachService {
 
     List<Coach> getCoachs(Map<String, String> params);
+    Coach getCoachByID(int id);
 
     boolean addCoach(Coach coach);
     boolean deleteCoach(int id);
+    boolean editCoach(Coach coach);
 }

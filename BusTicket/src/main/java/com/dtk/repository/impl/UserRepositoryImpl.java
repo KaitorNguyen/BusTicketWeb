@@ -71,7 +71,7 @@ public class UserRepositoryImpl implements UserRepository {
         Root root = q.from(User.class);
         q.select(root);
 
-        q.where(b.equal(root.get("username"), username.trim()));
+        q.where(b.equal(root.get("username").as(String.class), username.trim()));
 
         Query query = session.createQuery(q);
         return (User) query.getSingleResult();
@@ -128,6 +128,19 @@ public class UserRepositoryImpl implements UserRepository {
     public User getUserById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         return session.get(User.class, id);
+    }
+
+    @Override
+    public boolean editUser(User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(user);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 
 }

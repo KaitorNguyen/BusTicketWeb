@@ -68,4 +68,22 @@ public class RouteRepositoryImpl implements RouteRepository {
         return false;
     }
 
+    @Override
+    public Route getRouteByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Route.class, id);
+    }
+
+    @Override
+    public boolean editRoute(Route route) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(route);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
+
 }

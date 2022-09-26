@@ -7,7 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center text-info">DANG NHAP</h1>
 
 <c:if test="${param.error != null}">
     <div class="alert alert-danger">
@@ -24,6 +23,7 @@
 <c:url value="/login" var="action" />
 
 <div class="card container" style="background-color: lightblue; width: 70%; border-radius: 15px">
+    <h1 class="text-center text-info" style="padding-top: 10px">ĐĂNG NHẬP</h1>
     <div class="row" style="margin-bottom: 25px">
         <div class="col">
             <div class="text-center">
@@ -34,11 +34,11 @@
             <div class="container">
                 <form method="post" action="${action}">
                     <div class="mb-3 mt-3">
-                        <label for="username" class="form-label">Username:</label>
+                        <label for="username" class="form-label fw-bold text-lg-center">Username:</label>
                         <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password:</label>
+                        <label for="password" class="form-label fw-bold text-lg-center">Password:</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
                     </div>
                     <div class="form-check mb-3">

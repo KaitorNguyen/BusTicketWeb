@@ -99,4 +99,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUserById(id);
     }
 
+    @Override
+    public boolean editUser(User user) {
+        return this.userRepository.editUser(user);
+    }
+
 }

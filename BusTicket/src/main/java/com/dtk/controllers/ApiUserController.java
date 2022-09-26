@@ -6,6 +6,7 @@ package com.dtk.controllers;
 
 import com.dtk.pojo.User;
 import com.dtk.service.UserService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,15 +25,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ApiUserController {
+
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(this.userService.getUsers(null, 0), HttpStatus.OK);
     }
-    
-    @DeleteMapping("/users/{userId}")
+
+    @GetMapping("/users/getUser/{idUser}")
+    public ResponseEntity<List<User>> getUserByID(@PathVariable(value = "idUser") int idUser) {
+        List<User> user = new ArrayList<>();
+        user.add(this.userService.getUserById(idUser));
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/users/deleteUser/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "userId") int id) {
         this.userService.deleteUser(id);
