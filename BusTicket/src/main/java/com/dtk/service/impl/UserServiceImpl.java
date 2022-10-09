@@ -104,4 +104,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.editUser(user);
     }
 
+    @Override
+    public List<User> getUserByUsernameList(String username) {
+       return this.getUserByUsernameList(username);
+    }
+
 }

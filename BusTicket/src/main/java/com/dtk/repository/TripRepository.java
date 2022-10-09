@@ -18,4 +18,5 @@ public interface TripRepository {
     int countTrip();
     boolean addTrip(Trip trip);
     boolean deleteTrip(int id);
+    Trip getTripByID(String id);
 }

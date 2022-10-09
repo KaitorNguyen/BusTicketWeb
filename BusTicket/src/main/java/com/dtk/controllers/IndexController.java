@@ -45,10 +45,11 @@ public class IndexController {
         model.addAttribute("tripCounter", this.tripService.countTrip());
         return "index";
     }
-
-    @GetMapping("/trips/{tripId}")
-    public String tripDetail(Model model, @PathVariable(value = "tripId") int id) {
-        model.addAttribute("trip", this.tripService.getTripById(id));
-        return "details";
-    }
 }
+
+//    @GetMapping("/trips/{tripId}")
+//    public String tripDetail(Model model, @PathVariable(value = "tripId") int id) {
+//        model.addAttribute("tripId", this.tripService.getTripById(id));
+//        return "details";
+//    }
+//}

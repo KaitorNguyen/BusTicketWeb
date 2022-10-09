@@ -5,15 +5,23 @@
 package com.dtk.repository.impl;
 
 import com.dtk.pojo.Feedback;
+import com.dtk.pojo.Trip;
+
 import com.dtk.pojo.User;
 import com.dtk.repository.FeedbackRepository;
-import com.dtk.repository.TripRepository;
 import com.dtk.repository.UserRepository;
+import com.dtk.service.TripService;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,31 +32,41 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class FeedbackRepositoryImpl implements FeedbackRepository {
-
+    
     @Autowired
-    private TripRepository tripRepository;
+    private UserRepository userRepsitory;
+    
+    @Autowired
+    private TripService tripService;
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<Feedback> getFeedbacks() {
+    public List<Feedback> getFeedbacks(int idChuyenDi) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Feedback");
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Feedback> q =b.createQuery(Feedback.class);
+        Root<Feedback> root = q.from(Feedback.class);
+        q.select(root);
+        q.where(b.equal(root.get("idTrip").get("id"), idChuyenDi));
+        q.orderBy(b.desc(root.get("createdDate")));
+        Query query = session.createQuery(q);
 
-        return q.getResultList();
+        return query.getResultList();
     }
 
     @Override
-    public Feedback addFeedback(String comment, int tripId) {
-
+    public Feedback addFeedback(String comment, int idChuyenDi) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Feedback f = new Feedback();
-        f.setComment(comment);
-        f.setIdTrip(this.tripRepository.getTripById(tripId));
-        f.setIdCustomer(session.get(User.class, 5));
-        session.save(f); 
-        return f;
+        Feedback b = new Feedback();
+        b.setComment(comment);
+        b.setIdTrip(this.tripService.getTripById(idChuyenDi));
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        b.setIdCustomer(this.userRepsitory.getUserByUsername(authentication.getName().toString()));
+        session.save(b);
+        return b;
     }
 
 }

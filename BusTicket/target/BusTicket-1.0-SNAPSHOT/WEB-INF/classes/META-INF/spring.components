@@ -10,6 +10,7 @@ com.dtk.controllers.ApiTripController=org.springframework.stereotype.Component
 com.dtk.controllers.ApiUserController=org.springframework.stereotype.Component
 com.dtk.controllers.IndexController=org.springframework.stereotype.Component
 com.dtk.controllers.TripController=org.springframework.stereotype.Component
+com.dtk.controllers.TripDetailController=org.springframework.stereotype.Component
 com.dtk.controllers.UserController=org.springframework.stereotype.Component
 com.dtk.handlers.LoginSuccessHandler=org.springframework.stereotype.Component
 com.dtk.handlers.LogoutHandler=org.springframework.stereotype.Component

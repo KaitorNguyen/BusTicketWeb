@@ -38,8 +38,8 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<Feedback> getFeedbacks() {
-        return this.feedbackRepository.getFeedbacks();
+    public List<Feedback> getFeedbacks(int idChuyenDi) {
+        return this.feedbackRepository.getFeedbacks(idChuyenDi);
     }
 
     @Override
@@ -59,8 +59,13 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Feedback addFeedback(String comment, int tripId) {
-       return this.feedbackRepository.addFeedback(comment, tripId);
+    public Feedback addFeedback(String comment, int idChuyenDi) {
+       return this.feedbackRepository.addFeedback(comment,idChuyenDi);
+    }
+
+    @Override
+    public Trip getTripByID(String id) {
+     return this.tripRepository.getTripByID(id);
     }
 
 }

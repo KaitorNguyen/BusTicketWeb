@@ -5,6 +5,8 @@
 package com.dtk.repository;
 
 import com.dtk.pojo.Feedback;
+import com.dtk.pojo.Trip;
+import com.dtk.pojo.User;
 import java.util.List;
 
 /**
@@ -12,6 +14,6 @@ import java.util.List;
  * @author Admin
  */
 public interface FeedbackRepository {
-    List<Feedback> getFeedbacks();
- public Feedback addFeedback(String comment, int tripId);
+    List<Feedback> getFeedbacks(int idChuyenDi);
+ public Feedback addFeedback(String comment, int idChuyenDi);
 }

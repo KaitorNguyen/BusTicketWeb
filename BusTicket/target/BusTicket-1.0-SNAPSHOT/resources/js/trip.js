@@ -43,50 +43,90 @@ function loadAdminTrips(endpoint) {
     })
 }
 
-function loadFeedbacks(endpoint) {
+function loadFeedback(endpoint) {
     fetch(endpoint).then(function (res) {
         return res.json();
     }).then(function (data) {
+        let b = document.getElementById("feedbacks");
         let h = ``;
-        for (let c of data) {
+        for (let d of data) 
             h += `
-                <li>
-                    <img style="width: 50px; margin: 5px 0px 5px 0px" src="${c.user.avatar}" class="rounded" /> 
-                    ${c.comment} - binh luan boi ${c.user.username} - ${moment(c.createdDate).locale("vi").fromNow()}
+             <li>
+                     <div class="container boxReview-comment-item mb-4 form-control">
+            <div>
+                <img src="${d.user.avatar}" alt="Logo" class="rounded-circle" style="width:25px; height: 25px;">
+            </div>
+            <div class="boxReview-comment-item-title is-flex is-justify-content-space-between is-align-items-center">
+                <div class="is-flex is-align-items-center">
+                    <span class="name fw-bold">${d.user.fullname}</span>
+                </div>
+                <p class="date-time"><b>${moment(d.createdDate).locale("vi").fromNow()}</b> - ${moment(d.createdDate).locale("vi").format('lll')}</p>
+            </div> 
+            <div class="boxReview-comment-item-review p-2">
+                <div class="item-review-comment my-1 is-flex is-justify-content-space-between is-flex-direction-column">
+                    <div class="comment-content">
+                        <p>${d.comment}</p>
+                    </div>
+                    <div class="comment-image is-flex">
+                    </div>
+                </div>
+            </div>
+        </div>
                 </li>
-            `
-        }
-
-        let fb = document.getElementById("feedbacks");
-        fb.innerHTML = h;
-    })
-
+            `;
+        b.innerHTML = h;
+      
+    });
 }
 
-function addFeedback(endpoint, id) {
-    fetch(endpoint, {
-        method: 'post',
-        body: JSON.stringify({
-            "comment": document.getElementById("commentId").value,
-            "tripId": id,
-
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(function (res) {
-        return res.json();
-    }).then(function (data) {
-        let fb = document.querySelector("#feedbacks li:first-child");
-        let h = ``;
-        h = `
-                <li>
-                    <img style="width: 50px; margin: 5px 0px 5px 0px" src="${data.user.avatar}" class="rounded" /> 
-                    ${data.comment} - binh luan boi ${data.user.username} - ${moment(data.createdDate).locale("vi").fromNow()}
+function addFeedback(endpoint, idChuyenDi,xacNhan,thanhCong,thatBai) {
+   if(confirm(xacNhan) == true){
+       fetch(endpoint,{
+           method: "post",
+           body: JSON.stringify({
+               "comment" : document.getElementById("comment").value,
+               "idTrip" : idChuyenDi
+           }),
+           headers:{
+               "Content-Type" : "application/json"
+           }
+       }).then(function(res){
+           return res.json();
+       }).then(function(data){
+           if(data){
+               alert(thanhCong);
+               let d = document.getElementById("feedbacks");
+               
+               let h = `
+                     <li>
+                   <div class="container boxReview-comment-item mb-4 form-control">
+                        <div>
+                            <img src="${data.user.avatar}" alt="Logo" class="rounded-circle" style="width:25px; height: 25px;">
+                        </div>
+                        <div class="boxReview-comment-item-title is-flex is-justify-content-space-between is-align-items-center">
+                            <div class="is-flex is-align-items-center">
+                                <span class="name fw-bold">${data.user.fullname}</span>
+                            </div>
+                            <p class="date-time"><b>${moment(data.createdDate).locale("vi").fromNow()}</b> - ${moment(data.createdDate).locale("vi").format('lll')}</p>
+                        </div> 
+                        <div class="boxReview-comment-item-review p-2">
+                            <div class="item-review-comment my-1 is-flex is-justify-content-space-between is-flex-direction-column">
+                                <div class="comment-content">
+                                    <p>${data.comment}</p>
+                                </div>
+                                <div class="comment-image is-flex">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
-            `
-
-        fb.insertAdjacentHTML("beforebegin", h);
-        console.info(data);
-    })
+                    `;
+           d.insertAdjacentHTML("beforebegin", h)
+           }else{
+                alert(thatBai);
+           }
+           location.reload();
+       });
+   }
+       
 }

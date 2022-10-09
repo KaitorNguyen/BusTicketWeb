@@ -22,4 +22,5 @@ public interface UserRepository {
     List<User> getUsers(Map<String, String> params, int page);
     List<User> getUserByRole(String userRole);
     User getUserById(int id);
+    List<User> getUserByUsernameList(String username);
 }

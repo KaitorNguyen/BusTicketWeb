@@ -143,4 +143,19 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public List<User> getUserByUsernameList(String username) {
+       Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query.select(root);
+        query.where(builder.equal(root.get("username").as(String.class), username.trim()));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+    
+    
+
 }

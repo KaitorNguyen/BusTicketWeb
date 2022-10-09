@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,8 @@ public class TripRepositoryImpl implements TripRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         return session.get(Trip.class, id);
     }
+    
+    
 
     @Override
     public boolean addTrip(Trip trip) {
@@ -108,6 +111,23 @@ public class TripRepositoryImpl implements TripRepository {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public Trip getTripByID(String id) {
+       Session session = sessionFactory.getObject().getCurrentSession();
+       CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Trip> q = b.createQuery(Trip.class);
+        Root root = q.from(Trip.class);
+        q.select(root);
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("id").as(String.class), id);
+        predicates.add(p1);
+        q.where(predicates.toArray(new Predicate[]{}));
+        Query query = session.createQuery(q);
+        return(Trip)query.getSingleResult();
+        
+        
     }
 
 }

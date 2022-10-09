@@ -3,9 +3,11 @@
     Created on : Sep 4, 2022, 3:58:57 PM
     Author     : Admin
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix = "fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container">
@@ -13,25 +15,35 @@
 
     <div class="row container">
         <div class="col-md-4 " >
-            <img src="${trip.image}" class="rounded" style="width: 70%"/>
+            <img src="${id.image}" class="rounded" style="width: 70%"/>
         </div>
         <div class="col-md-4">
-            <h5>Ten chuyen xe: ${trip.name}</h5>
-            <h5>Diem di: ${trip.idRoute.start}</h5>
-            <h5>Diem den: ${trip.idRoute.end}</h5>
-            <h5>Thoi gian di: ${trip.startTime}</h5>
-            <h5>Gia ve: ${trip.price}</h5>
-            <h5>Tai xe: ${trip.idDriver.fullname}</h5>
-            <h5>Bien so xe: ${trip.idCoach.licensePlates}</h5>
+            <h5>Ten chuyen xe: ${id.name}</h5>
+            <h5>Diem di: ${id.idRoute.start}</h5>
+            <h5>Diem den: ${id.idRoute.end}</h5>
+            <h5>Thoi gian di: ${id.startTime}</h5>
+            <h5>Gia ve: ${id.price}</h5>
+            <h5>Tai xe: ${id.idDriver.fullname}</h5>
+            <h5>Bien so xe: ${id.idCoach.licensePlates}</h5>
         </div>
     </div>
 
-    <c:url value="/api/feedbacks" var="url"/>
-    <div class="form-group" style="margin: 15px 0px 15px 0px">
-        <textarea class="form-control"  id="commentId" placeholder="Noi dung feedback"></textarea>       
-    </div>
-    <input type="button" onclick="addFeedback('${url}', ${trip.id})" value="Binh luan" class="btn btn-danger" style="margin-bottom: 15px"/>
-    <ul id="feedbacks" style="list-style-type: none">
+    <div class="fw-bold text-danger fs-3 fs-lg-5 container"><spring:message code="chitietbinhluan.comment"/></div>
+
+    <sec:authorize access="isAuthenticated()">
+        <c:url value="/api/trips/${id.id}/feedbacks" var="endpoint"/>
+        <spring:message code="chitietbinhluan.xacnhanbinhluan" var="xacnhan"/>
+        <spring:message code="chitietbinhluan.binhluanthanhcong" var="thanhcong"/>
+        <spring:message code="chitietbinhluan.binhluanthatbai" var="thatbai"/>
+        <form class="d-flex" style="padding-left: 10%; padding-right: 25%;">
+            <textarea id="comment" class="form-control me-2" placeholder="<spring:message code="chitietbinhluan.yourcomment"/>"></textarea>
+            <input type="submit" class="btn btn-primary" value="<spring:message code="chitietbinhluan.gui"/>" style="height: 50px;"
+                   onclick = "addFeedback('${endpoint}',${id.id}, '${xacnhan}', '${thanhcong}', '${thatbai}')"/>
+        </form>
+    </sec:authorize>
+
+    <c:url value="/api/trips/${id.id}/feedbacks" var="endpoint"/>
+    <ul id="feedbacks" style="padding-left: 15%; padding-right: 25%; padding-top: 5%;">
 
     </ul>
 
@@ -41,8 +53,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/trip.js" />"></script>
 <script>
-    <c:url value="/api/feedbacks" var="url"/>
         window.onload = function () {
-            loadFeedbacks('${url}')
+            loadFeedback('${endpoint}');
         }
 </script>
