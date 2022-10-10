@@ -35,6 +35,6 @@ public class TripDetailController {
         User u = (User) session.getAttribute("currentUser");    
         model.addAttribute("current", u);
         model.addAttribute("id", tripService.getTripByID(id) );
-        return "trips";
+        return "trip-detail";
     }
 }

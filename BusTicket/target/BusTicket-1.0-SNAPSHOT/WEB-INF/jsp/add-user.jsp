@@ -76,6 +76,7 @@
             <div class="col-md-6 mb-3">
                 <label for="avatar" class="form-label fs-5">Avatar</label>
                 <form:input type="file" class="form-control" id="avatar" path="file"/>
+                <img style="width: 50%; margin: 10px" id="image" alt="Image"/>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -83,3 +84,22 @@
         </div>
     </form:form> 
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#avatar').change(function () {
+            showImageChooseFile(this);
+        });
+    });
+
+    function showImageChooseFile(fileInput) {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>

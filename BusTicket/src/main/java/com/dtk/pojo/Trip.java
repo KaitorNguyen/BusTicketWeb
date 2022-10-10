@@ -95,6 +95,9 @@ public class Trip implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore
     private Set<Ticket> ticketSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTripSeat")
+    @JsonIgnore
+    private Set<TicketDetail> ticketDetailSet;
 
     public Trip() {
     }
@@ -204,6 +207,15 @@ public class Trip implements Serializable {
 
     public void setTicketSet(Set<Ticket> ticketSet) {
         this.ticketSet = ticketSet;
+    }
+
+    @XmlTransient
+    public Set<TicketDetail> getTicketDetailSet() {
+        return ticketDetailSet;
+    }
+
+    public void setTicketDetailSet(Set<TicketDetail> ticketDetailSet) {
+        this.ticketDetailSet = ticketDetailSet;
     }
 
     @Override

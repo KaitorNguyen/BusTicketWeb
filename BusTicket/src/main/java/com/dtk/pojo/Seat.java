@@ -4,7 +4,9 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,11 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,8 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Seat.findAll", query = "SELECT s FROM Seat s"),
     @NamedQuery(name = "Seat.findById", query = "SELECT s FROM Seat s WHERE s.id = :id"),
-    @NamedQuery(name = "Seat.findByName", query = "SELECT s FROM Seat s WHERE s.name = :name"),
-    @NamedQuery(name = "Seat.findByStatusSeat", query = "SELECT s FROM Seat s WHERE s.statusSeat = :statusSeat")})
+    @NamedQuery(name = "Seat.findByName", query = "SELECT s FROM Seat s WHERE s.name = :name")})
 public class Seat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,13 +49,12 @@ public class Seat implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "name")
     private String name;
-    @Column(name = "status_seat")
-    private Boolean statusSeat;
     @JoinColumn(name = "id_coach", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Coach idCoach;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idSeat")
-    private TicketDetail ticketDetail;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSeat")
+    @JsonIgnore
+    private Set<TicketDetail> ticketDetailSet;
 
     public Seat() {
     }
@@ -83,14 +84,6 @@ public class Seat implements Serializable {
         this.name = name;
     }
 
-    public Boolean getStatusSeat() {
-        return statusSeat;
-    }
-
-    public void setStatusSeat(Boolean statusSeat) {
-        this.statusSeat = statusSeat;
-    }
-
     public Coach getIdCoach() {
         return idCoach;
     }
@@ -99,12 +92,13 @@ public class Seat implements Serializable {
         this.idCoach = idCoach;
     }
 
-    public TicketDetail getTicketDetail() {
-        return ticketDetail;
+    @XmlTransient
+    public Set<TicketDetail> getTicketDetailSet() {
+        return ticketDetailSet;
     }
 
-    public void setTicketDetail(TicketDetail ticketDetail) {
-        this.ticketDetail = ticketDetail;
+    public void setTicketDetailSet(Set<TicketDetail> ticketDetailSet) {
+        this.ticketDetailSet = ticketDetailSet;
     }
 
     @Override

@@ -5,7 +5,9 @@
 package com.dtk.controllers;
 
 import com.dtk.pojo.Coach;
+import com.dtk.pojo.Seat;
 import com.dtk.service.CoachService;
+import com.dtk.service.SeatService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -31,20 +33,27 @@ public class ApiCoachController {
 
     @Autowired
     private CoachService coachService;
+    @Autowired
+    private SeatService seatService;
 
     @GetMapping("/coaches")
     public ResponseEntity<List<Coach>> getCoaches() {
         return new ResponseEntity<>(this.coachService.getCoachs(null), HttpStatus.OK);
     }
 
+    @GetMapping("/seats")
+    public ResponseEntity<List<Seat>> getSeats() {
+        return new ResponseEntity<>(this.seatService.getSeats(null), HttpStatus.OK);
+    }
+
     @GetMapping("/coaches/getCoach/{idCoach}")
     public ResponseEntity<List<Coach>> getCoachByID(@PathVariable(value = "idCoach") int idCoach) {
         List<Coach> coach = new ArrayList<>();
         coach.add(this.coachService.getCoachByID(idCoach));
-        
+
         return new ResponseEntity<>(coach, HttpStatus.OK);
     }
-    
+
     @PutMapping("/coaches/editCoach")
     public boolean editCoach(@RequestBody Coach coach, HttpSession session) {
         try {
@@ -54,7 +63,7 @@ public class ApiCoachController {
             return false;
         }
     }
-            
+
     @DeleteMapping("/coaches/deleteCoach/{coachId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCoach(@PathVariable(value = "coachId") int id) {

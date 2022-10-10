@@ -81,25 +81,17 @@ public class User implements Serializable {
     @Column(name = "address")
     private String address;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    @Size(max = 10)
     @Column(name = "phone")
     private String phone;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "password")
     private String password;
     @Size(max = 150)
@@ -107,9 +99,7 @@ public class User implements Serializable {
     private String avatar;
     @Column(name = "active")
     private Boolean active;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
@@ -121,7 +111,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
     @JsonIgnore
     private Set<Ticket> ticketSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmployee")
+    @OneToMany(mappedBy = "idEmployee")
     @JsonIgnore
     private Set<Ticket> ticketSet1;
 
@@ -131,7 +121,7 @@ public class User implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
-
+    
     public User() {
     }
 
@@ -139,14 +129,9 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String fullname, String phone, String email, String username, String password, String userRole) {
+    public User(Integer id, String fullname) {
         this.id = id;
         this.fullname = fullname;
-        this.phone = phone;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.userRole = userRole;
     }
 
     public Integer getId() {

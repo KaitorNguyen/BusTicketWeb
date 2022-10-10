@@ -110,7 +110,6 @@ CREATE TABLE `seat` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_coach` int NOT NULL,
   `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status_seat` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_COACH_idx` (`id_coach`),
   CONSTRAINT `FK_COACH` FOREIGN KEY (`id_coach`) REFERENCES `coach` (`id`)
@@ -123,7 +122,7 @@ CREATE TABLE `seat` (
 
 LOCK TABLES `seat` WRITE;
 /*!40000 ALTER TABLE `seat` DISABLE KEYS */;
-INSERT INTO `seat` VALUES (1,1,'A01',1),(2,1,'A02',1),(3,1,'A03',NULL),(4,1,'A04',NULL),(5,2,'A01',NULL),(6,2,'A02',NULL),(7,2,'B01',NULL),(8,2,'B02',NULL);
+INSERT INTO `seat` VALUES (1,1,'A01'),(2,1,'A02'),(3,1,'A03'),(4,1,'A04'),(5,2,'A01'),(6,2,'A02'),(7,2,'B01'),(8,2,'B02');
 /*!40000 ALTER TABLE `seat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +136,7 @@ DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE `ticket` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_employee` int NOT NULL,
+  `id_employee` int DEFAULT NULL,
   `id_customer` int NOT NULL,
   `id_trip` int NOT NULL,
   `book_date` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -153,7 +152,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `FK_TICKET_CUSTOMER` FOREIGN KEY (`id_customer`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_TICKET_EMPLOYEE` FOREIGN KEY (`id_employee`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_TICKET_TRIP` FOREIGN KEY (`id_trip`) REFERENCES `trip` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +161,6 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'HCM-DL',2,4,1,'2022-09-01 09:41:38',600000,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,15 +174,18 @@ DROP TABLE IF EXISTS `ticket_detail`;
 CREATE TABLE `ticket_detail` (
   `id_ticket_detail` int NOT NULL AUTO_INCREMENT,
   `id_ticket` int NOT NULL,
+  `id_trip_seat` int NOT NULL,
   `id_seat` int NOT NULL,
   `price_seat` decimal(10,0) DEFAULT NULL,
+  `status_seat` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_ticket_detail`),
-  UNIQUE KEY `id_seat_UNIQUE` (`id_seat`),
   KEY `FK_TICKET_idx` (`id_ticket`),
   KEY `FK_TICKET_SEAT_idx` (`id_seat`),
+  KEY `FK_TICKET_TRIP_idx` (`id_trip_seat`),
   CONSTRAINT `FK_TICKET` FOREIGN KEY (`id_ticket`) REFERENCES `ticket` (`id`),
-  CONSTRAINT `FK_TICKET_SEAT` FOREIGN KEY (`id_seat`) REFERENCES `seat` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `FK_TICKET_SEAT` FOREIGN KEY (`id_seat`) REFERENCES `seat` (`id`),
+  CONSTRAINT `FK_TICKET_TRIP_SEAT` FOREIGN KEY (`id_trip_seat`) REFERENCES `trip` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +194,6 @@ CREATE TABLE `ticket_detail` (
 
 LOCK TABLES `ticket_detail` WRITE;
 /*!40000 ALTER TABLE `ticket_detail` DISABLE KEYS */;
-INSERT INTO `ticket_detail` VALUES (1,1,1,300000),(2,1,2,300000);
 /*!40000 ALTER TABLE `ticket_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,13 +248,13 @@ CREATE TABLE `user` (
   `gender` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthday` datetime DEFAULT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `avatar` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `active` bit(1) DEFAULT b'1',
-  `user_role` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_role` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -279,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-15 10:58:12
+-- Dump completed on 2022-10-10  5:45:37

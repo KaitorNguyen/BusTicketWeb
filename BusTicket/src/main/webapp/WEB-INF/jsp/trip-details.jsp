@@ -18,13 +18,14 @@
             <img src="${id.image}" class="rounded" style="width: 70%"/>
         </div>
         <div class="col-md-4">
-            <h5>Ten chuyen xe: ${id.name}</h5>
-            <h5>Diem di: ${id.idRoute.start}</h5>
-            <h5>Diem den: ${id.idRoute.end}</h5>
-            <h5>Thoi gian di: ${id.startTime}</h5>
-            <h5>Gia ve: ${id.price}</h5>
-            <h5>Tai xe: ${id.idDriver.fullname}</h5>
-            <h5>Bien so xe: ${id.idCoach.licensePlates}</h5>
+            <h5>Tên chuyến xe: ${id.name}</h5>
+            <h5>Điểm xuất phát: ${id.idRoute.start}</h5>
+            <h5>Điểm đến: ${id.idRoute.end}</h5>
+            <h5>Ngày xuất phát: <fmt:formatDate value="${id.startTime}" pattern="dd-MM-yyyy"/></h5>
+            <h5>Thời gian xuất phát: <fmt:formatDate value="${id.startTime}" pattern="HH:mm aa"/></h5>
+            <h5>Giá vé: <fmt:formatNumber type="number" value="${id.price}" maxFractionDigits="3"/> VNÐ</h5>
+            <h5>Tài xế: ${id.idDriver.fullname}</h5>
+            <h5>Biển số xe: ${id.idCoach.licensePlates}</h5>
         </div>
     </div>
 
@@ -53,7 +54,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
 <script src="<c:url value="/js/trip.js" />"></script>
 <script>
-        window.onload = function () {
-            loadFeedback('${endpoint}');
-        }
+                       window.onload = function () {
+                           loadFeedback('${endpoint}');
+                       }
 </script>

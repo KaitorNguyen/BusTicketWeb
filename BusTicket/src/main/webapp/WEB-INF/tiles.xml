@@ -64,7 +64,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/add-trip.jsp" />
     </definition>
-    <definition name="trips" extends="baseLayout">
+    <definition name="trip-detail" extends="baseLayout">
         <put-attribute name="title" value="CHI TIET CHUYEN DI" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/trip-details.jsp" />

@@ -43,7 +43,7 @@
 
     <!-- The Modal -->
     <div class="modal" id="myModalEditUser">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
 
                 <!-- Modal Header -->
@@ -54,69 +54,75 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="form-floating col-md-4 mb-3">
-                            <input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full name"/>
-                            <label for="fullname">Full name</label>
-                        </div>
-<!--                        <div class="form-floating col-md-4 mb-3">
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" id="gender" name="gender" path="gender" value="Nam">Nam
-                                    <label class="form-check-label" for="inlineRadio1"></label>
+                    <c:url value="/api/users/editUser" var="action" />
+                    <form:form method="post" action="${action}" enctype="multipart/form-data">
+                        <div class="row g-3">
+                            <div class="form-floating col-md-4 mb-3">
+                                <input type="text" class="form-control" id="fullname" path="fullname" placeholder="Full name"/>
+                                <label for="fullname">Full name</label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" id="genderNu" name="gender" path="gender" value="Nu">Nu
-                                    <label class="form-check-label" for="inlineRadio2"></label>
+                            <!--                        <div class="form-floating col-md-4 mb-3">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="gender" name="gender" path="gender" value="Nam">Nam
+                                                                <label class="form-check-label" for="inlineRadio1"></label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="genderNu" name="gender" path="gender" value="Nu">Nu
+                                                                <label class="form-check-label" for="inlineRadio2"></label>
+                                                        </div>
+                                                    </div>-->
+                            <div class="form-floating col-md-4 mb-3">
+                                <select class="form-select" aria-label=".form-select-lg example" id="gender" name="gender" path="gender">
+                                    <option selected value="Nam">Nam</option>
+                                    <option value="Nu">Nu</option>
+                                </select>
+                                <label for="roll" class="form-label">Role:</label>
                             </div>
-                        </div>-->
-                        <div class="form-floating col-md-4 mb-3">
-                            <select class="form-select" aria-label=".form-select-lg example" id="gender" name="gender" path="gender">
-                                <option selected value="Nam">Nam</option>
-                                <option value="Nu">Nu</option>
-                            </select>
-                            <label for="roll" class="form-label">Role:</label>
+                            <div class="form-floating col-md-4 mb-3">
+                                <select class="form-select" aria-label=".form-select-lg example" id="userRole" name="userRole" path="userRole">
+                                    <option selected value="ROLE_EMPLOYEE">Employee</option>
+                                    <option value="ROLE_DRIVER">Driver</option>
+                                    <option value="ROLE_CUSTOMER">Customer</option>
+                                    <option value="ROLE_ADMIN">Admin</option>
+                                </select>
+                                <label for="roll" class="form-label">Role:</label>
+                            </div>
+                            <div class="form-floating col-md-4 mb-3">
+                                <input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
+                                <label for="birthday">Birthday</label>
+                            </div>
+                            <div class="form-floating col-md-4 mb-3">
+                                <input type="text" class="form-control" id="address" path="address" placeholder="Address"/>
+                                <label for="address">Address</label>
+                            </div>
+                            <div class="form-floating col-md-4 mb-3">
+                                <input type="text" class="form-control" id="phone" path="phone" placeholder="Phone"/>
+                                <label for="phone">Phone</label>
+                            </div>
+                            <div class="form-floating col-md-6 mb-3">
+                                <input type="email" class="form-control" id="email" path="email" placeholder="name@example.com"/>
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="form-floating col-md-6 mb-3">
+                                <input type="text" class="form-control" id="username" path="username" placeholder="User name"/>
+                                <label for="username">User name</label>
+                            </div>    
+                            <div class="form-floating col-md-6 mb-3">
+                                <input type="password" class="form-control" id="password" path="password" placeholder="Password" disabled/>
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="form-floating col-md-6 mb-3">
+                                <input type="password" class="form-control" id="confirmPassword" path="confirmPassword" placeholder="Confirm Password" disabled/>
+                                <label for="password">Confirm Password</label>
+                            </div>
+                            <div class="form-floating col-md-6 mb-3">
+                                <input type="file" class="form-control" id="fileUploadAvatar" name="fileUploadAvatar" path="file"/>
+                            </div>
+                            <div class="form-floating col-md-6 mb-3">
+                                <img id="avatar" style="width: 45%"/>
+                            </div>
                         </div>
-                        <div class="form-floating col-md-4 mb-3">
-                            <select class="form-select" aria-label=".form-select-lg example" id="userRole" name="userRole" path="userRole">
-                                <option selected value="ROLE_EMPLOYEE">Employee</option>
-                                <option value="ROLE_DRIVER">Driver</option>
-                                <option value="ROLE_CUSTOMER">Customer</option>
-                                <option value="ROLE_ADMIN">Admin</option>
-                            </select>
-                            <label for="roll" class="form-label">Role:</label>
-                        </div>
-                        <div class="form-floating col-md-4 mb-3">
-                            <input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
-                            <label for="birthday">Birthday</label>
-                        </div>
-                        <div class="form-floating col-md-4 mb-3">
-                            <input type="text" class="form-control" id="address" path="address" placeholder="Address"/>
-                            <label for="address">Address</label>
-                        </div>
-                        <div class="form-floating col-md-4 mb-3">
-                            <input type="text" class="form-control" id="phone" path="phone" placeholder="Phone"/>
-                            <label for="phone">Phone</label>
-                        </div>
-                        <div class="form-floating col-md-6 mb-3">
-                            <input type="email" class="form-control" id="email" path="email" placeholder="name@example.com"/>
-                            <label for="email">Email</label>
-                        </div>
-                        <div class="form-floating col-md-6 mb-3">
-                            <input type="text" class="form-control" id="username" path="username" placeholder="User name"/>
-                            <label for="username">User name</label>
-                        </div>    
-                        <div class="form-floating col-md-6 mb-3">
-                            <input type="password" class="form-control" id="password" path="password" placeholder="Password" disabled/>
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="form-floating col-md-6 mb-3">
-                            <input type="password" class="form-control" id="confirmPassword" path="confirmPassword" placeholder="Confirm Password" disabled/>
-                            <label for="password">Confirm Password</label>
-                        </div>
-                        <div class="form-floating col-md-12 mb-3">
-                            <input type="file" class="form-control" id="avatar" path="file"/>
-                        </div>
-                    </div>
+                    </form:form>
                 </div>
 
                 <!-- Modal footer -->
@@ -139,5 +145,54 @@
     <c:url value="/api/users" var="u"/>
         window.onload = function () {
             getUsers('${u}');
+//            anhnguoidung = '';
+        }
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+//    window.onload = function () {
+//        anhnguoidung = '';
+//    }
+//    var CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/upload/v1665020974"
+//    var CLOUDINARY_UPLOAD_PRESET = "doe6rzwse"
+//
+//
+//    var fileUpload = document.getElementById('fileUploadAvatar');
+//
+//    fileUpload.addEventListener('change', function (event) {
+//        var file = event.target.files[0];
+//        var formData = new FormData();
+//        formData.append('file', file);
+//        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+//
+//        axios({
+//            url: CLOUDINARY_URL,
+//            method: 'POST',
+//            headers: {
+//                'Content-Type': 'application/x-www-form-urlencoded'
+//            },
+//            data: formData
+//        }).then(function (res) {
+//            anhnguoidung = res.data.secure_url;
+//        }).then(function (err) {
+//            console.error(err);
+//        });
+//    })
+
+        $(document).ready(function () {
+            $('#fileUploadAvatar').change(function () {
+                showImageChooseFile(this);
+            });
+        });
+
+        function showImageChooseFile(fileInput) {
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#avatar').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(file);
         }
 </script>

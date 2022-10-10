@@ -21,14 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author XGEAR
  */
-@Service
+@Repository
 @Transactional
 @PropertySource("classpath:databases.properties")
 public class TripRepositoryImpl implements TripRepository {
@@ -84,8 +84,6 @@ public class TripRepositoryImpl implements TripRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         return session.get(Trip.class, id);
     }
-    
-    
 
     @Override
     public boolean addTrip(Trip trip) {
@@ -115,8 +113,8 @@ public class TripRepositoryImpl implements TripRepository {
 
     @Override
     public Trip getTripByID(String id) {
-       Session session = sessionFactory.getObject().getCurrentSession();
-       CriteriaBuilder b = session.getCriteriaBuilder();
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Trip> q = b.createQuery(Trip.class);
         Root root = q.from(Trip.class);
         q.select(root);
@@ -125,9 +123,20 @@ public class TripRepositoryImpl implements TripRepository {
         predicates.add(p1);
         q.where(predicates.toArray(new Predicate[]{}));
         Query query = session.createQuery(q);
-        return(Trip)query.getSingleResult();
-        
-        
+        return (Trip) query.getSingleResult();
+
+    }
+
+    @Override
+    public boolean editTrip(Trip trip) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(trip);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 
 }

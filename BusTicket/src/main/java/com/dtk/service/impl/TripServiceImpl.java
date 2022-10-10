@@ -60,12 +60,18 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public Feedback addFeedback(String comment, int idChuyenDi) {
-       return this.feedbackRepository.addFeedback(comment,idChuyenDi);
+        return this.feedbackRepository.addFeedback(comment, idChuyenDi);
     }
 
     @Override
     public Trip getTripByID(String id) {
-     return this.tripRepository.getTripByID(id);
+        return this.tripRepository.getTripByID(id);
+    }
+
+    @Override
+    public boolean editTrip(Trip trip) {
+        trip.setImage("https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg");
+        return this.tripRepository.editTrip(trip);
     }
 
 }

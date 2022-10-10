@@ -5,10 +5,11 @@
 
 function loadMyModalEditUser(endpoint, id) {
     fetch(endpoint, {
-    method: 'get'
+        method: 'get'
     }).then(function (res) {
-    return res.json();
+        return res.json();
     }).then(function (data) {
+
         let fullname = document.getElementById('fullname');
         let gender = document.getElementById('gender');
         let userRole = document.getElementById('userRole');
@@ -17,9 +18,12 @@ function loadMyModalEditUser(endpoint, id) {
         let phone = document.getElementById('phone');
         let email = document.getElementById('email');
         let username = document.getElementById('username');
+        let password = document.getElementById('password');
+        let confirmPassword = document.getElementById('confirmPassword');
+        let fileUploadAvatar = document.getElementById('fileUploadAvatar');
         let avatar = document.getElementById('avatar');
         let editU = document.getElementById('editU');
-        
+
         fullname.value = data[0]["fullname"];
         gender.value = data[0]["gender"];
         userRole.value = data[0]["userRole"];
@@ -28,11 +32,86 @@ function loadMyModalEditUser(endpoint, id) {
         phone.value = data[0]["phone"];
         email.value = data[0]["email"];
         username.value = data[0]["username"];
-        avatar.value = data[0]["avatar"];
-//        editU.setAttribute('onclick', `editUser(${id})`);
+//        password.value = data[0]["password"];
+//        confirmPassword.value = data[0]["confirmPassword"];
+//        fileUploadAvatar.value = data[0]["avatar"];
+        avatar.src = data[0]["avatar"];
+//        window.alert(avatar.src);
+        editU.setAttribute('onclick', `editUser(${id})`);
     });
 }
 
+function editUser(id) {
+    let fullname = document.getElementById('fullname');
+    let gender = document.getElementById('gender');
+    let userRole = document.getElementById('userRole');
+    let birthday = document.getElementById('birthday');
+    let address = document.getElementById('address');
+    let phone = document.getElementById('phone');
+    let email = document.getElementById('email');
+    let username = document.getElementById('username');
+    let password = document.getElementById('password');
+    let confirmPassword = document.getElementById('confirmPassword');
+    let fileUploadAvatar = document.getElementById('fileUploadAvatar');
+    let avatar = document.getElementById('avatar');
+//    let avatar = '';
+//    if (qqq !== '') {
+//        avatar = anhnguoidung;
+//    } else
+//        avatar = '';
+
+    fetch("/BusTicket/api/users/editUser", {
+        method: 'put',
+        body: JSON.stringify({
+            "id": id,
+            "fullname": fullname.value,
+            "gender": gender.value,
+            "userRole": userRole.value,
+            "birthday": birthday.value,
+            "address": address.value,
+            "phone": phone.value,
+            "email": email.value,
+            "username": username.value,
+            "password": password.value,
+            "confirmPassword": confirmPassword.value,
+//            "avatar": fileUploadAvatar.value
+            "avatar": "https://res.cloudinary.com/doe6rzwse/image/upload/v1663062934/rywurihjjegsyms1zew3.jpg"
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        location.reload();
+        if (data === true) {
+            alert('Thành công');
+        } else
+            alert('Thất bại');
+    }).catch(function (err) {
+        console.error(err);
+    });
+}
+//async function editUser(id) {
+//    try {
+//        var fileUpload = await document.getElementById('fileUploadAvatar').value;
+//        if(fileUpload !== ''){
+//            const qq = await anhnguoidung;
+//           
+//            if(qq !== ''){
+//                editUser2(id,qq);
+//            }
+//        }else
+//        {
+//            qq = '';
+//            editUser2(id,qq);
+//        }
+//        
+//    } catch (e) {
+//        alert(e);
+//    }
+//
+//}
 function deleteUser(endpoint, id) {
     fetch(endpoint, {
         method: 'delete'
@@ -86,5 +165,5 @@ function getUsers(endpoint) {
         d3.style.display = "none";
     }).catch(function (err) {
         console.error(err);
-    })
+    });
 }

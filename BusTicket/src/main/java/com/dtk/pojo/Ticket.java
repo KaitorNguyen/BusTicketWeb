@@ -78,7 +78,7 @@ public class Ticket implements Serializable {
     @ManyToOne(optional = false)
     private User idCustomer;
     @JoinColumn(name = "id_employee", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User idEmployee;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTicket")
     private Set<TicketDetail> ticketDetailSet;

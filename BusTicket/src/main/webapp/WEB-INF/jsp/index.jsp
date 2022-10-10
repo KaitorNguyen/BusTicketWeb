@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <img class="banner" src="<c:url value="/images/bus.jpg"/>" />
@@ -47,9 +48,9 @@
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">${t.name}</h4>
-                        <p class="card-text"> Diem xuat phat: ${t.idRoute.start}</p>
-                        <p class="card-text"> Diem den: ${t.idRoute.end}</p>
-                        <p class="card-text"> Khởi hành vào lúc ${t.startTime}</p>
+                        <p class="card-text"> Điểm xuất phát: ${t.idRoute.start}</p>
+                        <p class="card-text"> Điểm đến: ${t.idRoute.end}</p>
+                        <p class="card-text"> Khởi hành vào lúc <fmt:formatDate value="${t.startTime}" pattern="HH:mm aa dd-MM-yyyy"/></p>
                         <a href="/BusTicket/trips/${t.id}" class="btn btn-info">Thông tin vé</a>
                         <a href="${cURL}" class="btn btn-primary">Đặt Vé Ngay</a>
                     </div>

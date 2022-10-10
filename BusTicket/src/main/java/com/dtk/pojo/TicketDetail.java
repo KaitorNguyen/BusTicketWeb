@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "TicketDetail.findAll", query = "SELECT t FROM TicketDetail t"),
     @NamedQuery(name = "TicketDetail.findByIdTicketDetail", query = "SELECT t FROM TicketDetail t WHERE t.idTicketDetail = :idTicketDetail"),
-    @NamedQuery(name = "TicketDetail.findByPriceSeat", query = "SELECT t FROM TicketDetail t WHERE t.priceSeat = :priceSeat")})
+    @NamedQuery(name = "TicketDetail.findByPriceSeat", query = "SELECT t FROM TicketDetail t WHERE t.priceSeat = :priceSeat"),
+    @NamedQuery(name = "TicketDetail.findByStatusSeat", query = "SELECT t FROM TicketDetail t WHERE t.statusSeat = :statusSeat")})
 public class TicketDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,12 +40,17 @@ public class TicketDetail implements Serializable {
     private Integer idTicketDetail;
     @Column(name = "price_seat")
     private Long priceSeat;
+    @Column(name = "status_seat")
+    private Boolean statusSeat;
     @JoinColumn(name = "id_seat", referencedColumnName = "id")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Seat idSeat;
     @JoinColumn(name = "id_ticket", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Ticket idTicket;
+    @JoinColumn(name = "id_trip_seat", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Trip idTripSeat;
 
     public TicketDetail() {
     }
@@ -70,6 +75,14 @@ public class TicketDetail implements Serializable {
         this.priceSeat = priceSeat;
     }
 
+    public Boolean getStatusSeat() {
+        return statusSeat;
+    }
+
+    public void setStatusSeat(Boolean statusSeat) {
+        this.statusSeat = statusSeat;
+    }
+
     public Seat getIdSeat() {
         return idSeat;
     }
@@ -84,6 +97,14 @@ public class TicketDetail implements Serializable {
 
     public void setIdTicket(Ticket idTicket) {
         this.idTicket = idTicket;
+    }
+
+    public Trip getIdTripSeat() {
+        return idTripSeat;
+    }
+
+    public void setIdTripSeat(Trip idTripSeat) {
+        this.idTripSeat = idTripSeat;
     }
 
     @Override

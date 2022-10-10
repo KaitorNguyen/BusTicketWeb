@@ -4,8 +4,9 @@
  */
 package com.dtk.repository.impl;
 
-import com.dtk.pojo.Coach;
-import com.dtk.repository.CoachRepository;
+import com.dtk.pojo.Seat;
+import com.dtk.repository.SeatRepository;
+import com.dtk.service.CoachService;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
@@ -21,21 +22,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Admin
+ * @author GIGABYTE
  */
 @Repository
 @Transactional
-public class CoachRepositoryImpl implements CoachRepository {
+public class SeatRepositoryImpl implements SeatRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+    @Autowired
+    private CoachService coachService;
 
     @Override
-    public List<Coach> getCoachs(Map<String, String> params) {
+    public List<Seat> getSeats(Map<String, String> params) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
-        CriteriaQuery<Coach> q = b.createQuery(Coach.class);
-        Root root = q.from(Coach.class);
+        CriteriaQuery<Seat> q = b.createQuery(Seat.class);
+        Root root = q.from(Seat.class);
         q.select(root);
 
         Query query = session.createQuery(q);
@@ -43,43 +46,20 @@ public class CoachRepositoryImpl implements CoachRepository {
     }
 
     @Override
-    public boolean addCoach(Coach coach) {
+    public boolean addSeat(int idCoach, int totalSeat) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(coach);
-
-            return true;
-        } catch (HibernateException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean deleteCoach(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-
-        try {
-            Coach c = session.get(Coach.class, id);
-            session.delete(c);
-            return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public Coach getCoachByID(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        return session.get(Coach.class, id);
-    }
-
-    @Override
-    public boolean editCoach(Coach coach) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            session.update(coach);
+            Seat s = new Seat();
+            for (int i = 1; i <= totalSeat; i++) {
+                if (i < 10) {
+                    s.setName("A0" + String.valueOf(i));
+                } else {
+                    s.setName("A" + String.valueOf(i));
+                }
+                s.setIdCoach(this.coachService.getCoachByID(idCoach));
+                session.save(s);
+                s = new Seat();
+            }
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());

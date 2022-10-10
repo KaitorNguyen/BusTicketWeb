@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,8 @@ public class UserRepositoryImpl implements UserRepository {
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
     private Environment env;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public boolean addUser(User user) {
@@ -130,11 +133,45 @@ public class UserRepositoryImpl implements UserRepository {
         return session.get(User.class, id);
     }
 
+//    @Override
+//    public boolean editUser(User user) {
+//        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        try {
+//            session.update(user);
+//
+//            return true;
+//        } catch (HibernateException ex) {
+//            System.err.println(ex.getMessage());
+//        }
+//        return false;
+//    }
     @Override
     public boolean editUser(User user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.update(user);
+            User u = session.get(User.class, user.getId());
+            u.setFullname(user.getFullname());
+            u.setGender(user.getGender());
+            u.setUserRole(user.getUserRole());
+            u.setBirthday(user.getBirthday());
+            u.setAddress(user.getAddress());
+            u.setPhone(user.getPhone());
+            u.setEmail(user.getEmail());
+            u.setUsername(user.getUsername());
+
+            String pass = "";
+            if (user.getPassword() != "") {
+                pass = this.passwordEncoder.encode(user.getPassword());
+                u.setPassword(pass);
+            } else {
+                u.setPassword(u.getPassword());
+            }
+
+            u.setAvatar(user.getAvatar());
+//            u.setAvatar("");
+            u.setActive(user.getActive());
+
+            session.update(u);
 
             return true;
         } catch (HibernateException ex) {
@@ -145,7 +182,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getUserByUsernameList(String username) {
-       Session session = this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
@@ -155,7 +192,5 @@ public class UserRepositoryImpl implements UserRepository {
         Query q = session.createQuery(query);
         return q.getResultList();
     }
-    
-    
 
 }

@@ -75,11 +75,11 @@
                             <label for="floatingInput">Ten xe</label>
                         </div>
                         <div class="form-floating col-md-4 mb-3">
-                            <input type="number" class="form-control" id="totalseat1" path="totalseat" placeholder="Tong so ghe"/>
+                            <input type="number" class="form-control" id="totalseat1" path="totalseat" placeholder="Tong so ghe" disabled/>
                             <label for="floatingTotalSeat">Tong so ghe</label>
                         </div>
                         <div class="form-floating col-md-4 mb-3">
-                            <input type="text" class="form-control" id="licensePlates1" path="licensePlates" placeholder="Bien so xe"/>
+                            <input type="text" class="form-control" id="licensePlates1" path="licensePlates" placeholder="Bien so xe" disabled/>
                             <label for="floatingLicensePlates">Bien so xe</label>
                         </div>
                     </div>

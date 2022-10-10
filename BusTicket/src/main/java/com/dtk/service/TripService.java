@@ -17,18 +17,12 @@ import java.util.Map;
 public interface TripService {
 
     List<Trip> getTrips(Map<String, String> params, int page);
-
     List<Feedback> getFeedbacks(int idChuyenDi);
-
     int countTrip();
-
     Trip getTripById(int id);
-
     boolean addTrip(Trip trip);
-
     boolean deleteTrip(int id);
-
+    boolean editTrip(Trip trip);
     Feedback addFeedback(String comment, int idChuyenDi);
-    
     Trip getTripByID(String id);
 }

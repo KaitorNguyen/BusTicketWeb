@@ -89,10 +89,12 @@ function getCoaches(endpoint) {
         return res.json();
     }).then(function (data) {
         let d = document.getElementById("myCoaches");
-
+        let s = document.getElementById('seat');
         if (d !== null) {
             let h = "";
             for (let i = 0; i < data.length; i++)
+//                window.alert(data[i].totalseat);
+//                for (let x = 0; x < data[i].totalseat; i++)
                 h += `
                     <tr>
                         <td>${i + 1}</td>
@@ -122,3 +124,25 @@ function getCoaches(endpoint) {
         console.error(err);
     });
 }
+
+//function getSeats(idCoach) {
+//    fetch("/BusTicket/api/seats").then(function (res) {
+//        return res.json();
+//    }).then(function (data) {
+//        let d = document.getElementById("mySeats");
+//        if (d !== null) {
+//            let h = "";
+//            for (let i = 0; i < data.length; i++)
+//                if (data[i].idCoach.id === idCoach)
+//                    h += `
+//                        <tr>
+//                            <td>${data[i].name}</td>
+//                        </tr>
+//                    `
+//
+//            d.innerHTML = h;
+//        }
+//    }).catch(function (err) {
+//        console.error(err);
+//    })
+//}
