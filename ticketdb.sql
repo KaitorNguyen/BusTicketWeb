@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ticketdb
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -61,7 +61,7 @@ CREATE TABLE `feedback` (
   KEY `FK_FEEDBACK_TRIP_idx` (`id_trip`),
   CONSTRAINT `FK_FEEDBACK_CUSTOMER` FOREIGN KEY (`id_customer`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_FEEDBACK_TRIP` FOREIGN KEY (`id_trip`) REFERENCES `trip` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,4,1,5,'Good','2022-09-01 09:45:46');
+INSERT INTO `feedback` VALUES (1,4,1,5,'Good','2022-09-01 09:45:46'),(2,4,1,NULL,'hello','2022-10-11 01:36:54'),(3,4,1,NULL,'hi','2022-10-11 01:37:03'),(4,4,1,NULL,'great','2022-10-11 09:49:02'),(5,4,1,NULL,'gr','2022-10-11 09:49:08'),(6,4,1,NULL,'sd','2022-10-11 09:49:16'),(7,4,1,NULL,'sd','2022-10-11 09:49:27'),(8,4,1,NULL,'sd','2022-10-11 09:49:30'),(9,4,1,NULL,'gy','2022-10-11 09:50:01'),(10,4,2,NULL,'df','2022-10-11 09:50:11'),(11,4,1,NULL,'sd','2022-10-12 15:57:32'),(12,4,1,NULL,'sd','2022-10-12 22:23:31'),(13,4,1,NULL,'sd','2022-10-13 01:02:13'),(14,4,1,NULL,'','2022-10-13 01:02:17'),(15,4,1,NULL,'sd','2022-10-13 01:40:25');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `route` (
   `start` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `end` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `route` (
 
 LOCK TABLES `route` WRITE;
 /*!40000 ALTER TABLE `route` DISABLE KEYS */;
-INSERT INTO `route` VALUES (1,'Hồ Chí Minh','Đà Lạt'),(2,'Hà Nội','Hồ Chí Minh');
+INSERT INTO `route` VALUES (1,'Hồ Chí Minh','Đà Lạt'),(2,'Hà Nội','Hồ Chí Minh'),(3,'Cần Thơ ','Hồ Chí Minh'),(4,'Hồ Chí Minh','Vũng Tàu'),(5,'Hà Nội','Hải Phòng');
 /*!40000 ALTER TABLE `route` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +222,7 @@ CREATE TABLE `trip` (
   CONSTRAINT `FK_TRIP_COACH` FOREIGN KEY (`id_coach`) REFERENCES `coach` (`id`),
   CONSTRAINT `FK_TRIP_ROUTE` FOREIGN KEY (`id_route`) REFERENCES `route` (`id`),
   CONSTRAINT `FK_TRIP_USER` FOREIGN KEY (`id_driver`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `trip` (
 
 LOCK TABLES `trip` WRITE;
 /*!40000 ALTER TABLE `trip` DISABLE KEYS */;
-INSERT INTO `trip` VALUES (1,'Hồ Chí Minh - Đà Lạt','https://res.cloudinary.com/doe6rzwse/image/upload/v1661425068/busApp/hcm-dalat_qncrqy.jpg','2022-09-01 10:30:00',NULL,300000,3,1,1,NULL),(2,'Hà Nội - Hồ Chí Minh','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-09-02 09:30:00',NULL,500000,3,2,2,NULL);
+INSERT INTO `trip` VALUES (1,'Hồ Chí Minh - Đà Lạt','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-09-01 10:30:00',NULL,300000,3,1,1,NULL),(2,'Hà Nội - Hồ Chí Minh','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-09-02 09:30:00',NULL,500000,3,2,2,NULL),(3,'Hồ Chí Minh - Đà Lạt','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-10-28 00:35:00',NULL,50000,3,1,1,NULL),(4,'Hồ Chí Minh - Đà Lạt','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-10-29 00:36:00',NULL,100000,3,2,1,NULL),(5,'Hồ Chí Minh - Hà Nội','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-12-01 00:36:00',NULL,5000000,3,2,2,NULL),(6,'Hà Nội - Hải Phòng','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-11-05 00:42:00',NULL,20000,3,2,5,NULL),(7,'Cần Thơ - Hồ Chí Minh','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-10-29 00:42:00',NULL,50000,3,2,3,NULL),(8,'Hồ Chí Minh - Vũng Tàu','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-11-30 00:43:00',NULL,0,3,2,4,NULL),(9,'Vùng Tàu - Hồ Chí Minh','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-11-08 00:43:00',NULL,10000,3,1,4,NULL),(10,'Hà Nội - Hải Phòng','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-11-16 00:44:00',NULL,100000,3,2,5,NULL),(11,'Hải Phòng - Hà Nội','https://res.cloudinary.com/doe6rzwse/image/upload/v1661163654/busApp/hn-hcm_j9jqmm.jpg','2022-12-31 00:44:00',NULL,0,3,2,5,NULL);
 /*!40000 ALTER TABLE `trip` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-10  5:45:37
+-- Dump completed on 2022-10-14  2:15:00
