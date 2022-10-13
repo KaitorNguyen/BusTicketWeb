@@ -39,38 +39,38 @@ public class TripRepositoryImpl implements TripRepository {
     private Environment env;
 
     @Override
-    public List<Trip> getTrips(Map<String, String> params, int page) {
+    public List<Trip> getTrips(String kw, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
-        CriteriaQuery<Trip> q = b.createQuery(Trip.class);
-        Root root = q.from(Trip.class);
-        q.select(root);
+        CriteriaQuery<Trip> query = b.createQuery(Trip.class);
+        Root root = query.from(Trip.class);
+        query.select(root);
 
-        if (params != null) {
+//        if (kw != null && !kw.isEmpty()) {
+//            Predicate p = b.like(root.get("name").as(String.class), String.format("%%s%%", kw));
+//            
+//            query =query.where(p);
             List<Predicate> predicates = new ArrayList<>();
-            String kw = params.get("kw");
+//            String kw = params.get("kw");
 
             if (kw != null && !kw.isEmpty()) {
                 Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
                 predicates.add(p);
             }
 
-            q.where(predicates.toArray(Predicate[]::new));
+            query.where(predicates.toArray(Predicate[]::new));
 
-        }
+//        }
+        query  = query.orderBy(b.desc(root.get("id")));
+        Query q =  session.createQuery(query);
+       
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page-1)* max);
 
-        Query query = session.createQuery(q);
-
-        if (page > 0) {
-            int size = Integer.parseInt(env.getProperty("page.size").toString());
-            int start = (page - 1) * size;
-            query.setFirstResult(start);
-            query.setMaxResults(size);
-        }
-
-        return query.getResultList();
+        return q.getResultList();
     }
-
+    
     @Override
     public int countTrip() {
         Session session = this.sessionFactory.getObject().getCurrentSession();

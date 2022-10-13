@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -28,8 +28,8 @@ public class TripServiceImpl implements TripService {
     private FeedbackRepository feedbackRepository;
 
     @Override
-    public List<Trip> getTrips(Map<String, String> params, int page) {
-        return this.tripRepository.getTrips(params, page);
+    public List<Trip> getTrips(String kw, int page) {
+        return this.tripRepository.getTrips(kw, page);
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface TripService {
 
-    List<Trip> getTrips(Map<String, String> params, int page);
+    List<Trip> getTrips(String kw, int page);
     List<Feedback> getFeedbacks(int idChuyenDi);
     int countTrip();
     Trip getTripById(int id);

@@ -13,7 +13,7 @@ import java.util.Map;
  * @author XGEAR
  */
 public interface TripRepository {
-    List<Trip> getTrips(Map<String, String> params, int page);
+    List<Trip> getTrips(String kw, int page);
     Trip getTripById(int id);
     int countTrip();
     boolean addTrip(Trip trip);

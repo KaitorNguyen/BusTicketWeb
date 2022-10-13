@@ -27,13 +27,10 @@
         </p>
     </c:if>
 
-    <ul class="pagination" style="margin: 15px">
-        <c:forEach begin="1" end="${Math.ceil(tripCounter/8)}" var="i">
-            <c:url value="/" var="c">
-                <c:param  value="${i}" name="page"/>
-            </c:url>
-            <li class="page-item"><a class="page-link" href="${c}">${i}</a></li>
-            </c:forEach>
+    <ul class="pagination" style="margin: 15px">        
+        <li class="page-item"><a class="page-link" href="<c:url value="/"/>?page=1">1</a></li> 
+         <li class="page-item"><a class="page-link" href="<c:url value="/"/>?page=2">2</a></li> 
+         <li class="page-item"><a class="page-link" href="<c:url value="/"/>?page=3">3</a></li>
     </ul>
 
     <div class="container">

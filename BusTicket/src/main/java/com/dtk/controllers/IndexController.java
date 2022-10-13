@@ -45,9 +45,11 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model,
-            @RequestParam Map<String, String> params) {
-        model.addAttribute("trips", this.tripService.getTrips(params, 0));
+            @RequestParam(required = false) Map<String, String> params) {
+        String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
+//        model.addAttribute("trips", this.tripService.getTrips(params, 0));         
+        model.addAttribute("trips", this.tripService.getTrips(kw, page));
         model.addAttribute("tripCounter", this.tripService.countTrip());
         return "index";
     }
