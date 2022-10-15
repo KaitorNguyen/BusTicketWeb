@@ -7,6 +7,7 @@ package com.dtk.repository;
 import com.dtk.pojo.Trip;
 import java.util.List;
 import java.util.Map;
+import sun.jvm.hotspot.oops.ObjArray;
 
 /**
  *
@@ -20,4 +21,5 @@ public interface TripRepository {
     boolean deleteTrip(int id);
     boolean editTrip(Trip trip);
     Trip getTripByID(String id);
+    List<Object[]> routeStats();
 }

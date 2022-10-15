@@ -35,7 +35,7 @@
                         <a class="nav-link fw-bold text-lg-center " href="<c:url value="/admin/users"/>">Quản Lý Nhân Viên</a>
                     </li>
                     <li class="nav-item nav-masthead">
-                        <a class="nav-link fw-bold text-lg-center " style="margin-right: 40px" href="#">Thống Kê & Báo Cáo</a>
+                        <a class="nav-link fw-bold text-lg-center " style="margin-right: 40px" href="<c:url value="/admin/route-stats"/>">Thống Kê & Báo Cáo</a>
                     </li>
                 </sec:authorize>
 

@@ -10,6 +10,7 @@ import com.dtk.pojo.User;
 import com.dtk.service.CoachService;
 import com.dtk.service.RouteService;
 import com.dtk.service.SeatService;
+import com.dtk.service.TripService;
 import com.dtk.service.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class AdminController {
     private RouteService routeService;
     @Autowired
     private SeatService seatService;
+    @Autowired
+    private TripService tripService;
 
     @GetMapping("/users")
     public String list(Model model) {
@@ -105,4 +108,12 @@ public class AdminController {
         }
         return "routes";
     }
+    
+    @GetMapping("/route-stats")
+    public String routeStats(Model model ){
+        model.addAttribute("stats", this.tripService.routeStats());
+        return "route-stats";
+    }
+    
+ 
 }

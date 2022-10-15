@@ -4,6 +4,7 @@
  */
 package com.dtk.repository.impl;
 
+import com.dtk.pojo.Route;
 import com.dtk.pojo.Trip;
 import com.dtk.repository.TripRepository;
 import java.util.ArrayList;
@@ -137,6 +138,22 @@ public class TripRepositoryImpl implements TripRepository {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public List<Object[]> routeStats() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        
+        Root rT = q.from(Trip.class);
+          Root rR = q.from(Route.class);
+        q.where(b.equal(rT.get("idRoute"),rR.get("id")));
+        q.multiselect(rR.get("id"),rR.get("start"),rR.get("end"), b.count(rT.get("id")));
+        q.groupBy(rR.get("id"));
+        
+        Query query = session.createQuery(q);
+        return query.getResultList();
     }
 
 }

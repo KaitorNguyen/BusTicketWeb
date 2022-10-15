@@ -25,4 +25,5 @@ public interface TripService {
     boolean editTrip(Trip trip);
     Feedback addFeedback(String comment, int idChuyenDi);
     Trip getTripByID(String id);
+    List<Object[]> routeStats();
 }

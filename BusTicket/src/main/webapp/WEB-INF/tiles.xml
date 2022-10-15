@@ -69,4 +69,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/trip-details.jsp" />
     </definition>
+    
+    <definition name="route-stats" extends="baseLayout">
+        <put-attribute name="title" value="THONG KE CHUYEN XE THEO TUYEN XE" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/route-stats.jsp" />
+    </definition>
 </tiles-definitions>

@@ -74,4 +74,9 @@ public class TripServiceImpl implements TripService {
         return this.tripRepository.editTrip(trip);
     }
 
+    @Override
+    public List<Object[]> routeStats() {
+       return this.tripRepository.routeStats();
+    }
+
 }
