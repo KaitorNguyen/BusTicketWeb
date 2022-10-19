@@ -4,7 +4,10 @@
  */
 package com.dtk.service.impl;
 
+import com.dtk.pojo.Seat;
+import com.dtk.pojo.Ticket;
 import com.dtk.pojo.TicketDetail;
+import com.dtk.pojo.User;
 import com.dtk.repository.TicketRepository;
 import com.dtk.service.TicketService;
 import java.util.List;
@@ -25,6 +28,35 @@ public class TicketServiceImpl implements TicketService{
     public List<TicketDetail> getTickets(Map<String, String> params) {
         return this.ticketRepository.getTickets(params);
     }
-    
-    
+
+    @Override
+    public List<Ticket> getTicketBook(Map<String, String> params) {
+        return this.ticketRepository.getTicketBook(params);
+    }
+
+    @Override
+    public User addUserCustomer(String fullname, String gender, String address, String phone, String email) {
+        return this.ticketRepository.addUserCustomer(fullname, gender, address, phone, email);
+    }
+
+    @Override
+    public Ticket addTicket(Map<String, String> params, int idTrip) {
+        return this.ticketRepository.addTicket(params, idTrip);
+    }
+
+    @Override
+    public TicketDetail addSeatTicketDetail(Ticket ticket, Seat seat) {
+        return this.ticketRepository.addSeatTicketDetail(ticket, seat);
+    }
+
+    @Override
+    public Ticket getTicketBookByID(int id) {
+        return this.ticketRepository.getTicketBookByID(id);
+    }
+
+    @Override
+    public List<TicketDetail> getTicketDetailByIDTrip(int idTrip) {
+        return this.ticketRepository.getTicketDeatilByIDTrip(idTrip);
+    }
+
 }

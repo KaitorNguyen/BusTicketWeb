@@ -43,9 +43,7 @@ import org.springframework.format.annotation.DateTimeFormat;
     @NamedQuery(name = "Trip.findByName", query = "SELECT t FROM Trip t WHERE t.name = :name"),
     @NamedQuery(name = "Trip.findByImage", query = "SELECT t FROM Trip t WHERE t.image = :image"),
     @NamedQuery(name = "Trip.findByStartTime", query = "SELECT t FROM Trip t WHERE t.startTime = :startTime"),
-    @NamedQuery(name = "Trip.findByEndTime", query = "SELECT t FROM Trip t WHERE t.endTime = :endTime"),
-    @NamedQuery(name = "Trip.findByPrice", query = "SELECT t FROM Trip t WHERE t.price = :price"),
-    @NamedQuery(name = "Trip.findByStatusTrip", query = "SELECT t FROM Trip t WHERE t.statusTrip = :statusTrip")})
+    @NamedQuery(name = "Trip.findByPrice", query = "SELECT t FROM Trip t WHERE t.price = :price")})
 public class Trip implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,18 +63,10 @@ public class Trip implements Serializable {
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
-    @Column(name = "end_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
     private long price;
-    @Size(max = 45)
-    @Column(name = "status_trip")
-    private String statusTrip;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore
     private Set<Feedback> feedbackSet;
@@ -95,9 +85,6 @@ public class Trip implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")
     @JsonIgnore
     private Set<Ticket> ticketSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTripSeat")
-    @JsonIgnore
-    private Set<TicketDetail> ticketDetailSet;
 
     public Trip() {
     }
@@ -143,28 +130,12 @@ public class Trip implements Serializable {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
     public long getPrice() {
         return price;
     }
 
     public void setPrice(long price) {
         this.price = price;
-    }
-
-    public String getStatusTrip() {
-        return statusTrip;
-    }
-
-    public void setStatusTrip(String statusTrip) {
-        this.statusTrip = statusTrip;
     }
 
     @XmlTransient
@@ -209,15 +180,6 @@ public class Trip implements Serializable {
         this.ticketSet = ticketSet;
     }
 
-    @XmlTransient
-    public Set<TicketDetail> getTicketDetailSet() {
-        return ticketDetailSet;
-    }
-
-    public void setTicketDetailSet(Set<TicketDetail> ticketDetailSet) {
-        this.ticketDetailSet = ticketDetailSet;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -242,5 +204,5 @@ public class Trip implements Serializable {
     public String toString() {
         return "com.dtk.pojo.Trip[ id=" + id + " ]";
     }
-
+    
 }

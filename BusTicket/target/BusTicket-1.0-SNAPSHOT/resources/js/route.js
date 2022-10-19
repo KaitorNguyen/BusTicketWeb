@@ -48,14 +48,16 @@ function editRoute(id) {
 }
 
 function deleteRoute(endpoint, id) {
-    fetch(endpoint, {
-        method: 'delete'
-    }).then(function (res) {
-        if (res.status === 204)
-            location.reload();
-    }).catch(function (err) {
-        console.error(err);
-    })
+    if (confirm("Bạn có chắc chắn muốn xóa?") == true) {
+        fetch(endpoint, {
+            method: 'delete'
+        }).then(function (res) {
+            if (res.status === 204)
+                location.reload();
+        }).catch(function (err) {
+            console.error(err);
+        });
+    }
 }
 
 function getRoutes(endpoint) {

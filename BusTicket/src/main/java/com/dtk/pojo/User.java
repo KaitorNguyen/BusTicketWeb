@@ -93,6 +93,7 @@ public class User implements Serializable {
     private String username;
     @Size(max = 100)
     @Column(name = "password")
+    @JsonIgnore
     private String password;
     @Size(max = 150)
     @Column(name = "avatar")
@@ -108,10 +109,10 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDriver")
     @JsonIgnore
     private Set<Trip> tripSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomerNew")
     @JsonIgnore
     private Set<Ticket> ticketSet;
-    @OneToMany(mappedBy = "idEmployee")
+    @OneToMany(mappedBy = "idUserLogin")
     @JsonIgnore
     private Set<Ticket> ticketSet1;
 

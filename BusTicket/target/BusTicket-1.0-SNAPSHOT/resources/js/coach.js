@@ -72,16 +72,18 @@ function editCoach(id) {
 }
 
 function deleteCoach(endpoint, id) {
-    fetch(endpoint, {
-        method: 'delete'
-    }).then(function (res) {
-        if (res.status === 204) {
-            location.reload();
-            alert('Thành công');
-        }
-    }).catch(function (err) {
-        console.error(err);
-    });
+    if (confirm("Bạn có chắc chắn muốn xóa?") == true) {
+        fetch(endpoint, {
+            method: 'delete'
+        }).then(function (res) {
+            if (res.status === 204) {
+                location.reload();
+                alert('Thành công');
+            }
+        }).catch(function (err) {
+            console.error(err);
+        });
+    }
 }
 
 function getCoaches(endpoint) {

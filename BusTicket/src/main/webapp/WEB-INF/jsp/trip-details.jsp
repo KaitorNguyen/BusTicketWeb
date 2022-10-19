@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container">
-    <h1 class="text-center text-info" style="margin-top: 15px"> CHI TIET CHUYEN DI</h1>
+    <h1 class="text-center text-info" style="margin-top: 15px"> CHI TIẾT CHUYẾN ĐI</h1>
 
     <div class="row container">
         <div class="col-md-4 " >
@@ -26,6 +26,9 @@
             <h5>Giá vé: <fmt:formatNumber type="number" value="${id.price}" maxFractionDigits="3"/> VNÐ</h5>
             <h5>Tài xế: ${id.idDriver.fullname}</h5>
             <h5>Biển số xe: ${id.idCoach.licensePlates}</h5>
+            <div class="col-auto">
+                <a href="/BusTicket/trips/book_ticket/${id.id}" class="btn btn-primary">Đặt Vé Ngay</a>
+            </div> 
         </div>
     </div>
 

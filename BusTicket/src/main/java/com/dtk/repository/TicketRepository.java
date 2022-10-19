@@ -4,7 +4,10 @@
  */
 package com.dtk.repository;
 
+import com.dtk.pojo.Seat;
+import com.dtk.pojo.Ticket;
 import com.dtk.pojo.TicketDetail;
+import com.dtk.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +17,10 @@ import java.util.Map;
  */
 public interface TicketRepository {
     List<TicketDetail> getTickets(Map<String, String> params);
+    List<Ticket> getTicketBook(Map<String, String> params);
+    Ticket getTicketBookByID(int id);
+    List<TicketDetail> getTicketDeatilByIDTrip(int idTrip);
+    User addUserCustomer(String fullname, String gender, String address, String phone, String email);
+    Ticket addTicket(Map<String, String> params, int idTrip);
+    TicketDetail addSeatTicketDetail(Ticket ticket, Seat seat);
 }

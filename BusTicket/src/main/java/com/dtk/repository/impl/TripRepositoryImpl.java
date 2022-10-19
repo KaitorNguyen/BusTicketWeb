@@ -51,27 +51,27 @@ public class TripRepositoryImpl implements TripRepository {
 //            Predicate p = b.like(root.get("name").as(String.class), String.format("%%s%%", kw));
 //            
 //            query =query.where(p);
-            List<Predicate> predicates = new ArrayList<>();
+        List<Predicate> predicates = new ArrayList<>();
 //            String kw = params.get("kw");
 
-            if (kw != null && !kw.isEmpty()) {
-                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
-                predicates.add(p);
-            }
+        if (kw != null && !kw.isEmpty()) {
+            Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
+            predicates.add(p);
+        }
 
-            query.where(predicates.toArray(Predicate[]::new));
+        query.where(predicates.toArray(Predicate[]::new));
 
 //        }
-        query  = query.orderBy(b.desc(root.get("id")));
-        Query q =  session.createQuery(query);
-       
+        query = query.orderBy(b.desc(root.get("id")));
+        Query q = session.createQuery(query);
+
         int max = 6;
         q.setMaxResults(max);
-        q.setFirstResult((page-1)* max);
+        q.setFirstResult((page - 1) * max);
 
         return q.getResultList();
     }
-    
+
     @Override
     public int countTrip() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -145,14 +145,47 @@ public class TripRepositoryImpl implements TripRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
-        
+
         Root rT = q.from(Trip.class);
-          Root rR = q.from(Route.class);
-        q.where(b.equal(rT.get("idRoute"),rR.get("id")));
-        q.multiselect(rR.get("id"),rR.get("start"),rR.get("end"), b.count(rT.get("id")));
+        Root rR = q.from(Route.class);
+        q.where(b.equal(rT.get("idRoute"), rR.get("id")));
+        q.multiselect(rR.get("id"), rR.get("start"), rR.get("end"), b.count(rT.get("id")));
         q.groupBy(rR.get("id"));
-        
+
         Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Trip> getTripsAPI(Map<String, String> params, int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Trip> q = b.createQuery(Trip.class);
+        Root root = q.from(Trip.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
+                predicates.add(p);
+            }
+
+            q.where(predicates.toArray(Predicate[]::new));
+
+        }
+
+        Query query = session.createQuery(q);
+
+        if (page > 0) {
+            int size = Integer.parseInt(env.getProperty("page.size").toString());
+            int start = (page - 1) * size;
+            query.setFirstResult(start);
+            query.setMaxResults(size);
+        }
+
         return query.getResultList();
     }
 

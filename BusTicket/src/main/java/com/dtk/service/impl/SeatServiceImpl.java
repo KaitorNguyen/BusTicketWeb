@@ -31,5 +31,15 @@ public class SeatServiceImpl implements SeatService{
     public boolean addSeat(int idCoach, int totalSeat) {
         return this.seatRepository.addSeat(idCoach, totalSeat);
     }
+
+    @Override
+    public List<Seat> getSeatsByIDCoach(int idCoach) {
+        return this.seatRepository.getSeatsByIDCoach(idCoach);
+    }
+
+    @Override
+    public Seat getSeatByID(int idSeat) {
+        return this.seatRepository.getSeatByID(idSeat);
+    }
     
 }

@@ -7,11 +7,13 @@ package com.dtk.repository.impl;
 import com.dtk.pojo.Seat;
 import com.dtk.repository.SeatRepository;
 import com.dtk.service.CoachService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -65,6 +67,29 @@ public class SeatRepositoryImpl implements SeatRepository {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public List<Seat> getSeatsByIDCoach(int idCoach) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Seat> q = b.createQuery(Seat.class);
+        Root root = q.from(Seat.class);
+        q.select(root);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        Predicate p1 = b.equal(root.get("idCoach").get("id").as(Integer.class), idCoach);
+        predicates.add(p1);
+        q.where((Predicate[]) predicates.toArray(Predicate[]::new));
+        
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Seat getSeatByID(int idSeat) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Seat.class, idSeat);
     }
 
 }

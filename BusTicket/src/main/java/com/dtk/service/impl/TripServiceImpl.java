@@ -79,4 +79,9 @@ public class TripServiceImpl implements TripService {
        return this.tripRepository.routeStats();
     }
 
+    @Override
+    public List<Trip> getTripsAPI(Map<String, String> params, int page) {
+        return this.tripRepository.getTripsAPI(params, page);
+    }
+
 }

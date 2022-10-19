@@ -4,6 +4,7 @@
  */
 package com.dtk.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -36,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t"),
     @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id"),
-    @NamedQuery(name = "Ticket.findByName", query = "SELECT t FROM Ticket t WHERE t.name = :name"),
     @NamedQuery(name = "Ticket.findByBookDate", query = "SELECT t FROM Ticket t WHERE t.bookDate = :bookDate"),
     @NamedQuery(name = "Ticket.findByTotalMoney", query = "SELECT t FROM Ticket t WHERE t.totalMoney = :totalMoney"),
     @NamedQuery(name = "Ticket.findByPaymentMethod", query = "SELECT t FROM Ticket t WHERE t.paymentMethod = :paymentMethod"),
@@ -51,9 +51,6 @@ public class Ticket implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "name")
-    private String name;
     @Column(name = "book_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date bookDate;
@@ -74,13 +71,14 @@ public class Ticket implements Serializable {
     @JoinColumn(name = "id_trip", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Trip idTrip;
-    @JoinColumn(name = "id_customer", referencedColumnName = "id")
+    @JoinColumn(name = "id_customer_new", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User idCustomer;
-    @JoinColumn(name = "id_employee", referencedColumnName = "id")
+    private User idCustomerNew;
+    @JoinColumn(name = "id_user_login", referencedColumnName = "id")
     @ManyToOne
-    private User idEmployee;
+    private User idUserLogin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTicket")
+    @JsonIgnore
     private Set<TicketDetail> ticketDetailSet;
 
     public Ticket() {
@@ -96,14 +94,6 @@ public class Ticket implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Date getBookDate() {
@@ -162,20 +152,20 @@ public class Ticket implements Serializable {
         this.idTrip = idTrip;
     }
 
-    public User getIdCustomer() {
-        return idCustomer;
+    public User getIdCustomerNew() {
+        return idCustomerNew;
     }
 
-    public void setIdCustomer(User idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setIdCustomerNew(User idCustomerNew) {
+        this.idCustomerNew = idCustomerNew;
     }
 
-    public User getIdEmployee() {
-        return idEmployee;
+    public User getIdUserLogin() {
+        return idUserLogin;
     }
 
-    public void setIdEmployee(User idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setIdUserLogin(User idUserLogin) {
+        this.idUserLogin = idUserLogin;
     }
 
     @XmlTransient

@@ -46,6 +46,11 @@ public class ApiCoachController {
         return new ResponseEntity<>(this.seatService.getSeats(null), HttpStatus.OK);
     }
 
+    @GetMapping("/seats/{idCoach}")
+    public ResponseEntity<List<Seat>> getSeatsByIDCoach(@PathVariable(value = "idCoach") int idCoach) {
+        return new ResponseEntity<>(this.seatService.getSeatsByIDCoach(idCoach), HttpStatus.OK);
+    }
+
     @GetMapping("/coaches/getCoach/{idCoach}")
     public ResponseEntity<List<Coach>> getCoachByID(@PathVariable(value = "idCoach") int idCoach) {
         List<Coach> coach = new ArrayList<>();

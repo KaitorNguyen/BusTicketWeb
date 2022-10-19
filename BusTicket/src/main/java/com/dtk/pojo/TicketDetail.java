@@ -48,9 +48,6 @@ public class TicketDetail implements Serializable {
     @JoinColumn(name = "id_ticket", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Ticket idTicket;
-    @JoinColumn(name = "id_trip_seat", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Trip idTripSeat;
 
     public TicketDetail() {
     }
@@ -97,14 +94,6 @@ public class TicketDetail implements Serializable {
 
     public void setIdTicket(Ticket idTicket) {
         this.idTicket = idTicket;
-    }
-
-    public Trip getIdTripSeat() {
-        return idTripSeat;
-    }
-
-    public void setIdTripSeat(Trip idTripSeat) {
-        this.idTripSeat = idTripSeat;
     }
 
     @Override

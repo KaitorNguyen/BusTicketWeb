@@ -14,5 +14,7 @@ import java.util.Map;
  */
 public interface SeatRepository {
     List<Seat> getSeats(Map<String, String> params);
+    List<Seat> getSeatsByIDCoach(int idCoach);
+    Seat getSeatByID(int idSeat);
     boolean addSeat(int idCoach, int totalSeat);
 }

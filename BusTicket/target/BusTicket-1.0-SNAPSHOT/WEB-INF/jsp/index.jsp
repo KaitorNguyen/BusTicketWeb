@@ -49,7 +49,7 @@
                         <p class="card-text"> Điểm đến: ${t.idRoute.end}</p>
                         <p class="card-text"> Khởi hành vào lúc <fmt:formatDate value="${t.startTime}" pattern="HH:mm aa dd-MM-yyyy"/></p>
                         <a href="/BusTicket/trips/${t.id}" class="btn btn-info">Thông tin vé</a>
-                        <a href="${cURL}" class="btn btn-primary">Đặt Vé Ngay</a>
+                        <a href="/BusTicket/trips/book_ticket/${t.id}" class="btn btn-primary">Đặt Vé Ngay</a>
                     </div>
                 </div>                                 
             </c:forEach>

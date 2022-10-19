@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<<h1 class="text-center text-info">THONG KE SO CHUYEN XE THEO TUYEN XE</h1>
+<<h1 class="text-center text-info">THỐNG KÊ SỐ CHUYẾN XE THEO TUYẾN XE</h1>
 <div class="row">
     <div class="col-md-5"> 
         <table class="table">
@@ -24,7 +24,7 @@
             </c:forEach>
         </table>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7" style="width: 35%">
         <canvas id="myChart"></canvas>
     </div>
     <script src="<c:url value="/js/stats.js/" />"></script>

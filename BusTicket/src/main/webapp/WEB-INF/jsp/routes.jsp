@@ -36,7 +36,7 @@
     </form:form> 
 
     <table class="table table-hover caption-top">
-        <caption>Danh sach tuyen xe</caption>
+        <caption>Danh sách tuyến xe</caption>
         <thead>
             <tr>
                 <th>STT</th>

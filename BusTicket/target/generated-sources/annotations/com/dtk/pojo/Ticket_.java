@@ -9,21 +9,20 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-10-15T15:27:25")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2022-10-20T01:51:13")
 @StaticMetamodel(Ticket.class)
 public class Ticket_ { 
 
-    public static volatile SingularAttribute<Ticket, User> idEmployee;
     public static volatile SingularAttribute<Ticket, Date> bookDate;
     public static volatile SingularAttribute<Ticket, Trip> idTrip;
     public static volatile SingularAttribute<Ticket, Long> totalMoney;
-    public static volatile SingularAttribute<Ticket, String> name;
     public static volatile SingularAttribute<Ticket, String> paymentMethod;
     public static volatile SingularAttribute<Ticket, String> statusTicket;
     public static volatile SingularAttribute<Ticket, Integer> id;
+    public static volatile SingularAttribute<Ticket, User> idCustomerNew;
     public static volatile SingularAttribute<Ticket, Date> paymentDate;
     public static volatile SingularAttribute<Ticket, String> paymentContent;
+    public static volatile SingularAttribute<Ticket, User> idUserLogin;
     public static volatile SetAttribute<Ticket, TicketDetail> ticketDetailSet;
-    public static volatile SingularAttribute<Ticket, User> idCustomer;
 
 }

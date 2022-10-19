@@ -22,15 +22,15 @@
         <div class="row g-3">
             <div class="form-floating col-md-4 mb-3">
                 <form:input type="text" class="form-control" id="name" path="name" placeholder="Tên xe"/>
-                <label for="floatingInput">Ten xe</label>
+                <label for="floatingInput">Tên xe</label>
             </div>
             <div class="form-floating col-md-4 mb-3">
                 <form:input type="number" class="form-control" id="totalseat" path="totalseat" placeholder="Tống số ghế"/>
-                <label for="floatingTotalSeat">Tong so ghe</label>
+                <label for="floatingTotalSeat">Tổng số ghế</label>
             </div>
             <div class="form-floating col-md-4 mb-3">
                 <form:input type="text" class="form-control" id="licensePlates" path="licensePlates" placeholder="Biển số xe"/>
-                <label for="floatingLicensePlates">Bien so xe</label>
+                <label for="floatingLicensePlates">Biển số xe</label>
             </div>
         </div>
         <div class="row">
@@ -41,13 +41,13 @@
     </form:form> 
 
     <table class="table table-hover caption-top">
-        <caption>Danh sach xe</caption>
+        <caption>Danh sách xe</caption>
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Ten xe</th>
-                <th>So ghe</th>
-                <th>Bien so xe</th>
+                <th>Tên xe</th>
+                <th>Số ghế</th>
+                <th>Biển số xe</th>
                 <th></th>
             </tr>
         </thead>
@@ -72,15 +72,15 @@
                     <div class="row g-3">
                         <div class="form-floating col-md-4 mb-3">
                             <input type="text" class="form-control" id="name1" path="name" placeholder="Ten xe"/>
-                            <label for="floatingInput">Ten xe</label>
+                            <label for="floatingInput">Tên xe</label>
                         </div>
                         <div class="form-floating col-md-4 mb-3">
                             <input type="number" class="form-control" id="totalseat1" path="totalseat" placeholder="Tong so ghe" disabled/>
-                            <label for="floatingTotalSeat">Tong so ghe</label>
+                            <label for="floatingTotalSeat">Tổng số ghế</label>
                         </div>
                         <div class="form-floating col-md-4 mb-3">
                             <input type="text" class="form-control" id="licensePlates1" path="licensePlates" placeholder="Bien so xe" disabled/>
-                            <label for="floatingLicensePlates">Bien so xe</label>
+                            <label for="floatingLicensePlates">Biển số xe</label>
                         </div>
                     </div>
                 </div>

@@ -76,7 +76,7 @@
                                     <option selected value="Nam">Nam</option>
                                     <option value="Nu">Nu</option>
                                 </select>
-                                <label for="roll" class="form-label">Role:</label>
+                                <label for="roll" class="form-label">Gender</label>
                             </div>
                             <div class="form-floating col-md-4 mb-3">
                                 <select class="form-select" aria-label=".form-select-lg example" id="userRole" name="userRole" path="userRole">
@@ -85,7 +85,7 @@
                                     <option value="ROLE_CUSTOMER">Customer</option>
                                     <option value="ROLE_ADMIN">Admin</option>
                                 </select>
-                                <label for="roll" class="form-label">Role:</label>
+                                <label for="roll" class="form-label">Role</label>
                             </div>
                             <div class="form-floating col-md-4 mb-3">
                                 <input type="date" class="form-control" id="birthday" path="birthday" placeholder="Birthday"/>
@@ -116,7 +116,7 @@
                                 <label for="password">Confirm Password</label>
                             </div>
                             <div class="form-floating col-md-6 mb-3">
-                                <input type="file" class="form-control" id="fileUploadAvatar" name="fileUploadAvatar" path="file"/>
+                                <input type="file" class="form-control" id="fileUploadAvatar" name="fileUploadAvatar" path="file" disabled/>
                             </div>
                             <div class="form-floating col-md-6 mb-3">
                                 <img id="avatar" style="width: 45%"/>

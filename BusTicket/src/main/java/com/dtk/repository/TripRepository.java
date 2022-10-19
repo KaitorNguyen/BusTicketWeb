@@ -15,6 +15,7 @@ import sun.jvm.hotspot.oops.ObjArray;
  */
 public interface TripRepository {
     List<Trip> getTrips(String kw, int page);
+    List<Trip> getTripsAPI(Map<String, String> params, int page);
     Trip getTripById(int id);
     int countTrip();
     boolean addTrip(Trip trip);
