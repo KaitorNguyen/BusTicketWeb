@@ -167,3 +167,41 @@ function getUsers(endpoint) {
         console.error(err);
     });
 }
+
+function loadMyUserCurrent(idUser) {
+    fetch(`/BusTicket/api/users/getUser/${idUser}`, {
+        method: 'get'
+    }).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+
+        let fullname = document.getElementById('fullname');
+        let gender = document.getElementById('gender');
+        let userRole = document.getElementById('userRole');
+        let birthday = document.getElementById('birthday');
+        let address = document.getElementById('address');
+        let phone = document.getElementById('phone');
+        let email = document.getElementById('email');
+        let username = document.getElementById('username');
+        let password = document.getElementById('password');
+        let confirmPassword = document.getElementById('confirmPassword');
+        let fileUploadAvatar = document.getElementById('fileUploadAvatar');
+        let avatar = document.getElementById('avatar');
+        let editU = document.getElementById('editU');
+
+        fullname.value = data[0]["fullname"];
+        gender.value = data[0]["gender"];
+        userRole.value = data[0]["userRole"];
+        birthday.value = moment(data[0]["birthday"]).format("YYYY-MM-DD");
+        address.value = data[0]["address"];
+        phone.value = data[0]["phone"];
+        email.value = data[0]["email"];
+        username.value = data[0]["username"];
+//        password.value = data[0]["password"];
+//        confirmPassword.value = data[0]["confirmPassword"];
+//        fileUploadAvatar.value = data[0]["avatar"];
+        avatar.src = data[0]["avatar"];
+//        window.alert(avatar.src);
+        editU.setAttribute('onclick', `editUser(${id})`);
+    });
+}

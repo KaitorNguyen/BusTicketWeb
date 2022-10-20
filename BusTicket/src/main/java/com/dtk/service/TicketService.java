@@ -18,9 +18,13 @@ import java.util.Map;
 public interface TicketService {
     List<TicketDetail> getTickets(Map<String, String> params);
     List<Ticket> getTicketBook(Map<String, String> params);
+    List<Ticket> getTicketBookByIDUser(int idUser);
     Ticket getTicketBookByID(int id);
     List<TicketDetail> getTicketDetailByIDTrip(int idTrip);
+    List<TicketDetail> getTicketDetailByIDTicket(int idTicket);
+    List<TicketDetail> getTicketDetailByIDUserLogin(int idUser);
     User addUserCustomer(String fullname, String gender, String address, String phone, String email);
     Ticket addTicket(Map<String, String> params, int idTrip);
     TicketDetail addSeatTicketDetail(Ticket ticket, Seat seat);
+    boolean xacNhanTicket(int idTicket);
 }

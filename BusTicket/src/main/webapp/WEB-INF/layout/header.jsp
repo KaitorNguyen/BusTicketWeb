@@ -21,6 +21,11 @@
                 <li class="nav-item nav-masthead">
                     <a class="nav-link fw-bold text-lg-center " style="margin-right: 15px" href="/BusTicket/">Trang Chủ</a>
                 </li>
+                <sec:authorize access="!hasRole('ROLE_ADMIN') and isAuthenticated()">
+                    <li class="nav-item nav-masthead">
+                        <a class="nav-link fw-bold text-lg-center " style="margin-right: 15px" href="<c:url value="/tickets"/>">Quản Lý Vé Xe</a>
+                    </li>                    
+                </sec:authorize>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li class="nav-item nav-masthead">
                         <a class="nav-link fw-bold text-lg-center " href="<c:url value="/admin/trips"/>">Quản Lý Chuyến Xe</a>
@@ -91,6 +96,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     Bạn đang đăng nhập với vai trò ${currentUser.userRole} 
+                    <div class="col-auto" style="margin: 15px auto">
+                        <button type="button" class="btn btn-primary">
+                            <a class="nav-link text-white fw-bold text-lg-center " href="<c:url value="/userdetails"/>">
+                                Thông Tin Cá Nhân
+                            </a>
+                        </button>
+                    </div> 
                 </div>
 
                 <!-- Modal footer -->

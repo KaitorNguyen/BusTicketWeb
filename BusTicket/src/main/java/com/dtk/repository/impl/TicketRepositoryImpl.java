@@ -121,6 +121,7 @@ public class TicketRepositoryImpl implements TicketRepository {
             t.setBookDate(date);
             t.setTotalMoney(Long.parseLong(params.get("totalMoney")));
             t.setPaymentMethod(params.get("paymentMethod"));
+            t.setStatusTicket("Chưa thanh toán");
 
             session.save(t);
             return t;
@@ -168,6 +169,68 @@ public class TicketRepositoryImpl implements TicketRepository {
 
         Query query = session.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public List<TicketDetail> getTicketDetailByIDTicket(int idTicket) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<TicketDetail> q = b.createQuery(TicketDetail.class);
+        Root root = q.from(TicketDetail.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("idTicket").get("id"), idTicket));
+
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<TicketDetail> getTicketDetailByIDUserLogin(int idUser) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<TicketDetail> q = b.createQuery(TicketDetail.class);
+        Root root = q.from(TicketDetail.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("idTicket").get("idUserLogin"), idUser));
+
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Ticket> getTicketBookByIDUser(int idUser) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Ticket> q = b.createQuery(Ticket.class);
+        Root root = q.from(Ticket.class);
+        q.select(root);
+
+        q.where(b.equal(root.get("idUserLogin"), idUser));
+
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public boolean xacNhanTicket(int idTicket) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            Date date = formatter.parse(String.valueOf(java.time.LocalDateTime.now()));
+
+            Ticket ticketB = session.get(Ticket.class, idTicket);
+            ticketB.setPaymentDate(date);
+            ticketB.setStatusTicket("Ðã thanh toán");
+            session.update(ticketB);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(TicketRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

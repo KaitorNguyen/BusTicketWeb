@@ -49,6 +49,7 @@ com\dtk\handlers\LogoutHandler.class
 com\dtk\pojo\Ticket.class
 com\dtk\service\RouteService.class
 com\dtk\configs\WebAppContextConfig.class
+com\dtk\controllers\TicketController.class
 com\dtk\repository\RouteRepository.class
 com\dtk\handlers\LoginSuccessHandler.class
 com\dtk\pojo\Feedback_.class

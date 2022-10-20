@@ -49,4 +49,9 @@ public class UserController {
         model.addAttribute("errMsg", errMsg);
         return "register";
     }
+    
+    @GetMapping("/userdetails")
+    public String userDetails(Model model) {
+        return "user-details";
+    }
 }
