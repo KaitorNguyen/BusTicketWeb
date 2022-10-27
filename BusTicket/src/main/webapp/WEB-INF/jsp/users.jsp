@@ -145,40 +145,10 @@
     <c:url value="/api/users" var="u"/>
         window.onload = function () {
             getUsers('${u}');
-//            anhnguoidung = '';
-        }
+        };
 </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-//    window.onload = function () {
-//        anhnguoidung = '';
-//    }
-//    var CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/upload/v1665020974"
-//    var CLOUDINARY_UPLOAD_PRESET = "doe6rzwse"
-//
-//
-//    var fileUpload = document.getElementById('fileUploadAvatar');
-//
-//    fileUpload.addEventListener('change', function (event) {
-//        var file = event.target.files[0];
-//        var formData = new FormData();
-//        formData.append('file', file);
-//        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-//
-//        axios({
-//            url: CLOUDINARY_URL,
-//            method: 'POST',
-//            headers: {
-//                'Content-Type': 'application/x-www-form-urlencoded'
-//            },
-//            data: formData
-//        }).then(function (res) {
-//            anhnguoidung = res.data.secure_url;
-//        }).then(function (err) {
-//            console.error(err);
-//        });
-//    })
-
         $(document).ready(function () {
             $('#fileUploadAvatar').change(function () {
                 showImageChooseFile(this);

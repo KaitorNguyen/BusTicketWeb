@@ -62,6 +62,23 @@ function editTrip(id) {
     });
 }
 
+function deleteTrip(endpoint, id) {
+    if (confirm("Bạn có chắc chắn muốn xóa?") === true) {
+        fetch(endpoint, {
+            method: 'delete'
+        }).then(function (res) {
+            if (res.status === 204) {
+                location.reload();
+                alert('Bạn đã xóa thành công');
+            }
+        }).catch(function (err) {
+            console.error(err);
+        });
+    } else {
+        alert('Bạn vẫn chưa muốn xóa!');
+    }
+}
+
 function loadAdminTrips(endpoint) {
     fetch(endpoint).then(function (res) {
         return res.json();
@@ -86,11 +103,9 @@ function loadAdminTrips(endpoint) {
                             <button class="btn btn-primary" onclick="loadMyModalEditTrip('${endpoint + "/getTrip/" + data[i].id}', ${data[i].id})" data-bs-toggle="modal" data-bs-target="#myModalEditTrip">
                                Edit
                             </button>
-                            <a href="/BusTicket/admin/trips/remove/${data[i].id}">
-                                <button class="btn btn-danger"> 
-                                    Delete
-                                </button>
-                            </a>
+                            <button class="btn btn-danger" onclick="deleteTrip('${endpoint + "/deleteTrip/" + data[i].id}', ${data[i].id})"> 
+                                Delete
+                            </button>
                         </td>
                     </tr> 
                     `

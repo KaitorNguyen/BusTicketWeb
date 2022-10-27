@@ -57,11 +57,4 @@ public class TripController {
         return "add-trip";
     }
 
-    @RequestMapping("/trips/remove/{tripId}")
-    public String removeTrip(Model model, @PathVariable("tripId") Integer tripId) {
-        if (tripService.getTripById(tripId) != null) {
-            tripService.deleteTrip(tripId);
-        }
-        return "redirect:/admin/trips";
-    }
 }

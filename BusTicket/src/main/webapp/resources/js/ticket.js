@@ -77,8 +77,15 @@ function addTicket(idTrip, idCustomerLogin) {
         addSeatTicketDetail();
         console.info(data);
         alert('Thành công');
-        if (data.idUserLogin.userRole == 'ROLE_EMPLOYEE' || data.idUserLogin.userRole == 'ROLE_CUSTOMER')
+        if (data.idUserLogin === null) {
+            location.reload();
+        }
+
+        if (data.idUserLogin.userRole === 'ROLE_EMPLOYEE' || data.idUserLogin.userRole === 'ROLE_CUSTOMER') {
             window.open('/BusTicket/tickets');
+//            window.location = '/BusTicket/tickets';
+        }
+        location.reload();
     }).catch(function (err) {
         console.error(err);
 //        alert(err);
@@ -365,7 +372,7 @@ function getTicketSeat(idTicket) {
             let h = "";
             for (let i = 0; i < data.length; i++)
                 h += `
-                            <h6>${data[i].idSeat.name} - ${(data[i].priceSeat).toLocaleString('vi-VN', {style : 'currency', currency : 'VND'})}</h6>
+                            <h6>${data[i].idSeat.name} - ${(data[i].priceSeat).toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})}</h6>
                         `;
 
             d.innerHTML = h;

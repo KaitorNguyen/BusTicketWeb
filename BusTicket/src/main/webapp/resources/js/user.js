@@ -54,11 +54,6 @@ function editUser(id) {
     let confirmPassword = document.getElementById('confirmPassword');
     let fileUploadAvatar = document.getElementById('fileUploadAvatar');
     let avatar = document.getElementById('avatar');
-//    let avatar = '';
-//    if (qqq !== '') {
-//        avatar = anhnguoidung;
-//    } else
-//        avatar = '';
 
     fetch("/BusTicket/api/users/editUser", {
         method: 'put',
@@ -92,35 +87,22 @@ function editUser(id) {
         console.error(err);
     });
 }
-//async function editUser(id) {
-//    try {
-//        var fileUpload = await document.getElementById('fileUploadAvatar').value;
-//        if(fileUpload !== ''){
-//            const qq = await anhnguoidung;
-//           
-//            if(qq !== ''){
-//                editUser2(id,qq);
-//            }
-//        }else
-//        {
-//            qq = '';
-//            editUser2(id,qq);
-//        }
-//        
-//    } catch (e) {
-//        alert(e);
-//    }
-//
-//}
+
 function deleteUser(endpoint, id) {
-    fetch(endpoint, {
-        method: 'delete'
-    }).then(function (res) {
-        if (res.status === 204)
-            location.reload();
-    }).catch(function (err) {
-        console.error(err);
-    })
+    if (confirm("Bạn có chắc chắn muốn xóa?") === true) {
+        fetch(endpoint, {
+            method: 'delete'
+        }).then(function (res) {
+            if (res.status === 204) {
+                location.reload();
+                alert('Bạn đã xóa thành công');
+            }
+        }).catch(function (err) {
+            console.error(err);
+        });
+    } else {
+        alert('Bạn vẫn chưa muốn xóa!');
+    }
 }
 
 function getUsers(endpoint) {

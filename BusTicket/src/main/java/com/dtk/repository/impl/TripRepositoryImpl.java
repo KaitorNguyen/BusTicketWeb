@@ -103,7 +103,7 @@ public class TripRepositoryImpl implements TripRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             Trip t = session.get(Trip.class, id);
-            session.remove(t);
+            session.delete(t);
 
             return true;
         } catch (HibernateException ex) {

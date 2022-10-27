@@ -72,17 +72,19 @@ function editCoach(id) {
 }
 
 function deleteCoach(endpoint, id) {
-    if (confirm("Bạn có chắc chắn muốn xóa?") == true) {
+    if (confirm("Bạn có chắc chắn muốn xóa?") === true) {
         fetch(endpoint, {
             method: 'delete'
         }).then(function (res) {
             if (res.status === 204) {
                 location.reload();
-                alert('Thành công');
+                alert('Bạn đã xóa thành công');
             }
         }).catch(function (err) {
             console.error(err);
         });
+    } else {
+        alert('Bạn vẫn chưa muốn xóa!');
     }
 }
 
@@ -95,8 +97,6 @@ function getCoaches(endpoint) {
         if (d !== null) {
             let h = "";
             for (let i = 0; i < data.length; i++)
-//                window.alert(data[i].totalseat);
-//                for (let x = 0; x < data[i].totalseat; i++)
                 h += `
                     <tr>
                         <td>${i + 1}</td>
@@ -126,25 +126,3 @@ function getCoaches(endpoint) {
         console.error(err);
     });
 }
-
-//function getSeats(idCoach) {
-//    fetch("/BusTicket/api/seats").then(function (res) {
-//        return res.json();
-//    }).then(function (data) {
-//        let d = document.getElementById("mySeats");
-//        if (d !== null) {
-//            let h = "";
-//            for (let i = 0; i < data.length; i++)
-//                if (data[i].idCoach.id === idCoach)
-//                    h += `
-//                        <tr>
-//                            <td>${data[i].name}</td>
-//                        </tr>
-//                    `
-//
-//            d.innerHTML = h;
-//        }
-//    }).catch(function (err) {
-//        console.error(err);
-//    })
-//}

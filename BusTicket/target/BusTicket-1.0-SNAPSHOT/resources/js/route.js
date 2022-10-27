@@ -52,11 +52,15 @@ function deleteRoute(endpoint, id) {
         fetch(endpoint, {
             method: 'delete'
         }).then(function (res) {
-            if (res.status === 204)
+            if (res.status === 204) {
                 location.reload();
+                alert('Bạn đã xóa thành công');
+            }
         }).catch(function (err) {
             console.error(err);
         });
+    } else {
+        alert('Bạn vẫn chưa muốn xóa!');
     }
 }
 
