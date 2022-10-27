@@ -60,7 +60,7 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="nav-item active" style="margin-right: 15px">
-                        <a class="nav-link text-danger fw-bold text-lg-center " href="<c:url value="/"/>" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <a class="nav-link text-danger fw-bold text-lg-center " href="<c:url value="/"/>" data-bs-toggle="modal" data-bs-target="#myModal" data-toggle="tooltip" data-placement="right" title="Bấm để xem thông tin cá nhân">
                             <c:if test="${currentUser.avatar != null}">
                                 <img style="width: 25px" src="${pageContext.session.getAttribute("currentUser").avatar}" class="rounded" />
                             </c:if>

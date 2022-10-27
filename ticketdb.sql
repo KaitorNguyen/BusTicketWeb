@@ -139,7 +139,6 @@ CREATE TABLE `ticket` (
   `id_customer_new` int NOT NULL,
   `id_trip` int NOT NULL,
   `book_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `total_money` decimal(10,0) DEFAULT NULL,
   `payment_method` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment_date` datetime DEFAULT NULL,
   `payment_content` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -273,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-20  1:34:40
+-- Dump completed on 2022-10-27 15:48:37

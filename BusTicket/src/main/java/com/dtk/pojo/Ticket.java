@@ -38,12 +38,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t"),
     @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id"),
     @NamedQuery(name = "Ticket.findByBookDate", query = "SELECT t FROM Ticket t WHERE t.bookDate = :bookDate"),
-    @NamedQuery(name = "Ticket.findByTotalMoney", query = "SELECT t FROM Ticket t WHERE t.totalMoney = :totalMoney"),
     @NamedQuery(name = "Ticket.findByPaymentMethod", query = "SELECT t FROM Ticket t WHERE t.paymentMethod = :paymentMethod"),
     @NamedQuery(name = "Ticket.findByPaymentDate", query = "SELECT t FROM Ticket t WHERE t.paymentDate = :paymentDate"),
     @NamedQuery(name = "Ticket.findByPaymentContent", query = "SELECT t FROM Ticket t WHERE t.paymentContent = :paymentContent"),
     @NamedQuery(name = "Ticket.findByStatusTicket", query = "SELECT t FROM Ticket t WHERE t.statusTicket = :statusTicket")})
 public class Ticket implements Serializable {
+    
+    public static final String TrucTiep = "Trực tiếp";
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,8 +55,6 @@ public class Ticket implements Serializable {
     @Column(name = "book_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date bookDate;
-    @Column(name = "total_money")
-    private Long totalMoney;
     @Size(max = 45)
     @Column(name = "payment_method")
     private String paymentMethod;
@@ -102,14 +101,6 @@ public class Ticket implements Serializable {
 
     public void setBookDate(Date bookDate) {
         this.bookDate = bookDate;
-    }
-
-    public Long getTotalMoney() {
-        return totalMoney;
-    }
-
-    public void setTotalMoney(Long totalMoney) {
-        this.totalMoney = totalMoney;
     }
 
     public String getPaymentMethod() {

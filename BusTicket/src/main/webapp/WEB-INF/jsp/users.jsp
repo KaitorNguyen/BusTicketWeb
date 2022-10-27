@@ -104,7 +104,7 @@
                                 <label for="email">Email</label>
                             </div>
                             <div class="form-floating col-md-6 mb-3">
-                                <input type="text" class="form-control" id="username" path="username" placeholder="User name"/>
+                                <input type="text" class="form-control" id="username" path="username" placeholder="User name" disabled/>
                                 <label for="username">User name</label>
                             </div>    
                             <div class="form-floating col-md-6 mb-3">

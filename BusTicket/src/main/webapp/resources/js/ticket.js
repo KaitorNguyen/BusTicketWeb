@@ -4,7 +4,6 @@
  */
 
 var idTicket = 0;
-var totalMoney = 0;
 
 function loadUserEmployee(idUser) {
     fetch(`/BusTicket/api/users/getUser/${idUser}`, {
@@ -54,7 +53,6 @@ function addTicket(idTrip, idCustomerLogin) {
     let address = document.getElementById('addressCustomer');
     let phone = document.getElementById('phoneCustomer');
     let email = document.getElementById('emailCustomer');
-    let totalMoney = document.getElementById('totalMoney');
     let paymentMethod = document.getElementById('paymentMethod');
 
     fetch('/BusTicket/api/bookticket', {
@@ -66,7 +64,6 @@ function addTicket(idTrip, idCustomerLogin) {
             "phone": phone.value,
             "email": email.value,
             "idTrip": idTrip,
-            "totalMoney": totalMoney.value,
             "paymentMethod": paymentMethod.value,
             "idCustomerLogin": idCustomerLogin
         }),
@@ -79,10 +76,12 @@ function addTicket(idTrip, idCustomerLogin) {
         idTicket = `${data.id}`;
         addSeatTicketDetail();
         console.info(data);
-        location.reload();
+        alert('Thành công');
+        if (data.idUserLogin.userRole == 'ROLE_EMPLOYEE' || data.idUserLogin.userRole == 'ROLE_CUSTOMER')
+            window.open('/BusTicket/tickets');
     }).catch(function (err) {
         console.error(err);
-        alert(err);
+//        alert(err);
     });
 }
 
@@ -94,9 +93,14 @@ function getSeats(idCoach) {
         if (d !== null) {
             let h = "";
             for (let i = 0; i < data.length; i++)
-                h += `
-                        <input type="checkbox" value="${data[i].id}" id="seat${data[i].id}}" name="optionSeat"/> ${data[i].name}
-                    `;
+                if (i === 10 || i === 20 || i === 30 || i === 40 || i === 50 || i === 60)
+                    h += `
+                            <br> <input type="checkbox" value="${data[i].id}" id="seat${data[i].id}}" name="optionSeat"/> ${data[i].name}
+                        `;
+                else
+                    h += `
+                            <input type="checkbox" value="${data[i].id}" id="seat${data[i].id}}" name="optionSeat"/> ${data[i].name}
+                        `;
             d.innerHTML = h;
         }
     }).catch(function (err) {
@@ -120,7 +124,6 @@ function addSeatTicketDetail() {
             }).then(function (res) {
                 return res.json();
             }).then(function (data) {
-                totalMoney += data.idTicket.idTrip.price;
                 console.info(data);
             }).catch(function (err) {
                 console.error(err);
@@ -131,7 +134,7 @@ function addSeatTicketDetail() {
 }
 
 function getTotalMoney() {
-    
+
 }
 
 function xacNhanTicket(idTicket) {
@@ -149,7 +152,7 @@ function xacNhanTicket(idTicket) {
 }
 
 function getTicketUserLogin(idUser) {
-    fetch(`/BusTicket/api/ticketdetail/myTicket/${idUser}`).then(function (res) {
+    fetch(`/BusTicket/api/ticketdetail/myTicketBook/${idUser}`).then(function (res) {
         return res.json();
     }).then(function (data) {
         let d = document.getElementById("getMyTicket");
@@ -158,19 +161,21 @@ function getTicketUserLogin(idUser) {
             for (let i = 0; i < data.length; i++)
                 h += `
                         <tr>
-                            <td>${data[i].idTicketDetail}</td>
-                            <td>${data[i].idTicket.id}</td>
-                            <td>${data[i].idTicket.idUserLogin.fullname}</td>
-                            <td>${data[i].idTicket.idCustomerNew.fullname}</td>
-                            <td>${data[i].idTicket.idTrip.idRoute.start}</td>
-                            <td>${data[i].idTicket.idTrip.idRoute.end}</td>
-                            <td>${moment(data[i].idTicket.idTrip.startTime).format("DD-MM-YYYY LT")}</td>
-                            <td>${data[i].idTicket.idTrip.idCoach.licensePlates}</td>
-                            <td>${data[i].idSeat.name}</td>
-                            <td>${data[i].priceSeat}</td>
-                            <td>${moment(data[i].idTicket.bookDate).format("DD-MM-YYYY LT")}</td>
-                            <td>${data[i].idTicket.paymentMethod}</td>
-                            <td>${data[i].idTicket.statusTicket}</td>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].idUserLogin.fullname}</td>
+                            <td>${data[i].idCustomerNew.fullname}</td>
+                            <td>${data[i].idTrip.idRoute.start}</td>
+                            <td>${data[i].idTrip.idRoute.end}</td>
+                            <td>${moment(data[i].idTrip.startTime).format("DD-MM-YYYY LT")}</td>
+                            <td>${data[i].idTrip.idCoach.licensePlates}</td>
+                            <td>${moment(data[i].bookDate).format("DD-MM-YYYY LT")}</td>
+                            <td>${moment(data[i].paymentDate).format("DD-MM-YYYY LT")}</td>
+                            <td>${data[i].statusTicket}</td>
+                            <td>
+                                <button class="btn btn-primary" onclick="getTicketBookDetail(${data[i].id})" data-bs-toggle="modal" data-bs-target="#myModalXacNhanTicket">
+                                   Thông tin vé
+                                </button>
+                            </td>
                         </tr>
                     `;
             d.innerHTML = h;
@@ -195,7 +200,6 @@ function getTicketBookByEmployee(idUser) {
                             <td>${data[i].idTrip.idRoute.end}</td>
                             <td>${moment(data[i].idTrip.startTime).format("DD-MM-YYYY LT")}</td>
                             <td>${data[i].idTrip.idCoach.licensePlates}</td>
-                            <td>${data[i].totalMoney}</td>
                             <td>${moment(data[i].bookDate).format("DD-MM-YYYY LT")}</td>
                             <td>${moment(data[i].paymentDate).format("DD-MM-YYYY LT")}</td>
                             <td>${data[i].statusTicket}</td>
@@ -267,10 +271,6 @@ function getTicketBookDetail(idTicket) {
                                     <td>${moment(data[i].bookDate).format("DD-MM-YYYY LT")}</td>
                                 </tr>
                                 <tr>
-                                    <th>Tổng số tiền</th>
-                                    <td>${data[i].totalMoney}</td>
-                                </tr>
-                                <tr>
                                     <th>Ngày thanh toán</th>
                                     <td>${moment(data[i].paymentDate).format("DD-MM-YYYY LT")}</td>
                                 </tr>
@@ -290,7 +290,7 @@ function getTicketBookDetail(idTicket) {
                                     <td>${data[i].id}</td>
                                 </tr>
                                 <tr>
-                                    <th>Tên nhân viên</th>
+                                    <th>Tên nhân viên / Tên đăng nhập </th>
                                     <td>${data[i].idUserLogin.fullname}</td>
                                 </tr>
                                 <tr>
@@ -334,10 +334,6 @@ function getTicketBookDetail(idTicket) {
                                     <td>${moment(data[i].bookDate).format("DD-MM-YYYY LT")}</td>
                                 </tr>
                                 <tr>
-                                    <th>Tổng số tiền</th>
-                                    <td>${data[i].totalMoney}</td>
-                                </tr>
-                                <tr>
                                     <th>Ngày thanh toán</th>
                                     <td>${moment(data[i].paymentDate).format("DD-MM-YYYY LT")}</td>
                                 </tr>
@@ -368,8 +364,8 @@ function getTicketSeat(idTicket) {
         if (d !== null) {
             let h = "";
             for (let i = 0; i < data.length; i++)
-                    h += `
-                            <h6>${data[i].idSeat.name} - ${data[i].priceSeat} VNÐ</h6>
+                h += `
+                            <h6>${data[i].idSeat.name} - ${(data[i].priceSeat).toLocaleString('vi-VN', {style : 'currency', currency : 'VND'})}</h6>
                         `;
 
             d.innerHTML = h;

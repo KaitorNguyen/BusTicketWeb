@@ -10,7 +10,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div style="margin: 0px auto">
-    <h1 class="text-center text-info" style="margin-top: 15px">QUẢN LÝ VÉ XE</h1>
+    <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
+        <h1 class="text-center text-info" style="margin-top: 15px">QUẢN LÝ VÉ XE</h1>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+        <h1 class="text-center text-info" style="margin-top: 15px">LỊCH SỬ ĐẶT VÉ XE</h1>
+    </sec:authorize>
+
     <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
         <table class="table table-hover caption-top">
             <caption>Danh sách vé nhân viên đã đặt</caption>
@@ -23,7 +29,6 @@
                     <th>Điểm đến</th>
                     <th>Thời gian đi</th>
                     <th>Biển số xe</th>
-                    <th>Tổng số tiền</th>
                     <th>Ngày đặt</th>
                     <th>Ngày thanh toán</th>
                     <th>Trạng thái</th>
@@ -44,7 +49,6 @@
                     <th>Điểm đến</th>
                     <th>Thời gian đi</th>
                     <th>Biển số xe</th>
-                    <th>Tổng số tiền</th>
                     <th>Ngày đặt vé</th>
                     <th>Ngày thanh toán</th>
                     <th>Trạng thái vé</th>
@@ -53,7 +57,7 @@
             </thead>
             <tbody>
                 <c:forEach items="${tickets}" var="allTicket">
-                    <c:if test="${allTicket.idUserLogin.userRole == 'ROLE_CUSTOMER'}">
+                    <c:if test="${allTicket.idUserLogin.userRole == 'ROLE_CUSTOMER' || allTicket.idUserLogin.userRole == 'ROLE_ADMIN' || allTicket.idUserLogin.userRole == 'ROLE_DRIVER'}">
                         <tr>
                             <td>${allTicket.id}</td>
                             <td>${allTicket.idCustomerNew.fullname}</td>
@@ -61,7 +65,6 @@
                             <td>${allTicket.idTrip.idRoute.end}</td>
                             <td><fmt:formatDate value="${allTicket.idTrip.startTime}" pattern="dd-MM-yyyy HH:mm aa"/></td>
                             <td>${allTicket.idTrip.idCoach.licensePlates}</td>
-                            <td><fmt:formatNumber type="number" value="${allTicket.totalMoney}" maxFractionDigits="3"/> VNÐ</td>
                             <td><fmt:formatDate value="${allTicket.bookDate}" pattern="dd-MM-yyyy HH:mm aa"/></td>
                             <td><fmt:formatDate value="${allTicket.paymentDate}" pattern="dd-MM-yyyy HH:mm aa"/></td>
                             <td>${allTicket.statusTicket}</td>
@@ -80,7 +83,6 @@
                             <td>${allTicket.idTrip.idRoute.end}</td>
                             <td><fmt:formatDate value="${allTicket.idTrip.startTime}" pattern="dd-MM-yyyy HH:mm aa"/></td>
                             <td>${allTicket.idTrip.idCoach.licensePlates}</td>
-                            <td><fmt:formatNumber type="number" value="${allTicket.totalMoney}" maxFractionDigits="3"/> VNÐ</td>
                             <td><fmt:formatDate value="${allTicket.bookDate}" pattern="dd-MM-yyyy HH:mm aa"/></td>
                             <td><fmt:formatDate value="${allTicket.paymentDate}" pattern="dd-MM-yyyy HH:mm aa"/></td>
                             <td>${allTicket.statusTicket}</td>
@@ -94,37 +96,6 @@
                 </c:forEach>
             </tbody>    
         </table>
-        <!-- The Modal -->
-        <div class="modal" id="myModalXacNhanTicket">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Xác nhận thông tin vé</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <table class="table table-bordered">
-                            <tbody id="getTicketBookDetail">
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" id="xacNhanButton">
-                            Xác nhận
-                        </button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </sec:authorize>
 
     <sec:authorize access="hasRole('ROLE_CUSTOMER')">
@@ -132,7 +103,6 @@
             <caption>Danh sách vé khách hàng đã đặt</caption>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Mã vé đặt</th>
                     <th>User</th>
                     <th>Tên khách hàng</th>
@@ -140,8 +110,6 @@
                     <th>Điểm đến</th>
                     <th>Thời gian đi</th>
                     <th>Biển số xe</th>
-                    <th>Ghế</th>
-                    <th>Giá ghế</th>
                     <th>Ngày đặt vé</th>
                     <th>Phương thức thanh toán</th>
                     <th>Trạng thái vé</th>
@@ -154,7 +122,45 @@
         </table>
     </sec:authorize>
 
+    <!-- The Modal -->
+    <div class="modal" id="myModalXacNhanTicket">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
+                        <h4 class="modal-title">Xác nhận thông tin vé</h4>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+                        <h4 class="modal-title">Vé bạn đã đặt</h4>
+                    </sec:authorize>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tbody id="getTicketBookDetail">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
+                        <button class="btn btn-primary" id="xacNhanButton">
+                            Xác nhận
+                        </button>
+                    </sec:authorize>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>

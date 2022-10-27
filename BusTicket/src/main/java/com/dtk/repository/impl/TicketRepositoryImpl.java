@@ -37,14 +37,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class TicketRepositoryImpl implements TicketRepository {
-
+    
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
     private UserService userService;
     @Autowired
     private TripService tripService;
-
+    
     @Override
     public List<TicketDetail> getTickets(Map<String, String> params) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -52,11 +52,11 @@ public class TicketRepositoryImpl implements TicketRepository {
         CriteriaQuery<TicketDetail> q = b.createQuery(TicketDetail.class);
         Root root = q.from(TicketDetail.class);
         q.select(root);
-
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
+    
     @Override
     public List<Ticket> getTicketBook(Map<String, String> params) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -64,32 +64,32 @@ public class TicketRepositoryImpl implements TicketRepository {
         CriteriaQuery<Ticket> q = b.createQuery(Ticket.class);
         Root root = q.from(Ticket.class);
         q.select(root);
-
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
+    
     @Override
     public User addUserCustomer(String fullname, String gender, String address, String phone, String email) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             User u = new User();
-
+            
             u.setFullname(fullname);
             u.setGender(gender);
             u.setAddress(address);
             u.setPhone(phone);
             u.setEmail(email);
-
+            
             session.save(u);
-
+            
             return u;
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-
+    
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Ticket addTicket(Map<String, String> params, int idTrip) {
@@ -97,7 +97,7 @@ public class TicketRepositoryImpl implements TicketRepository {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date date = formatter.parse(String.valueOf(java.time.LocalDateTime.now()));
-
+            
             String fullname = params.get("fullname");
             String gender = params.get("gender");
             String address = params.get("address");
@@ -105,24 +105,29 @@ public class TicketRepositoryImpl implements TicketRepository {
             String email = params.get("email");
             User uCustomer = this.addUserCustomer(fullname, gender, address, phone, email);
             session.save(uCustomer);
-
+            
             Ticket t = new Ticket();
-
+            
             t.setIdCustomerNew(uCustomer);
-
+            
             if (params.get("idCustomerLogin") == null) {
                 t.setIdUserLogin(null);
             } else {
                 User uUserLogin = this.userService.getUserById(Integer.parseInt(params.get("idCustomerLogin")));
                 t.setIdUserLogin(uUserLogin);
             }
-
+            
             t.setIdTrip(this.tripService.getTripById(idTrip));
             t.setBookDate(date);
-            t.setTotalMoney(Long.parseLong(params.get("totalMoney")));
             t.setPaymentMethod(params.get("paymentMethod"));
-            t.setStatusTicket("Chưa thanh toán");
-
+            
+            if (params.get("paymentMethod").equals(Ticket.TrucTiep)) {
+                t.setStatusTicket("Chưa thanh toán");
+            } else {
+                t.setPaymentDate(date);
+                t.setStatusTicket("Ðã thanh toán");
+            }
+            
             session.save(t);
             return t;
         } catch (HibernateException ex) {
@@ -132,13 +137,13 @@ public class TicketRepositoryImpl implements TicketRepository {
         }
         return null;
     }
-
+    
     @Override
     public TicketDetail addSeatTicketDetail(Ticket ticket, Seat seat) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             TicketDetail tDetail = new TicketDetail();
-
+            
             tDetail.setIdTicket(ticket);
             tDetail.setIdSeat(seat);
             tDetail.setPriceSeat(ticket.getIdTrip().getPrice());
@@ -150,13 +155,13 @@ public class TicketRepositoryImpl implements TicketRepository {
         }
         return null;
     }
-
+    
     @Override
     public Ticket getTicketBookByID(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         return session.get(Ticket.class, id);
     }
-
+    
     @Override
     public List<TicketDetail> getTicketDeatilByIDTrip(int idTrip) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -164,13 +169,13 @@ public class TicketRepositoryImpl implements TicketRepository {
         CriteriaQuery<TicketDetail> q = b.createQuery(TicketDetail.class);
         Root root = q.from(TicketDetail.class);
         q.select(root);
-
+        
         q.where(b.equal(root.get("idTicket").get("idTrip"), idTrip));
-
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
+    
     @Override
     public List<TicketDetail> getTicketDetailByIDTicket(int idTicket) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -178,13 +183,13 @@ public class TicketRepositoryImpl implements TicketRepository {
         CriteriaQuery<TicketDetail> q = b.createQuery(TicketDetail.class);
         Root root = q.from(TicketDetail.class);
         q.select(root);
-
+        
         q.where(b.equal(root.get("idTicket").get("id"), idTicket));
-
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
+    
     @Override
     public List<TicketDetail> getTicketDetailByIDUserLogin(int idUser) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -192,13 +197,13 @@ public class TicketRepositoryImpl implements TicketRepository {
         CriteriaQuery<TicketDetail> q = b.createQuery(TicketDetail.class);
         Root root = q.from(TicketDetail.class);
         q.select(root);
-
+        
         q.where(b.equal(root.get("idTicket").get("idUserLogin"), idUser));
-
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
+    
     @Override
     public List<Ticket> getTicketBookByIDUser(int idUser) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -206,20 +211,20 @@ public class TicketRepositoryImpl implements TicketRepository {
         CriteriaQuery<Ticket> q = b.createQuery(Ticket.class);
         Root root = q.from(Ticket.class);
         q.select(root);
-
+        
         q.where(b.equal(root.get("idUserLogin"), idUser));
-
+        
         Query query = session.createQuery(q);
         return query.getResultList();
     }
-
+    
     @Override
     public boolean xacNhanTicket(int idTicket) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date date = formatter.parse(String.valueOf(java.time.LocalDateTime.now()));
-
+            
             Ticket ticketB = session.get(Ticket.class, idTicket);
             ticketB.setPaymentDate(date);
             ticketB.setStatusTicket("Ðã thanh toán");
@@ -232,5 +237,5 @@ public class TicketRepositoryImpl implements TicketRepository {
         }
         return false;
     }
-
+    
 }
