@@ -42,9 +42,11 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean addUser(User user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(user);
+            if (user.getUsername() != null || user.getPassword() != null || user.getConfirmPassword() != null) {
+                session.save(user);
 
-            return true;
+                return true;
+            }
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }

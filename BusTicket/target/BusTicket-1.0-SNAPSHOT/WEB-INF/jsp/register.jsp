@@ -13,7 +13,8 @@
         <h1 class="text-center text-info">ĐĂNG KÝ</h1>
 
         <c:if test="${errMsg != null}">
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 ${errMsg}
             </div>
         </c:if>
@@ -72,17 +73,20 @@
                         <div class="col-md-6 mb-3">
                             <label for="username" class="form-label fs-5">Username</label>
                             <form:input type="text" class="form-control" id="username" path="username" placeholder="Username"/>
+                            <form:errors path="username" element="div" cssClass="text-danger" />
 
                         </div>    
                         <div class="col-md-6 mb-3">
                             <label for="password" class="form-label fs-5">Password</label>
                             <form:input type="password" class="form-control" id="password" path="password" placeholder="Password"/>
+                            <form:errors path="password" element="div" cssClass="text-danger" />
 
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="password" class="form-label fs-5">Confirm Password</label>
                             <form:input type="password" class="form-control" id="confirmPassword" path="confirmPassword" placeholder="Confirm Password"/>
-                        
+                            <form:errors path="confirmPassword" element="div" cssClass="text-danger" />
+
                         </div>
                         <div class="col-auto mb-3">
                             <button type="submit" class="btn btn-primary">Submit</button>

@@ -22,14 +22,17 @@
         <div class="row g-3">
             <div class="form-floating col-md-4 mb-3">
                 <form:input type="text" class="form-control" id="name" path="name" placeholder="Tên xe"/>
+                <form:errors path="name" element="div" cssClass="text-danger" />
                 <label for="floatingInput">Tên xe</label>
             </div>
             <div class="form-floating col-md-4 mb-3">
                 <form:input type="number" class="form-control" id="totalseat" path="totalseat" placeholder="Tống số ghế"/>
+                <form:errors path="totalseat" element="div" cssClass="text-danger" />
                 <label for="floatingTotalSeat">Tổng số ghế</label>
             </div>
             <div class="form-floating col-md-4 mb-3">
                 <form:input type="text" class="form-control" id="licensePlates" path="licensePlates" placeholder="Biển số xe"/>
+                <form:errors path="licensePlates" element="div" cssClass="text-danger" />
                 <label for="floatingLicensePlates">Biển số xe</label>
             </div>
         </div>

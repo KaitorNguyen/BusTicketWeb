@@ -45,12 +45,12 @@ public class Route implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 45, message = "{route.start.err}")
     @Column(name = "start")
     private String start;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 45, message = "{route.end.err}")
     @Column(name = "end")
     private String end;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRoute")

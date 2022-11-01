@@ -15,14 +15,17 @@
     <form:form method="post" action="${action}" modelAttribute="trip">
         <div class="form-floating mb-3 mt-3">
             <form:input class="form-control" path="name" id="name"/>
+            <form:errors path="name" element="div" cssClass="text-danger" />
             <label for="name">Tên chuyến đi:</label>
         </div>
         <div class="form-floating mb-3 mt-3">
             <form:input type="datetime-local" class="form-control" path="startTime" id="startTime"/>
+            <form:errors path="startTime" element="div" cssClass="text-danger" />
             <label for="startTime">Thời gian xuất phát:</label>
         </div>
         <div class="form-floating mt-3 mb-3">
             <form:input class="form-control" path="price" id="price"/>
+            <form:errors path="price" element="div" cssClass="text-danger" />
             <label for="price">Giá</label>
         </div>
         <div class="form-floating mt-3 mb-3">

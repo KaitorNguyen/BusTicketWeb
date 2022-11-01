@@ -17,14 +17,15 @@
 
     <c:url value="/admin/routes" var="action" />
     <form:form method="post" action="${action}" modelAttribute="route">
-        <form:errors path="*" element="div" cssClass="alert alert-danger"/>
         <div class="row g-3">
             <div class="form-floating col-md-6 mb-3">
                 <form:input type="text" class="form-control" id="start" path="start" placeholder="Điểm xuất phát"/>
+                <form:errors path="start" element="div" cssClass="text-danger" />
                 <label for="floatingInput">Điểm xuất phát</label>
             </div>
             <div class="form-floating col-md-6 mb-3">
                 <form:input type="text" class="form-control" id="end" path="end" placeholder="Điểm đến"/>
+                <form:errors path="end" element="div" cssClass="text-danger" />
                 <label for="floatingPassword">Điểm đến</label>
             </div>
         </div>

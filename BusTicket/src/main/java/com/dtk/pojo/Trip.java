@@ -54,17 +54,19 @@ public class Trip implements Serializable {
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
+    @NotNull(message = "{trip.name.err}")
     private String name;
     @Size(max = 150)
     @Column(name = "image")
     private String image;
     @Column(name = "start_time")
+    @NotNull(message = "{trip.startTime.err}")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{trip.price.err}")
     @Column(name = "price")
     private long price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTrip")

@@ -80,7 +80,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Override
     public Validator getValidator() {
-        return WebMvcConfigurer.super.getValidator(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return validator();
     }
 
     @Bean
