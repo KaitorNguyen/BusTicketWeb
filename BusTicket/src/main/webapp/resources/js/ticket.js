@@ -177,6 +177,7 @@ function getTicketUserLogin(idUser) {
                             <td>${data[i].idTrip.idCoach.licensePlates}</td>
                             <td>${moment(data[i].bookDate).format("DD-MM-YYYY LT")}</td>
                             <td>${moment(data[i].paymentDate).format("DD-MM-YYYY LT")}</td>
+                            <td>${data[i].paymentMethod}</td>
                             <td>${data[i].statusTicket}</td>
                             <td>
                                 <button class="btn btn-primary" onclick="getTicketBookDetail(${data[i].id})" data-bs-toggle="modal" data-bs-target="#myModalXacNhanTicket">

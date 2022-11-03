@@ -9,14 +9,14 @@
 
 
 <c:if test="${param.error != null}">
-    <div class="alert alert-danger">
-        Da co loi xay ra! Vui long dang nhap lai!
+    <div class="alert alert-danger container" style="width: 75%">
+        Đã có lỗi xảy ra! Vui lòng đăng nhập lại!
     </div>
 </c:if>
 
 <c:if test="${param.accessDenied != null}">
-    <div class="alert alert-danger">
-        Ban khong co quyen truy cap!
+    <div class="alert alert-danger container" style="width: 75%">
+        Bạn không có quyền truy cập
     </div>
 </c:if>
 

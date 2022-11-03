@@ -90,11 +90,11 @@ public class User implements Serializable {
     private String email;
     @Size(max = 45)
     @Column(name = "username")
-    @NotNull(message = "{user.username.err}")
+//    @NotNull(message = "{user.username.err}")
     private String username;
     @Size(max = 100)
     @Column(name = "password")
-    @NotNull(message = "{user.password.err}")
+//    @NotNull(message = "{user.password.err}")
     @JsonIgnore
     private String password;
     @Size(max = 150)
@@ -120,7 +120,7 @@ public class User implements Serializable {
 
     @Transient
     @JsonIgnore
-    @NotNull(message = "{user.confirmpassword.err}")
+//    @NotNull(message = "{user.confirmpassword.err}")
     private String confirmPassword;
     @Transient
     @JsonIgnore

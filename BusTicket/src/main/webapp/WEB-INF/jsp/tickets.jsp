@@ -111,6 +111,7 @@
                     <th>Thời gian đi</th>
                     <th>Biển số xe</th>
                     <th>Ngày đặt vé</th>
+                    <th>Ngày thanh toán</th>
                     <th>Phương thức thanh toán</th>
                     <th>Trạng thái vé</th>
                     <th></th>

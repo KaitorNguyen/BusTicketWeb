@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container">
-    <h1 class="text-center text-info" style="margin-top: 15px">THEM NHAN VIEN</h1>
+    <h1 class="text-center text-info" style="margin-top: 15px">Thêm Nhân Viên</h1>
 
     <c:url value="/admin/users/add_user" var="action" />
     <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user">

@@ -6,9 +6,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<<h1 class="text-center text-info">THỐNG KÊ SỐ CHUYẾN XE THEO TUYẾN XE</h1>
+<h1 class="text-center text-info">THỐNG KÊ SỐ CHUYẾN XE THEO TUYẾN XE</h1>
 <div class="row">
-    <div class="col-md-5"> 
+    <div class="col-md-5" style="margin-left: 25px"> 
         <table class="table">
             <tr>
                 <th>ID</th>
